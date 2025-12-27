@@ -64,11 +64,56 @@ The `data-ops` package manages the database schema and auth configuration.
 ## Task Management (Mandatory)
 
 This project uses **bd** (beads) for issue tracking.
+Run `bd prime` for full workflow context, or `bd hooks install` for auto-injection.
 
-- **Start Work**: `bd update <id> --status in_progress`
-- **Finish Work**: `bd close <id>`
-- **Sync**: `bd sync` (Run before pushing)
-- **End Session**: Ensure `git push` succeeds.
+### 🚨 SESSION CLOSE PROTOCOL 🚨
+
+**CRITICAL**: Before saying "done" or "complete", you MUST run this checklist:
+
+```bash
+[ ] 1. git status              # check what changed
+[ ] 2. git add <files>         # stage code changes
+[ ] 3. bd sync                 # commit beads changes
+[ ] 4. git commit -m "..."     # commit code
+[ ] 5. bd sync                 # commit any new beads changes
+[ ] 6. git push                # push to remote
+```
+
+**NEVER skip this.** Work is not done until pushed.
+
+### Essential Commands
+
+**Finding Work:**
+- `bd ready` - Show issues ready to work (no blockers)
+- `bd list --status=open` - All open issues
+- `bd show <id>` - Detailed issue view with dependencies
+
+**Creating & Updating:**
+- `bd create --title="..." --type=task|bug|feature --priority=2` - New issue
+  - Priority: 0-4 (0=critical, 2=medium, 4=backlog)
+- `bd update <id> --status in_progress` - Claim work
+- `bd close <id>` - Mark complete
+- `bd close <id> --reason="explanation"` - Close with reason
+
+**Sync & Collaboration:**
+- `bd sync` - Sync with git remote (run at session end)
+- `bd sync --status` - Check sync status
+
+### Common Workflows
+
+**Starting work:**
+```bash
+bd ready                                  # Find available work
+bd show <id>                              # Review issue details
+bd update <id> --status in_progress       # Claim it
+```
+
+**Completing work:**
+```bash
+bd close <id>      # Close completed issue
+bd sync            # Push to remote
+git push           # Ensure changes are pushed
+```
 
 ## Coding Standards
 

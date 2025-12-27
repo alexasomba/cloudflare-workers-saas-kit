@@ -1,16 +1,16 @@
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@workspace/ui/components/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+} from "@workspace/ui/components/dialog";
+import { Input } from "@workspace/ui/components/input";
 import { authClient } from "@/lib/auth-client";
-import { LogOut, Palette } from "lucide-react";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
+import { IconLogout, IconPalette } from "@tabler/icons-react";
+import { ThemeToggle } from "@workspace/ui/components/theme-toggle";
 import { useState } from "react";
 
 interface AccountDialogProps {
@@ -163,7 +163,7 @@ export function AccountDialog({ children }: AccountDialogProps) {
             ) : null}
             <div className="flex items-center justify-between w-full py-3 px-4 rounded-lg border bg-card">
               <span className="text-sm font-medium flex items-center gap-2">
-                <Palette className="h-4 w-4" />
+                <IconPalette className="h-4 w-4" />
                 Theme
               </span>
               <ThemeToggle />
@@ -174,7 +174,7 @@ export function AccountDialog({ children }: AccountDialogProps) {
               size="lg"
               className="w-full gap-2"
             >
-              <LogOut className="h-5 w-5" />
+              <IconLogout className="h-5 w-5" />
               Sign Out
             </Button>
           </div>

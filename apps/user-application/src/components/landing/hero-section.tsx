@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ArrowRight, Github, Sparkles, Zap, Shield } from "lucide-react";
+import { Button } from "@workspace/ui/components/button";
+import { Badge } from "@workspace/ui/components/badge";
+import { IconArrowRight, IconBrandGithub, IconSparkles, IconBolt, IconShield } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 
 export function HeroSection() {
@@ -9,15 +9,15 @@ export function HeroSection() {
       <div className="mx-auto max-w-4xl text-center">
         <div className="mb-8 flex flex-wrap justify-center gap-2">
           <Badge variant="secondary" className="mb-4">
-            <Sparkles className="mr-1 h-3 w-3" />
+            <IconSparkles className="mr-1 h-3 w-3" />
             Production-Ready
           </Badge>
           <Badge variant="secondary" className="mb-4">
-            <Zap className="mr-1 h-3 w-3" />
+            <IconBolt className="mr-1 h-3 w-3" />
             Edge-Optimized
           </Badge>
           <Badge variant="secondary" className="mb-4">
-            <Shield className="mr-1 h-3 w-3" />
+            <IconShield className="mr-1 h-3 w-3" />
             Type-Safe
           </Badge>
         </div>
@@ -38,7 +38,7 @@ export function HeroSection() {
           <Link to="/docs">
             <Button size="lg" className="group">
               Get Started
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <IconArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>
 
@@ -49,7 +49,7 @@ export function HeroSection() {
               rel="noopener noreferrer"
               className="inline-flex items-center"
             >
-              <Github className="mr-2 h-4 w-4" />
+              <IconBrandGithub className="mr-2 h-4 w-4" />
               View on GitHub
             </a>
           </Button>

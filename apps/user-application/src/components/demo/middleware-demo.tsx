@@ -1,24 +1,24 @@
 import * as React from "react";
 import { useMutation } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
+import { Button } from "@workspace/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+} from "@workspace/ui/components/card";
+import { Badge } from "@workspace/ui/components/badge";
+import { Alert, AlertDescription } from "@workspace/ui/components/alert";
 import {
-  Loader2,
-  Play,
-  Server,
-  Zap,
-  CheckCircle,
-  AlertCircle,
-  Code2,
-} from "lucide-react";
+  IconLoader2,
+  IconPlayerPlay,
+  IconServer,
+  IconBolt,
+  IconCircleCheck,
+  IconAlertCircle,
+  IconCode,
+} from "@tabler/icons-react";
 import { examplefunction } from "@/core/functions/example-functions";
 
 export function MiddlewareDemo() {
@@ -47,7 +47,7 @@ export function MiddlewareDemo() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <Badge variant="outline" className="mb-4">
-            <Server className="w-4 h-4 mr-2" />
+            <IconServer className="w-4 h-4 mr-2" />
             Server Functions & Middleware
           </Badge>
           <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
@@ -65,7 +65,7 @@ export function MiddlewareDemo() {
             <Card className="lg:col-span-1">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Play className="w-5 h-5 mr-2 text-primary" />
+                  <IconPlayerPlay className="w-5 h-5 mr-2 text-primary" />
                   Interactive Demo
                 </CardTitle>
                 <CardDescription>
@@ -97,9 +97,9 @@ export function MiddlewareDemo() {
                   className="w-full"
                 >
                   {mutation.isPending ? (
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <IconLoader2 className="w-4 h-4 mr-2 animate-spin" />
                   ) : (
-                    <Zap className="w-4 h-4 mr-2" />
+                    <IconBolt className="w-4 h-4 mr-2" />
                   )}
                   Execute Server Function
                 </Button>
@@ -108,7 +108,7 @@ export function MiddlewareDemo() {
                 <div className="space-y-2">
                   {mutation.isPending && (
                     <Alert>
-                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <IconLoader2 className="w-4 h-4 animate-spin" />
                       <AlertDescription>
                         Executing server function with middleware...
                       </AlertDescription>
@@ -117,7 +117,7 @@ export function MiddlewareDemo() {
 
                   {mutation.isSuccess && (
                     <Alert className="border-green-500 bg-green-200/10">
-                      <CheckCircle className="w-4 h-4 text-green-800 dark:text-green-400" />
+                      <IconCircleCheck className="w-4 h-4 text-green-800 dark:text-green-400" />
                       <AlertDescription className="text-green-700 dark:text-green-300">
                         <strong>Success!</strong> Response: "{mutation.data}"
                       </AlertDescription>
@@ -126,7 +126,7 @@ export function MiddlewareDemo() {
 
                   {mutation.isError && (
                     <Alert className="border-red-200 bg-red-50 dark:bg-red-950/20">
-                      <AlertCircle className="w-4 h-4 text-red-600" />
+                      <IconAlertCircle className="w-4 h-4 text-red-600" />
                       <AlertDescription className="text-red-800 dark:text-red-200">
                         <strong>Error:</strong>{" "}
                         {mutation.error?.message || "Something went wrong"}
@@ -141,7 +141,7 @@ export function MiddlewareDemo() {
             <Card className="lg:col-span-1">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Code2 className="w-5 h-5 mr-2 text-primary" />
+                  <IconCode className="w-5 h-5 mr-2 text-primary" />
                   What's Happening
                 </CardTitle>
                 <CardDescription>
@@ -194,7 +194,7 @@ export function MiddlewareDemo() {
 
                   <div className="pt-4 border-t border-border">
                     <Alert>
-                      <Server className="w-4 h-4" />
+                      <IconServer className="w-4 h-4" />
                       <AlertDescription>
                         <strong>Check your server logs!</strong> You'll see
                         console output from both the middleware and server
@@ -224,7 +224,7 @@ export function MiddlewareDemo() {
           {/* Additional Info */}
           <div className="mt-8 p-6 bg-muted/50 rounded-xl">
             <h3 className="text-lg font-semibold mb-3 flex items-center">
-              <Zap className="w-5 h-5 mr-2 text-primary" />
+              <IconBolt className="w-5 h-5 mr-2 text-primary" />
               Key Benefits
             </h3>
             <div className="grid md:grid-cols-3 gap-4 text-sm">

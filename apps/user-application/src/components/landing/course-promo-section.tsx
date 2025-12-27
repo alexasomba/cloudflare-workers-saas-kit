@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { CheckCircle } from "lucide-react";
+import { Button } from "@workspace/ui/components/button";
+import { Badge } from "@workspace/ui/components/badge";
+import { IconCircleCheck } from "@tabler/icons-react";
 
 export function CoursePromoSection() {
   return (
@@ -40,23 +40,23 @@ export function CoursePromoSection() {
               <h3 className="font-semibold text-lg mb-2">What You'll Build</h3>
               <div className="space-y-2">
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">
                     SmartLinks - Complete short link service
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">
                     Location-based intelligent redirects
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">AI-powered link analysis</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">Real-time analytics dashboard</span>
                 </div>
               </div>
@@ -68,25 +68,25 @@ export function CoursePromoSection() {
               </h3>
               <div className="space-y-2">
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">
                     Cloudflare D1, KV, R2, Workers AI
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">
                     Durable Objects for state management
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">
                     Better Auth & Stripe integration
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">TypeScript, Drizzle ORM, pnpm</span>
                 </div>
               </div>

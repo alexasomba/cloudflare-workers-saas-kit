@@ -9,6 +9,7 @@
     "BETTER_AUTH_SECRET": "",
     "GOOGLE_CLIENT_ID": "",
     "GOOGLE_CLIENT_SECRET": "",
+    "POLAR_SECRET":""
   },
   "d1_databases": [
     {

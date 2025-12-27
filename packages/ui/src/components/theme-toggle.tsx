@@ -1,13 +1,12 @@
-import * as React from "react";
-import { Monitor, Moon, Sun, Check } from "lucide-react";
+import { IconDeviceDesktop, IconMoon, IconSun, IconCheck } from "@tabler/icons-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@workspace/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@workspace/ui/components/dropdown-menu";
 import { useTheme } from "./theme-provider";
 
 interface ThemeToggleProps {
@@ -35,7 +34,7 @@ export function ThemeToggle({
   const getCurrentIcon = () => {
     if (theme === "system") {
       return (
-        <Monitor 
+        <IconDeviceDesktop 
           className={`h-4 w-4 ${iconVariants.system} rotate-0 scale-100`}
           aria-hidden="true" 
         />
@@ -44,7 +43,7 @@ export function ThemeToggle({
     
     if (resolvedTheme === "dark") {
       return (
-        <Moon 
+        <IconMoon 
           className={`h-4 w-4 ${iconVariants.moon} rotate-0 scale-100`}
           aria-hidden="true" 
         />
@@ -52,7 +51,7 @@ export function ThemeToggle({
     }
     
     return (
-      <Sun 
+      <IconSun 
         className={`h-4 w-4 ${iconVariants.sun} rotate-0 scale-100`}
         aria-hidden="true" 
       />
@@ -63,19 +62,19 @@ export function ThemeToggle({
     {
       value: "light",
       label: "Light",
-      icon: Sun,
+      icon: IconSun,
       description: "Use light theme",
     },
     {
       value: "dark", 
       label: "Dark",
-      icon: Moon,
+      icon: IconMoon,
       description: "Use dark theme",
     },
     {
       value: "system",
       label: "System",
-      icon: Monitor,
+      icon: IconDeviceDesktop,
       description: "Use system theme",
     },
   ] as const;
@@ -156,7 +155,7 @@ export function ThemeToggle({
                 </div>
                 
                 {isSelected && (
-                  <Check className="h-4 w-4 text-accent-foreground animate-in fade-in-0 zoom-in-75 duration-150" />
+                  <IconCheck className="h-4 w-4 text-accent-foreground animate-in fade-in-0 zoom-in-75 duration-150" />
                 )}
               </DropdownMenuItem>
             );
@@ -208,13 +207,13 @@ export function ThemeToggleSimple() {
     >
       <div className="relative flex items-center justify-center">
         {theme === "system" && (
-          <Monitor className="h-4 w-4 transition-all duration-300 ease-in-out rotate-0 scale-100" />
+          <IconDeviceDesktop className="h-4 w-4 transition-all duration-300 ease-in-out rotate-0 scale-100" />
         )}
         {resolvedTheme === "dark" && theme !== "system" && (
-          <Moon className="h-4 w-4 transition-all duration-500 ease-in-out rotate-0 scale-100" />
+          <IconMoon className="h-4 w-4 transition-all duration-500 ease-in-out rotate-0 scale-100" />
         )}
         {resolvedTheme === "light" && theme !== "system" && (
-          <Sun className="h-4 w-4 transition-all duration-500 ease-in-out rotate-0 scale-100" />
+          <IconSun className="h-4 w-4 transition-all duration-500 ease-in-out rotate-0 scale-100" />
         )}
       </div>
       <span className="sr-only">

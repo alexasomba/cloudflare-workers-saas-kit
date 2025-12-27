@@ -5,7 +5,7 @@ import remarkGfm from "remark-gfm";
 import remarkBreaks from "remark-breaks";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github-dark.css";
-import { Copy, Check } from "lucide-react";
+import { IconCopy, IconCheck } from "@tabler/icons-react";
 
 export const Route = createFileRoute("/_static/docs/$name")({
   component: RouteComponent,
@@ -73,9 +73,9 @@ function CodeBlock({ children, ...props }: any) {
           title={copied ? "Copied!" : "Copy"}
         >
           {copied ? (
-            <Check className="h-3.5 w-3.5" />
+            <IconCheck className="h-3.5 w-3.5" />
           ) : (
-            <Copy className="h-3.5 w-3.5" />
+            <IconCopy className="h-3.5 w-3.5" />
           )}
           <span className="hidden sm:inline">{copied ? "Copied" : "Copy"}</span>
         </button>
