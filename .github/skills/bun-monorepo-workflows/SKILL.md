@@ -5,7 +5,7 @@ description: Use this when installing dependencies, running scripts, filtering p
 
 # Bun monorepo workflows (Cloudflare Workers SaaS kit)
 
-This repo is currently pnpm-based, but Bun can act as the package manager for the monorepo.
+This repo is migrating to Bun as the package manager (some older branches/PRs may still be pnpm-based).
 This skill covers (1) day-to-day Bun equivalents for pnpm workflows and (2) a safe pnpm → Bun migration checklist.
 
 ## Quick commands (Bun)
@@ -14,8 +14,8 @@ This skill covers (1) day-to-day Bun equivalents for pnpm workflows and (2) a sa
 - CI install (frozen lockfile): `bun ci` (equivalent to `bun install --frozen-lockfile`)
 - Run a root script: `bun run <script>`
 - Run a workspace script (common patterns):
-  - By filter: `bun --filter <workspace-name-or-glob> run <script>`
-  - By path filter: `bun --filter ./apps/user-application run build`
+  - By filter: `bun run --filter <workspace-name-or-glob> <script>`
+  - By path filter: `bun run --filter ./apps/user-application build`
 - Add deps:
   - Prod: `bun add <pkg>`
   - Dev: `bun add -d <pkg>`
@@ -30,7 +30,7 @@ Examples:
 
 - Install everything except one workspace: `bun install --filter '!data-service'`
 - Install only one workspace (by path): `bun install --filter './apps/user-application'`
-- Run TS typecheck in just UI: `bun --filter @workspace/ui run tsc`
+- Run TS typecheck in just UI: `bun run --filter @workspace/ui tsc`
 
 Notes:
 

@@ -4,7 +4,7 @@
 
 This is a monorepo SaaS application built with **Cloudflare Workers**, **TanStack Start**, and **Drizzle ORM**.
 
-- **Package Manager**: `pnpm`
+- **Package Manager**: `bun`
 - **Database**: Cloudflare D1 (SQLite)
 - **Authentication**: Better Auth
 - **Styling**: Tailwind CSS v4
@@ -21,31 +21,30 @@ This is a monorepo SaaS application built with **Cloudflare Workers**, **TanStac
 
 ### 1. Setup & Development
 
-- **Initial Setup**: `pnpm run setup` (Installs deps & builds `data-ops`).
-- **Start User App**: `pnpm run dev:user-application` (Runs on port 3000).
-- **Start Data Service**: `pnpm run dev:data-service`.
-- **Rebuild Shared Lib**: `pnpm run build:data-ops` (Run this after changing `packages/data-ops`).
+- **Initial Setup**: `bun run setup` (Installs deps & builds `data-ops`).
+- **Start User App**: `bun run dev:user-application` (Runs on port 3000).
+- **Start Data Service**: `bun run dev:data-service`.
+- **Rebuild Shared Lib**: `bun run build:data-ops` (Run this after changing `packages/data-ops`).
 
 ### 1.1 Linting & Typechecking
 
-- **Lint UI package**: `pnpm --filter @workspace/ui lint`
-- **Typecheck (any package/app)**: prefer `pnpm -C <dir> tsc --noEmit` when debugging TS issues.
+- **Lint UI package**: `bun run --filter @workspace/ui lint`
+- **Typecheck (any package/app)**: prefer `bunx tsc -p <dir>/tsconfig.json --noEmit` when debugging TS issues.
 
 ### 2. Database & Authentication (Cloudflare D1)
 
 The `data-ops` package manages the database schema and auth configuration.
 
-- **Generate Auth Schema**: `pnpm run --filter data-ops better-auth:generate`
-- **Generate SQL Migrations**: `pnpm run --filter data-ops drizzle:generate`
+- **Generate Auth Schema**: `bun run --filter ./packages/data-ops better-auth:generate`
+- **Generate SQL Migrations**: `bun run --filter ./packages/data-ops drizzle:generate`
 - **Apply Migrations (Local)**: `npx wrangler d1 execute DB --local --file=../../packages/data-ops/src/drizzle/<migration_file>.sql` (from `apps/user-application`)
-- **Apply Migrations (Remote)**: `pnpm run --filter data-ops drizzle:migrate`
+- **Apply Migrations (Remote)**: `bun run --filter ./packages/data-ops drizzle:migrate`
 
 ### 3. Type Generation
-
-- **Generate Worker Types**: `pnpm run --filter user-application cf-typegen`
+- **Generate Worker Types**: `bun run --filter ./apps/user-application cf-typegen`
   - Updates `worker-configuration.d.ts` based on `wrangler.jsonc`.
   - Run this after modifying bindings or environment variables.
-- **Generate Data Service Worker Types**: `pnpm run --filter data-service cf-typegen`
+- **Generate Data Service Worker Types**: `bun run --filter ./apps/data-service cf-typegen`
 
 ## Architecture & Patterns
 

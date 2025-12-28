@@ -14,12 +14,12 @@ Use this skill when the user modifies `wrangler.jsonc`, adds/removes bindings, c
 ## Generate worker types
 
 - For the user application:
-  - `pnpm run --filter user-application cf-typegen`
+  - `bun run --filter ./apps/user-application cf-typegen`
 
 This updates `worker-configuration.d.ts` based on `apps/user-application/wrangler.jsonc`.
 
 - For the data service:
-  - `pnpm run --filter data-service cf-typegen`
+  - `bun run --filter ./apps/data-service cf-typegen`
 
 This updates `worker-configuration.d.ts` based on `apps/data-service/wrangler.jsonc`.
 

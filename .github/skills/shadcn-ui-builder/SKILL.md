@@ -25,15 +25,15 @@ The shadcn CLI supports monorepos. In this repo, each workspace has a `component
 
 ### Inspect registry items before adding
 
-- View an item: `pnpm dlx shadcn@latest view button`
-- Search/list items: `pnpm dlx shadcn@latest search @shadcn -q "dialog"`
+- View an item: `bunx shadcn@latest view button`
+- Search/list items: `bunx shadcn@latest search @shadcn -q "dialog"`
 
 ### Add components (recommended)
 
 Run from the app workspace so the CLI can resolve monorepo paths correctly:
 
-- From repo root: `pnpm dlx shadcn@latest add button --cwd apps/user-application`
-- Or cd first: `cd apps/user-application && pnpm dlx shadcn@latest add button`
+- From repo root: `bunx shadcn@latest add button --cwd apps/user-application`
+- Or cd first: `cd apps/user-application && bunx shadcn@latest add button`
 
 Notes:
 - Adding a “block” (e.g. `login-01`) may install primitives into `packages/ui` and the composed block into the app.
@@ -44,7 +44,7 @@ Notes:
 Shadcn recommends re-adding components to pick up upstream improvements. This overwrites local modifications.
 
 - Commit first.
-- Then (example): `pnpm dlx shadcn@latest add --all --overwrite --cwd apps/user-application`
+- Then (example): `bunx shadcn@latest add --all --overwrite --cwd apps/user-application`
 
 ## Tailwind v4 + React 19 notes (upstream)
 
@@ -54,6 +54,6 @@ Shadcn recommends re-adding components to pick up upstream improvements. This ov
 
 ## Quick repo sanity checks after UI changes
 
-- Lint UI package: `pnpm --filter @workspace/ui lint`
-- Typecheck user app: `pnpm -C apps/user-application tsc --noEmit`
-- Typecheck UI package: `pnpm -C packages/ui tsc --noEmit`
+- Lint UI package: `bun run --filter @workspace/ui lint`
+- Typecheck user app: `bunx tsc -p apps/user-application/tsconfig.json --noEmit`
+- Typecheck UI package: `bunx tsc -p packages/ui/tsconfig.json --noEmit`

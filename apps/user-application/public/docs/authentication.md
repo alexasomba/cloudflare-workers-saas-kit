@@ -130,7 +130,7 @@ Use Better Auth CLI to generate the database schemas and TypeScript types. This 
 ### 1. Generate Better Auth schemas
 
 ```bash
-pnpm run better-auth:generate
+bun run --filter ./packages/data-ops better-auth:generate
 ```
 
 This creates `packages/data-ops/src/drizzle/auth-schema.ts` with your authentication tables
@@ -138,7 +138,7 @@ This creates `packages/data-ops/src/drizzle/auth-schema.ts` with your authentica
 ### 2. Generate Drizzle migrations
 
 ```bash
-pnpm run drizzle:generate
+bun run --filter ./packages/data-ops drizzle:generate
 ```
 
 This creates SQL migration files in `packages/data-ops/src/drizzle`
@@ -146,7 +146,7 @@ This creates SQL migration files in `packages/data-ops/src/drizzle`
 ### 3. Run migrations (optional)
 
 ```bash
-pnpm run drizzle:migrate
+bun run --filter ./packages/data-ops drizzle:migrate
 ```
 
 This automatically applies migrations to create the auth tables

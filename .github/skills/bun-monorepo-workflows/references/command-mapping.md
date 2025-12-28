@@ -11,13 +11,13 @@ This is a quick cheat sheet for translating common pnpm workflows to Bun.
 
 - `pnpm run <script>` → `bun run <script>`
 - `pnpm -C <dir> <script>` → prefer filter-by-path:
-  - `bun --filter ./apps/user-application run <script>`
+  - `bun run --filter ./apps/user-application <script>`
 
 ## Filtering / targeting packages
 
-- `pnpm --filter <pkg> <script>` → `bun --filter <pkg> run <script>`
-- `pnpm --filter <glob> <script>` → `bun --filter <glob> run <script>`
-- `pnpm --filter '!<pkg>' <script>` → `bun --filter '!<pkg>' run <script>`
+- `pnpm --filter <pkg> <script>` → `bun run --filter <pkg> <script>`
+- `pnpm --filter <glob> <script>` → `bun run --filter <glob> <script>`
+- `pnpm --filter '!<pkg>' <script>` → `bun run --filter '!<pkg>' <script>`
 
 Install-only filtering:
 

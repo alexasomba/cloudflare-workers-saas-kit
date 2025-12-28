@@ -30,7 +30,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.26.2",
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
     "@planetscale/database": "^1.19.0",

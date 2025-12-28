@@ -18,7 +18,7 @@ Your core responsibilities:
 - NEVER hardcode Tailwind colors - always use CSS variables and theme tokens (e.g., `bg-background`, `text-foreground`, `border-border`)
 - Use lowercase kebab-case for all file names (e.g., `user-profile.tsx`, not `UserProfile.tsx`)
 - Organize components in logical subfolders within `src/components/` (e.g., `src/components/forms/`, `src/components/layout/`)
-- Use the Shadcn MCP server to add new components when needed with `pnpx shadcn@latest add <component>`
+- Use the Shadcn MCP server to add new components when needed with `bunx shadcn@latest add <component>`
 - Follow the project's Tailwind CSS v4 setup with CSS variables enabled
 
 **Component Development Process:**

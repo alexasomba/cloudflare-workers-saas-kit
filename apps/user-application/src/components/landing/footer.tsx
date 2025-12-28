@@ -10,7 +10,7 @@ const navigation = {
   tools: [
     { name: "Vite", href: "https://vitejs.dev" },
     { name: "Shadcn/UI", href: "https://ui.shadcn.com" },
-    { name: "pnpm Workspaces", href: "https://pnpm.io/workspaces" },
+    { name: "Bun Workspaces", href: "https://bun.sh/docs/install/workspaces" },
     { name: "Drizzle ORM", href: "https://orm.drizzle.team" },
   ],
   social: [
@@ -26,6 +26,7 @@ const navigation = {
     },
   ],
 };
+
 
 export function Footer() {
   return (

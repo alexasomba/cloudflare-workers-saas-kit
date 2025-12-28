@@ -87,7 +87,7 @@ export function CoursePromoSection() {
                 </div>
                 <div className="flex items-start gap-2">
                   <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
-                  <span className="text-sm">TypeScript, Drizzle ORM, pnpm</span>
+                  <span className="text-sm">TypeScript, Drizzle ORM, Bun</span>
                 </div>
               </div>
             </div>

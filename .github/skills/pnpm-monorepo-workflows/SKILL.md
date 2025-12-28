@@ -1,9 +1,14 @@
 ---
 name: pnpm-monorepo-workflows
-description: Use this when installing dependencies, running dev servers, building packages, or running scripts in this pnpm monorepo.
+description: Legacy pnpm workflows for older branches/PRs. Use only when the repo is still pnpm-based; otherwise prefer bun-monorepo-workflows and bun-workspace-management.
 ---
 
-# pnpm monorepo workflows (Cloudflare Workers SaaS kit)
+# pnpm monorepo workflows (legacy)
+
+This repo has migrated to Bun.
+Prefer:
+- `bun-monorepo-workflows` for migration/CI guidance
+- `bun-workspace-management` for day-to-day commands
 
 Use this skill whenever the user asks to set up the repo, run dev servers, rebuild shared packages, or troubleshoot script execution.
 

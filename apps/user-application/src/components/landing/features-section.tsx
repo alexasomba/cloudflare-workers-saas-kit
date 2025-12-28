@@ -85,9 +85,9 @@ const templateFeatures = [
     highlight: true
   },
   {
-    image: "/pnpm.webp",
+    image: "/monorepo.svg",
     title: "Monorepo Architecture",
-    description: "Organized workspace structure with pnpm. Shared components, utilities, and configurations across multiple applications.",
+    description: "Organized workspace structure with Bun workspaces. Shared components, utilities, and configurations across multiple applications.",
     badge: "Architecture",
     highlight: true
   }
