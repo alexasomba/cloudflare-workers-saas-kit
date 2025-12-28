@@ -1,183 +1,71 @@
-import { authClient } from "@/lib/auth-client";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Badge } from "@workspace/ui/components/badge";
-import { Button } from "@workspace/ui/components/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@workspace/ui/components/card";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@workspace/ui/components/table";
-import { IconArrowRight, IconBolt, IconClock } from "@tabler/icons-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { ChartAreaInteractive } from "@/components/dashboard/chart-area-interactive";
+import { DataTable, type DataItem } from "@/components/dashboard/data-table";
+import { SectionCards } from "@/components/dashboard/section-cards";
 
 export const Route = createFileRoute("/_auth/app/")({
-  component: RouteComponent,
+  component: Page,
 });
 
-type Activity = {
-  id: string;
-  label: string;
-  detail: string;
-  status: "success" | "pending" | "failed";
-  time: string;
-};
-
-const recentActivity: Activity[] = [
+// Sample data - in a real app, this would come from an API
+const data: DataItem[] = [
   {
-    id: "evt_1",
-    label: "Signed in",
-    detail: "Email OTP",
-    status: "success",
-    time: "Just now",
+    id: 1,
+    header: "Cover page",
+    type: "Cover page",
+    status: "In Process",
+    target: "18",
+    limit: "5",
+    reviewer: "Eddie Lake",
   },
   {
-    id: "evt_2",
-    label: "Billing portal",
-    detail: "Opened customer portal",
-    status: "pending",
-    time: "2m ago",
+    id: 2,
+    header: "Table of contents",
+    type: "Table of contents",
+    status: "Done",
+    target: "29",
+    limit: "24",
+    reviewer: "Eddie Lake",
   },
   {
-    id: "evt_3",
-    label: "Subscription",
-    detail: "Plan check",
-    status: "success",
-    time: "10m ago",
+    id: 3,
+    header: "Executive summary",
+    type: "Narrative",
+    status: "Done",
+    target: "10",
+    limit: "13",
+    reviewer: "Eddie Lake",
+  },
+  {
+    id: 4,
+    header: "Technical approach",
+    type: "Narrative",
+    status: "Done",
+    target: "27",
+    limit: "23",
+    reviewer: "Jamik Tashpulatov",
+  },
+  {
+    id: 5,
+    header: "Design",
+    type: "Narrative",
+    status: "In Process",
+    target: "2",
+    limit: "16",
+    reviewer: "Jamik Tashpulatov",
   },
 ];
 
-function RouteComponent() {
-  const navigate = useNavigate();
-  const { data: session } = authClient.useSession();
-
-  const userName = session?.user?.name ?? session?.user?.email ?? "";
-  const greeting = userName ? `Welcome back, ${userName}` : "Welcome back";
-
+function Page() {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="space-y-1">
-          <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
-          <p className="text-sm text-muted-foreground">{greeting}</p>
+    <div className="@container/main flex flex-1 flex-col gap-2">
+      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+        <SectionCards />
+        <div className="px-4 lg:px-6">
+          <ChartAreaInteractive />
         </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          <Button
-            variant="outline"
-            onClick={() => navigate({ to: "/app/polar/subscriptions" })}
-          >
-            Manage subscription
-            <IconArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-          <Button onClick={() => navigate({ to: "/app/polar/portal" })}>
-            Open billing portal
-          </Button>
-        </div>
+        <DataTable data={data} />
       </div>
-
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="flex flex-row items-start justify-between space-y-0">
-            <div className="space-y-1">
-              <CardTitle className="text-sm font-medium">Account</CardTitle>
-              <CardDescription>Authentication & profile</CardDescription>
-            </div>
-            <IconBolt className="h-5 w-5 text-muted-foreground" />
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="text-2xl font-semibold">Active</div>
-            <div className="text-sm text-muted-foreground">
-              Signed in with email OTP.
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-start justify-between space-y-0">
-            <div className="space-y-1">
-              <CardTitle className="text-sm font-medium">Subscription</CardTitle>
-              <CardDescription>Plan & billing</CardDescription>
-            </div>
-            <IconClock className="h-5 w-5 text-muted-foreground" />
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="text-2xl font-semibold">—</div>
-            <div className="text-sm text-muted-foreground">
-              Visit Subscriptions to choose a plan.
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-start justify-between space-y-0">
-            <div className="space-y-1">
-              <CardTitle className="text-sm font-medium">Environment</CardTitle>
-              <CardDescription>Worker runtime</CardDescription>
-            </div>
-            <Badge variant="secondary">Cloudflare</Badge>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="text-2xl font-semibold">Ready</div>
-            <div className="text-sm text-muted-foreground">
-              SSR + API routes running in Workers.
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent activity</CardTitle>
-          <CardDescription>Latest events in this workspace</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Event</TableHead>
-                <TableHead>Detail</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead className="text-right">When</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {recentActivity.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell className="font-medium">{row.label}</TableCell>
-                  <TableCell className="text-muted-foreground">
-                    {row.detail}
-                  </TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        row.status === "success"
-                          ? "default"
-                          : row.status === "pending"
-                            ? "secondary"
-                            : "destructive"
-                      }
-                    >
-                      {row.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-right text-muted-foreground">
-                    {row.time}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
     </div>
   );
 }
