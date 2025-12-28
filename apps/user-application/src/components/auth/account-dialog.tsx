@@ -8,6 +8,12 @@ import {
   DialogTrigger,
 } from "@workspace/ui/components/dialog";
 import { Input } from "@workspace/ui/components/input";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@workspace/ui/components/input-otp";
 import { authClient } from "@/lib/auth-client";
 import { IconLogout, IconPalette } from "@tabler/icons-react";
 import { ThemeToggle } from "@workspace/ui/components/theme-toggle";
@@ -121,19 +127,37 @@ export function AccountDialog({ children }: AccountDialogProps) {
                   </Button>
                 ) : (
                   <>
-                    <Input
-                      inputMode="numeric"
-                      placeholder="Enter the code"
-                      value={verificationOtp}
-                      onChange={(e) => setVerificationOtp(e.target.value)}
-                      disabled={isVerifyingEmail}
-                      aria-label="Email verification code"
-                    />
+                    <div className="space-y-2">
+                      <div className="text-sm text-muted-foreground">
+                        Enter the 6-digit code from your email.
+                      </div>
+                      <div className="flex justify-center">
+                        <InputOTP
+                          maxLength={6}
+                          value={verificationOtp}
+                          onChange={setVerificationOtp}
+                          disabled={isVerifyingEmail}
+                          aria-label="Email verification code"
+                        >
+                          <InputOTPGroup>
+                            <InputOTPSlot index={0} />
+                            <InputOTPSlot index={1} />
+                            <InputOTPSlot index={2} />
+                          </InputOTPGroup>
+                          <InputOTPSeparator />
+                          <InputOTPGroup>
+                            <InputOTPSlot index={3} />
+                            <InputOTPSlot index={4} />
+                            <InputOTPSlot index={5} />
+                          </InputOTPGroup>
+                        </InputOTP>
+                      </div>
+                    </div>
                     <Button
                       onClick={() => verifyEmail(user.email!)}
                       size="sm"
                       className="w-full"
-                      disabled={!verificationOtp || isVerifyingEmail}
+                      disabled={verificationOtp.length !== 6 || isVerifyingEmail}
                     >
                       {isVerifyingEmail ? "Verifying…" : "Verify email"}
                     </Button>
