@@ -11,7 +11,7 @@
         ".specify/scripts/powershell/": true
     },
     "terminal.integrated.env.osx": {
-        "PATH": "${workspaceFolder}/scripts:${env:HOME}/.bun/bin:${env:PATH}"
+        "PATH": "${workspaceFolder}/scripts:${env:HOME}/.bun/bin:${env:HOME}/.local/bin:${env:PATH}"
     }
 }
 
