@@ -1,19 +1,20 @@
-import * as React from "react"
+import { useEffect, useState } from "react"
 
-const DEFAULT_BREAKPOINT_PX = 768
+export function useIsMobile(breakpoint: number = 768): boolean {
+  const [isMobile, setIsMobile] = useState<boolean>(false)
 
-export function useIsMobile(breakpointPx: number = DEFAULT_BREAKPOINT_PX) {
-  const [isMobile, setIsMobile] = React.useState(false)
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < breakpoint)
+    }
 
-  React.useEffect(() => {
-    const media = window.matchMedia(`(max-width: ${breakpointPx}px)`) 
+    // Check on mount
+    checkIsMobile()
 
-    const update = () => setIsMobile(media.matches)
-    update()
-
-    media.addEventListener("change", update)
-    return () => media.removeEventListener("change", update)
-  }, [breakpointPx])
+    // Listen for resize
+    window.addEventListener("resize", checkIsMobile)
+    return () => window.removeEventListener("resize", checkIsMobile)
+  }, [breakpoint])
 
   return isMobile
 }

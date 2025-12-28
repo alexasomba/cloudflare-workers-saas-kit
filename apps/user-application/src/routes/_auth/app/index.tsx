@@ -1,43 +1,71 @@
-import { authClient } from "@/lib/auth-client";
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Button } from "@workspace/ui/components/button";
-import Dashboard01Block from "@workspace/ui/components/dashboard-01";
-import { IconArrowRight } from "@tabler/icons-react";
+import { createFileRoute } from "@tanstack/react-router";
+import { ChartAreaInteractive } from "@/components/dashboard/chart-area-interactive";
+import { DataTable, type DataItem } from "@/components/dashboard/data-table";
+import { SectionCards } from "@/components/dashboard/section-cards";
 
 export const Route = createFileRoute("/_auth/app/")({
-  component: RouteComponent,
+  component: Page,
 });
 
-function RouteComponent() {
-  const navigate = useNavigate();
-  const { data: session } = authClient.useSession();
+// Sample data - in a real app, this would come from an API
+const data: DataItem[] = [
+  {
+    id: 1,
+    header: "Cover page",
+    type: "Cover page",
+    status: "In Process",
+    target: "18",
+    limit: "5",
+    reviewer: "Eddie Lake",
+  },
+  {
+    id: 2,
+    header: "Table of contents",
+    type: "Table of contents",
+    status: "Done",
+    target: "29",
+    limit: "24",
+    reviewer: "Eddie Lake",
+  },
+  {
+    id: 3,
+    header: "Executive summary",
+    type: "Narrative",
+    status: "Done",
+    target: "10",
+    limit: "13",
+    reviewer: "Eddie Lake",
+  },
+  {
+    id: 4,
+    header: "Technical approach",
+    type: "Narrative",
+    status: "Done",
+    target: "27",
+    limit: "23",
+    reviewer: "Jamik Tashpulatov",
+  },
+  {
+    id: 5,
+    header: "Design",
+    type: "Narrative",
+    status: "In Process",
+    target: "2",
+    limit: "16",
+    reviewer: "Jamik Tashpulatov",
+  },
+];
 
-  const userName = session?.user?.name ?? session?.user?.email ?? "";
-  const greeting = userName ? `Welcome back, ${userName}` : "Welcome back";
-
+function Page() {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="space-y-1">
-          <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
-          <p className="text-sm text-muted-foreground">{greeting}</p>
+    <div className="@container/main flex flex-1 flex-col gap-2">
+      <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+        <SectionCards />
+        <div className="px-4 lg:px-6">
+          <ChartAreaInteractive />
         </div>
-
-        <div className="flex flex-wrap items-center gap-2">
-          <Button
-            variant="outline"
-            onClick={() => navigate({ to: "/app/polar/subscriptions" })}
-          >
-            Manage subscription
-            <IconArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-          <Button onClick={() => navigate({ to: "/app/polar/portal" })}>
-            Open billing portal
-          </Button>
-        </div>
+        <DataTable data={data} />
       </div>
-
-      <Dashboard01Block />
     </div>
   );
 }
