@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+# Workspace shim: prefer a real Bun install (e.g. ~/.bun/bin/bun) over broken package-manager shims.
+# This makes `bun` reliable in this monorepo without requiring shell/profile changes.
+
+set -eu
+
+if [ -x "$HOME/.bun/bin/bun" ]; then
+  exec "$HOME/.bun/bin/bun" "$@"
+fi
+
+exec bun "$@"
