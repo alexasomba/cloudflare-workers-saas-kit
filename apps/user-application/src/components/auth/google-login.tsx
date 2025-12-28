@@ -7,6 +7,12 @@ import {
   CardTitle,
 } from "@workspace/ui/components/card";
 import { Input } from "@workspace/ui/components/input";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@workspace/ui/components/input-otp";
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
 
@@ -100,18 +106,37 @@ export function GoogleLogin() {
               </Button>
             ) : (
               <>
-                <Input
-                  inputMode="numeric"
-                  placeholder="Enter the code"
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                  disabled={isSigningIn}
-                  aria-label="One-time code"
-                />
+                <div className="space-y-2">
+                  <div className="text-sm text-muted-foreground">
+                    Enter the 6-digit code we sent to your email.
+                  </div>
+                  <div className="flex justify-center">
+                    <InputOTP
+                      maxLength={6}
+                      value={otp}
+                      onChange={setOtp}
+                      disabled={isSigningIn}
+                      aria-label="One-time code"
+                      autoFocus
+                    >
+                      <InputOTPGroup>
+                        <InputOTPSlot index={0} />
+                        <InputOTPSlot index={1} />
+                        <InputOTPSlot index={2} />
+                      </InputOTPGroup>
+                      <InputOTPSeparator />
+                      <InputOTPGroup>
+                        <InputOTPSlot index={3} />
+                        <InputOTPSlot index={4} />
+                        <InputOTPSlot index={5} />
+                      </InputOTPGroup>
+                    </InputOTP>
+                  </div>
+                </div>
                 <Button
                   onClick={handleEmailOtpSignIn}
                   className="w-full h-12 text-base"
-                  disabled={!otp || isSigningIn}
+                  disabled={otp.length !== 6 || isSigningIn}
                 >
                   {isSigningIn ? "Signing in…" : "Sign in"}
                 </Button>
