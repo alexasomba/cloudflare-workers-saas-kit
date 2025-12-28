@@ -1,62 +1,61 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@workspace/ui/components/card"
+import { Badge } from "@workspace/ui/components/badge"
 import { 
-  Route, 
-  Database, 
-  Zap, 
-  Shield, 
-  Palette, 
-  Code,
-  Server,
-  Layers,
-  GitBranch
-} from "lucide-react"
+  IconRoute, 
+  IconDatabase, 
+  IconBolt, 
+  IconShield, 
+  IconPalette, 
+  IconCode,
+  IconServer,
+  IconStack
+} from "@tabler/icons-react"
 
 const features = [
   {
-    icon: Route,
+    icon: IconRoute,
     title: "TanStack Router",
     description: "Type-safe, file-based routing with powerful features like nested layouts, loaders, and search params validation.",
     badge: "Type-Safe"
   },
   {
-    icon: Database,
+    icon: IconDatabase,
     title: "TanStack Query",
     description: "Powerful data synchronization with server state management, caching, and background updates built-in.",
     badge: "Server State"
   },
   {
-    icon: Code,
+    icon: IconCode,
     title: "React 19",
     description: "Latest React with concurrent features, improved performance, and modern development patterns.",
     badge: "Latest"
   },
   {
-    icon: Zap,
+    icon: IconBolt,
     title: "Vite",
     description: "Lightning-fast build tool with hot module replacement and optimized production builds.",
     badge: "Fast"
   },
   {
-    icon: Shield,
+    icon: IconShield,
     title: "TypeScript",
     description: "Full TypeScript support with strict typing, IntelliSense, and compile-time error checking.",
     badge: "Type-Safe"
   },
   {
-    icon: Palette,
+    icon: IconPalette,
     title: "Tailwind CSS v4",
     description: "Modern utility-first CSS framework with CSS variables and a comprehensive design system.",
     badge: "Styling"
   },
   {
-    icon: Server,
+    icon: IconServer,
     title: "SSR Ready",
     description: "Server-side rendering support with seamless hydration and SEO optimization out of the box.",
     badge: "Performance"
   },
   {
-    icon: Layers,
+    icon: IconStack,
     title: "Shadcn/UI",
     description: "Beautiful, accessible component library with customizable themes and modern design patterns.",
     badge: "Components"
@@ -86,9 +85,9 @@ const templateFeatures = [
     highlight: true
   },
   {
-    image: "/pnpm.webp",
+    image: "/monorepo.svg",
     title: "Monorepo Architecture",
-    description: "Organized workspace structure with pnpm. Shared components, utilities, and configurations across multiple applications.",
+    description: "Organized workspace structure with Bun workspaces. Shared components, utilities, and configurations across multiple applications.",
     badge: "Architecture",
     highlight: true
   }

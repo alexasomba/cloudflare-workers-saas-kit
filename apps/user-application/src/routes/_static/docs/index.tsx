@@ -5,19 +5,18 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+} from "@workspace/ui/components/card";
+import { Badge } from "@workspace/ui/components/badge";
+import { Button } from "@workspace/ui/components/button";
 import {
-  ArrowRightIcon,
-  BookOpenIcon,
-  DatabaseIcon,
-  CreditCardIcon,
-  ShieldCheckIcon,
-  Bot,
-  Sparkles,
-  CheckCircle,
-} from "lucide-react";
+  IconArrowRight,
+  IconBook,
+  IconDatabase,
+  IconCreditCard,
+  IconShieldCheck,
+  IconSparkles,
+  IconCircleCheck,
+} from "@tabler/icons-react";
 
 export const Route = createFileRoute("/_static/docs/")({
   component: RouteComponent,
@@ -29,7 +28,7 @@ const gettingStartedSteps = [
     title: "Database Setup",
     description:
       "Configure your serverless database with edge optimization and HTTP proxying to prevent connection overwhelm in isolated environments.",
-    icon: DatabaseIcon,
+    icon: IconDatabase,
     image: "/cloudflare.png",
     badgeVariant: "default" as const,
     features: [
@@ -44,7 +43,7 @@ const gettingStartedSteps = [
     title: "Authentication Setup",
     description:
       "Set up comprehensive authentication with Better Auth, including social providers, email/password, and session management for serverless environments.",
-    icon: ShieldCheckIcon,
+    icon: IconShieldCheck,
     image: "/better-auth.png",
     badgeVariant: "secondary" as const,
     features: [
@@ -59,7 +58,7 @@ const gettingStartedSteps = [
     title: "Payment Integration",
     description:
       "Integrate Polar for modern subscription management and payment processing without webhooks or external database tables.",
-    icon: CreditCardIcon,
+    icon: IconCreditCard,
     image: "/polar.png",
     badgeVariant: "outline" as const,
     features: [
@@ -77,7 +76,7 @@ function RouteComponent() {
       {/* Header Section */}
       <div className="text-center mb-12">
         <div className="flex justify-center mb-4">
-          <BookOpenIcon className="h-12 w-12 text-primary" />
+          <IconBook className="h-12 w-12 text-primary" />
         </div>
         <h1 className="text-4xl font-bold tracking-tight mb-4">
           Documentation
@@ -134,7 +133,7 @@ function RouteComponent() {
           <CardContent className="p-8">
             <div className="text-center">
               <Badge variant="outline" className="mb-4">
-                <Sparkles className="h-3 w-3 mr-1" />
+                <IconSparkles className="h-3 w-3 mr-1" />
                 AI-Powered Setup
               </Badge>
               <h3 className="text-2xl font-semibold mb-4">
@@ -224,7 +223,7 @@ function RouteComponent() {
                   >
                     <Button className="w-full group-hover:bg-primary/90 transition-colors">
                       Start {step.title}
-                      <ArrowRightIcon className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      <IconArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </Link>
                 </CardContent>
@@ -238,7 +237,7 @@ function RouteComponent() {
       <Card className="border-dashed bg-muted/20">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <BookOpenIcon className="h-5 w-5" />
+            <IconBook className="h-5 w-5" />
             Quick Access
           </CardTitle>
           <CardDescription>
@@ -311,23 +310,23 @@ function RouteComponent() {
               <h3 className="font-semibold text-lg mb-2">What You'll Build</h3>
               <div className="space-y-2">
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">
                     SmartLinks - Complete short link service
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">
                     Location-based intelligent redirects
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">AI-powered link analysis</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">Real-time analytics dashboard</span>
                 </div>
               </div>
@@ -339,42 +338,45 @@ function RouteComponent() {
               </h3>
               <div className="space-y-2">
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">
                     Cloudflare D1, KV, R2, Workers AI
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">
                     Durable Objects for state management
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">
                     Better Auth & Stripe integration
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
-                  <span className="text-sm">TypeScript, Drizzle ORM, pnpm</span>
+                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
+                  <span className="text-sm">TypeScript, Drizzle ORM, Bun</span>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" asChild>
-              <a
-                href="https://learn.backpine.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Enroll in Course
-                <ArrowRightIcon className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
+            <Button
+              size="lg"
+              render={
+                <a
+                  href="https://learn.backpine.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Enroll in Course
+                  <IconArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              }
+            />
           </div>
         </div>
       </div>

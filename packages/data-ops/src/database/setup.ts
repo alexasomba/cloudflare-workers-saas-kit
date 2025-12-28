@@ -1,17 +1,13 @@
 // packages/data-ops/src/database/setup.ts
-import { drizzle } from "drizzle-orm/planetscale-serverless";
+import { drizzle } from "drizzle-orm/d1";
 
 let db: ReturnType<typeof drizzle>;
 
-export function initDatabase(connection: {
-  host: string;
-  username: string;
-  password: string;
-}) {
+export function initDatabase(connection: D1Database) {
   if (db) {
     return db;
   }
-  db = drizzle({ connection });
+  db = drizzle(connection);
   return db;
 }
 

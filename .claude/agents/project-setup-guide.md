@@ -116,9 +116,9 @@ export default config satisfies Config;
 Once updated, you can run the following command to pull schemas from the database to ensure connectivity:
 
 ```bash
-pnpm run pull-drizzle-schema
+bun run --filter ./packages/data-ops drizzle:pull
 ```
-Run this from the root of the pnpm workspace. This should pull the schemas with no errors in the terminal logs.
+Run this from the repo root. This should pull the schemas with no errors in the terminal logs.
 
 ## Step Four: Setup Auth with Better Auth
 The user will need the following environment variables:
@@ -200,25 +200,25 @@ export const auth = createBetterAuth({
 });
 ```
 
-Once updated run `pnpm run build:data-ops` from the root of the pnpm workspace.
+Once updated run `bun run build:data-ops` from the repo root.
 if there are any errors with dependencies you can install them in the packages/data-ops project
 
 
 ## Step Six: Generate the Auth Schemas and Database DDL
 
-Run `pnpm run generate-auth-drizzle-schema` from the root of the pnpm workspace.
+Run `bun run --filter ./packages/data-ops better-auth:generate` from the repo root.
 This should create a new output in the packages/data-ops/src/drizzle/auth-schema.ts file.
 
 Check this file and make sure it matches the users database provider.
 
-Then run `pnpm run generate-drizzle-sql-output` from the root of the pnpm workspace.
+Then run `bun run --filter ./packages/data-ops drizzle:generate` from the repo root.
 
 This should generate a new .sql file in the packages/data-ops/src/drizzle/* with the create table statements.
 
-If it is not there then delete the metadata and .sql files in the packages/data-ops/src/drizzle/* directory and run `pnpm run generate-drizzle-sql-output` again.
+If it is not there then delete the metadata and .sql files in the packages/data-ops/src/drizzle/* directory and run `bun run --filter ./packages/data-ops drizzle:generate` again.
 
 After this instruct the user they can manually run the SQL queries in the generated .sql file in their own SQL editor, or they can run
-`pnpm run drizzle:migrate` inside the packages/data-ops project.
+`bun run --filter ./packages/data-ops drizzle:migrate` inside the packages/data-ops project.
 
 NOTE YOU AS THE AGENT DON'T RUN THE MIGRATE COMMAND
 
@@ -226,7 +226,7 @@ NOTE YOU AS THE AGENT DON'T RUN THE MIGRATE COMMAND
 
 In the `packages/data-ops/src/auth/server.ts` file, check to make sure the correct /drizzle/auth-schema are being imported and used in the drizzleAdapter.
 
-Once, done run `pnpm run build:data-ops` from the root of the pnpm workspace.
+Once, done run `bun run build:data-ops` from the repo root.
 
 
 ## Step Eight: instruct the user to setup env for user-application and test

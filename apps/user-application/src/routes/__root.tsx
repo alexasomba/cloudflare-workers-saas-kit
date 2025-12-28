@@ -11,7 +11,7 @@ import * as React from "react";
 import type { QueryClient } from "@tanstack/react-query";
 import { DefaultCatchBoundary } from "@/components/default-catch-boundary";
 import { NotFound } from "@/components/not-found";
-import { ThemeProvider } from "@/components/theme";
+import { ThemeProvider } from "@workspace/ui/components/theme-provider";
 import appCss from "@/styles.css?url";
 import { seo } from "@/utils/seo";
 

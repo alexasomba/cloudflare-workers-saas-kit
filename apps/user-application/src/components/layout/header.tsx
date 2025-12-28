@@ -1,13 +1,13 @@
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { cn } from "@workspace/ui/lib/utils";
+import { Button } from "@workspace/ui/components/button";
+import { Input } from "@workspace/ui/components/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar";
 import { AccountDialog } from "@/components/auth/account-dialog";
 import { 
-  Bell, 
-  Search, 
-  Menu
-} from "lucide-react";
+  IconBell, 
+  IconSearch, 
+  IconMenu2
+} from "@tabler/icons-react";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 
@@ -40,11 +40,11 @@ export function Header({ className, onMobileMenuToggle }: HeaderProps) {
           className="lg:hidden"
           onClick={onMobileMenuToggle}
         >
-          <Menu className="h-5 w-5" />
+          <IconMenu2 className="h-5 w-5" />
         </Button>
 
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <IconSearch className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search..."
             value={searchQuery}
@@ -57,7 +57,7 @@ export function Header({ className, onMobileMenuToggle }: HeaderProps) {
       {/* Right side - Notifications and user menu */}
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" className="relative">
-          <Bell className="h-5 w-5" />
+          <IconBell className="h-5 w-5" />
           <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-destructive"></span>
         </Button>
 

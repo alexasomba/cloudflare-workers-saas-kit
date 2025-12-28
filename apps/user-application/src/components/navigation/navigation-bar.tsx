@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "@tanstack/react-router";
-import { Menu, Github, ExternalLink, LogIn } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { IconMenu2, IconBrandGithub, IconExternalLink, IconLogin } from "@tabler/icons-react";
+import { Button } from "@workspace/ui/components/button";
 import {
   Sheet,
   SheetContent,
@@ -9,12 +9,12 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/theme";
+} from "@workspace/ui/components/sheet";
+import { cn } from "@workspace/ui/lib/utils";
+import { ThemeToggle } from "@workspace/ui/components/theme-toggle";
 import { authClient } from "@/lib/auth-client";
 import { AccountDialog } from "@/components/auth/account-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar";
 
 interface NavigationItem {
   label: string;
@@ -63,17 +63,7 @@ export function NavigationBar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleSmoothScroll = (elementId: string) => {
-    const element = document.getElementById(elementId);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
-  const handleNavClick = (item: NavigationItem) => {
+  const handleNavClick = () => {
     setIsOpen(false);
   };
 
@@ -116,15 +106,15 @@ export function NavigationBar() {
                   >
                     <span>{item.label}</span>
                     {item.label === "GitHub" ? (
-                      <Github className="h-4 w-4" />
+                      <IconBrandGithub className="h-4 w-4" />
                     ) : (
-                      <ExternalLink className="h-4 w-4" />
+                      <IconExternalLink className="h-4 w-4" />
                     )}
                   </a>
                 ) : (
                   <Link
                     to={item.href}
-                    onClick={() => handleNavClick(item)}
+                    onClick={() => handleNavClick()}
                     className="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-300 hover:bg-accent/50 block"
                   >
                     {item.label}
@@ -168,7 +158,7 @@ export function NavigationBar() {
                 variant="default"
                 className="gap-2"
               >
-                <LogIn className="h-4 w-4" />
+                <IconLogin className="h-4 w-4" />
                 Sign In
               </Button>
             )}
@@ -178,16 +168,18 @@ export function NavigationBar() {
           <div className="lg:hidden flex items-center space-x-2">
             <ThemeToggle variant="ghost" align="end" />
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="relative h-10 w-10 hover:bg-accent/50"
-                >
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Open navigation menu</span>
-                </Button>
-              </SheetTrigger>
+              <SheetTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="relative h-10 w-10 hover:bg-accent/50"
+                  >
+                    <IconMenu2 className="h-5 w-5" />
+                    <span className="sr-only">Open navigation menu</span>
+                  </Button>
+                }
+              />
               <SheetContent
                 side="right"
                 className="w-[300px] bg-background/95 backdrop-blur-xl border-l border-border/50"
@@ -214,15 +206,15 @@ export function NavigationBar() {
                         >
                           <span>{item.label}</span>
                           {item.label === "GitHub" ? (
-                            <Github className="h-4 w-4" />
+                            <IconBrandGithub className="h-4 w-4" />
                           ) : (
-                            <ExternalLink className="h-4 w-4" />
+                            <IconExternalLink className="h-4 w-4" />
                           )}
                         </a>
                       ) : (
                         <Link
                           to={item.href}
-                          onClick={() => handleNavClick(item)}
+                          onClick={() => handleNavClick()}
                           className="flex items-center w-full px-4 py-3 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-300 hover:bg-accent/50 text-left"
                         >
                           {item.label}
@@ -260,7 +252,7 @@ export function NavigationBar() {
                       variant="default"
                       className="w-full gap-2"
                     >
-                      <LogIn className="h-4 w-4" />
+                      <IconLogin className="h-4 w-4" />
                       Sign In with Google
                     </Button>
                   )}

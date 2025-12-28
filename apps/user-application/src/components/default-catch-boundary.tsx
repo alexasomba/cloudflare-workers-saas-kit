@@ -1,22 +1,22 @@
 import { Link, rootRouteId, useMatch, useRouter } from "@tanstack/react-router";
 import type { ErrorComponentProps } from "@tanstack/react-router";
 import {
-  AlertTriangle,
-  RefreshCw,
-  ArrowLeft,
-  Home,
-  ChevronDown,
-  Bug,
-  Mail,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+  IconAlertTriangle,
+  IconRefresh,
+  IconArrowLeft,
+  IconHome,
+  IconChevronDown,
+  IconBug,
+  IconMail,
+} from "@tabler/icons-react";
+import { Button } from "@workspace/ui/components/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@workspace/ui/components/card";
+import { Alert, AlertDescription } from "@workspace/ui/components/alert";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from "@workspace/ui/components/collapsible";
 import { useState } from "react";
 
 export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
@@ -48,7 +48,7 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
         <CardHeader>
           <div className="flex items-center space-x-2">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-destructive/10">
-              <AlertTriangle className="h-5 w-5 text-destructive" />
+              <IconAlertTriangle className="h-5 w-5 text-destructive" />
             </div>
             <div>
               <CardTitle className="text-xl">Something went wrong</CardTitle>
@@ -62,7 +62,7 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
         <CardContent className="space-y-6">
           {/* Error Alert */}
           <Alert variant="destructive">
-            <AlertTriangle className="h-4 w-4" />
+            <IconAlertTriangle className="h-4 w-4" />
             <AlertDescription className="font-medium">
               {errorMessage}
             </AlertDescription>
@@ -74,24 +74,27 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
               onClick={() => router.invalidate()}
               className="flex items-center gap-2"
             >
-              <RefreshCw className="h-4 w-4" />
+              <IconRefresh className="h-4 w-4" />
               Try Again
             </Button>
 
             {isRoot ? (
-              <Button variant="outline" asChild>
-                <Link to="/" className="flex items-center gap-2">
-                  <Home className="h-4 w-4" />
-                  Go to Home
-                </Link>
-              </Button>
+              <Button
+                variant="outline"
+                render={
+                  <Link to="/" className="flex items-center gap-2">
+                    <IconHome className="h-4 w-4" />
+                    Go to Home
+                  </Link>
+                }
+              />
             ) : (
               <Button
                 variant="outline"
                 onClick={() => window.history.back()}
                 className="flex items-center gap-2"
               >
-                <ArrowLeft className="h-4 w-4" />
+                <IconArrowLeft className="h-4 w-4" />
                 Go Back
               </Button>
             )}
@@ -100,19 +103,21 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
           {/* Error Details (Collapsible) */}
           {hasStack && (
             <Collapsible open={showDetails} onOpenChange={setShowDetails}>
-              <CollapsibleTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
-                >
-                  <Bug className="h-4 w-4" />
-                  Technical Details
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${showDetails ? "rotate-180" : ""}`}
-                  />
-                </Button>
-              </CollapsibleTrigger>
+              <CollapsibleTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
+                  >
+                    <IconBug className="h-4 w-4" />
+                    Technical Details
+                    <IconChevronDown
+                      className={`h-4 w-4 transition-transform duration-200 ${showDetails ? "rotate-180" : ""}`}
+                    />
+                  </Button>
+                }
+              />
               <CollapsibleContent className="space-y-2">
                 <div className="rounded-lg bg-muted p-4">
                   <h4 className="text-sm font-medium mb-2">
@@ -138,7 +143,7 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
                 onClick={handleReportError}
                 className="flex items-center gap-2"
               >
-                <Mail className="h-4 w-4" />
+                <IconMail className="h-4 w-4" />
                 Report Error
               </Button>
             </div>

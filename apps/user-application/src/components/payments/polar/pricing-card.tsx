@@ -4,10 +4,10 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Check } from "lucide-react";
+} from "@workspace/ui/components/card";
+import { Button } from "@workspace/ui/components/button";
+import { Badge } from "@workspace/ui/components/badge";
+import { IconCheck } from "@tabler/icons-react";
 import { Price, Product, Subscription } from "./types";
 
 interface PricingCardProps {
@@ -25,10 +25,8 @@ export function PricingCard({
 }: PricingCardProps) {
   const price = product.prices[0];
 
-  const formatPrice = (price: Price) => {
-    if (!price) {
-      return "Price unavailable";
-    }
+  const formatPrice = (price: Price | undefined) => {
+    if (!price) return "Price unavailable";
     if (price.type !== "recurring") {
       return "Currency not specified";
     }
@@ -67,7 +65,7 @@ export function PricingCard({
 
   const renderButton = () => {
     if (subscription) {
-      if (subscription.productId === price.productId) {
+      if (price && subscription.productId === price.productId) {
         return (
           <div className="space-y-2">
             <div className="text-center">
@@ -78,9 +76,12 @@ export function PricingCard({
                 Status: {subscription.status}
               </p>
             </div>
-            <Button asChild className="w-full" size="lg" variant="outline">
-              <a href="/app/polar/portal">Manage Subscription</a>
-            </Button>
+            <Button
+              className="w-full"
+              size="lg"
+              variant="outline"
+              render={<a href="/app/polar/portal">Manage Subscription</a>}
+            />
           </div>
         );
       } else {
@@ -89,9 +90,12 @@ export function PricingCard({
             <p className="text-sm text-muted-foreground mb-4">
               Manage your subscription in the portal
             </p>
-            <Button asChild className="w-full" size="lg" variant="secondary">
-              <a href="/app/polar/portal">Go to Portal</a>
-            </Button>
+            <Button
+              className="w-full"
+              size="lg"
+              variant="secondary"
+              render={<a href="/app/polar/portal">Go to Portal</a>}
+            />
           </div>
         );
       }
@@ -99,8 +103,11 @@ export function PricingCard({
 
     return (
       <Button
-        disabled={isCheckoutPending}
-        onClick={() => onCheckout(price.productId)}
+        disabled={isCheckoutPending || !price}
+        onClick={() => {
+          if (!price) return;
+          onCheckout(price.productId);
+        }}
         className="w-full"
         size="lg"
       >
@@ -126,7 +133,7 @@ export function PricingCard({
       <CardContent>
         <div className="mb-6">
           <div className="text-3xl font-bold">{formatPrice(price)}</div>
-          {price.type === "recurring" && (
+          {price?.type === "recurring" && (
             <div className="text-sm text-muted-foreground">
               per {price.recurringInterval}
             </div>
@@ -137,7 +144,7 @@ export function PricingCard({
           <div className="space-y-3 mb-6">
             {features.map((feature, index) => (
               <div key={index} className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                <IconCheck className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
                 <span className="text-sm">{feature}</span>
               </div>
             ))}

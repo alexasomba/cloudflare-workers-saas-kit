@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Home, Menu } from "lucide-react";
+import { cn } from "@workspace/ui/lib/utils";
+import { Button } from "@workspace/ui/components/button";
+import { ScrollArea } from "@workspace/ui/components/scroll-area";
+import { IconHome, IconMenu2 } from "@tabler/icons-react";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 
@@ -15,7 +15,7 @@ interface NavigationItem {
 const navigationItems: NavigationItem[] = [
   {
     name: "Dashboard",
-    icon: Home,
+    icon: IconHome,
     href: "/dashboard",
   },
 ];
@@ -53,7 +53,7 @@ export function Sidebar({ className }: SidebarProps) {
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="h-8 w-8"
           >
-            <Menu className="h-4 w-4" />
+            <IconMenu2 className="h-4 w-4" />
           </Button>
         </div>
 

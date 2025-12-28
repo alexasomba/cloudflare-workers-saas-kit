@@ -75,7 +75,7 @@ CLOUDFLARE_D1_TOKEN="<Create in Cloudflare Dashboard>"
 
 Drizzle Kit helps you manage your database schema and generate TypeScript types automatically. In the `data-ops` package within your monorepo, you'll configure Drizzle Kit to connect to your database and pull existing schemas into your project.
 
-After configuring Drizzle Kit, you can run `pnpm run drizzle:pull` to pull in existing database schemas from your database to the project. The generated schemas will be available in `src/drizzle/schema.ts`, which you can then use to create type-safe queries throughout your application.
+After configuring Drizzle Kit, you can run `bun run drizzle:pull` to pull in existing database schemas from your database to the project. The generated schemas will be available in `src/drizzle/schema.ts`, which you can then use to create type-safe queries throughout your application.
 
 ### PostgreSQL Drizzle Configuration
 
@@ -398,7 +398,7 @@ The data-ops package is already configured to export all queries under the `./qu
 }
 ```
 
-> **Important:** After creating or modifying queries, run `pnpm run build` in the data-ops package to compile the TypeScript and make the queries available to other applications.
+> **Important:** After creating or modifying queries, run `bun run build` in the data-ops package to compile the TypeScript and make the queries available to other applications.
 
 ## Step 3: Install the Data-Ops Package
 
@@ -414,7 +414,7 @@ Your applications need to include the data-ops package as a dependency to use th
 }
 ```
 
-The `workspace:^` syntax tells pnpm to use the local workspace version of the package, ensuring you're always using the latest queries from your data-ops package.
+The `workspace:^` syntax tells the package manager to use the local workspace version of the package, ensuring you're always using the latest queries from your data-ops package.
 
 ## Step 4: Use Queries in Your Application
 

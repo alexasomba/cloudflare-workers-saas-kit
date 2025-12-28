@@ -2,8 +2,8 @@ import { collectSubscription, validPayment } from "@/core/functions/payments";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { CheckCircle2, Loader2, AlertCircle } from "lucide-react";
+import { Button } from "@workspace/ui/components/button";
+import { IconCircleCheck, IconLoader2, IconAlertCircle } from "@tabler/icons-react";
 
 const searchSchema = z.object({
   checkout_id: z.string(),
@@ -29,7 +29,7 @@ export const Route = createFileRoute("/_auth/app/polar/checkout/success")({
       <div className="h-ful flex flex-col items-center justify-center bg-background px-6 py-12">
         <div className="max-w-lg w-full text-center space-y-8">
           <div className="flex justify-center">
-            <AlertCircle className="w-16 h-16 text-destructive" />
+            <IconAlertCircle className="w-16 h-16 text-destructive" />
           </div>
 
           <div className="space-y-4">
@@ -77,11 +77,11 @@ function RouteComponent() {
   const getStatusIcon = () => {
     switch (status) {
       case "success":
-        return <CheckCircle2 className="w-16 h-16 text-primary" />;
+        return <IconCircleCheck className="w-16 h-16 text-primary" />;
       case "error":
-        return <AlertCircle className="w-16 h-16 text-destructive" />;
+        return <IconAlertCircle className="w-16 h-16 text-destructive" />;
       default:
-        return <Loader2 className="w-12 h-12 text-primary animate-spin" />;
+        return <IconLoader2 className="w-12 h-12 text-primary animate-spin" />;
     }
   };
 

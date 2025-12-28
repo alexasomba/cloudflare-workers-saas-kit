@@ -1,19 +1,59 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@workspace/ui/components/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@workspace/ui/components/card";
+import { Input } from "@workspace/ui/components/input";
 import { authClient } from "@/lib/auth-client";
+import { useState } from "react";
 
 export function GoogleLogin() {
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
+  const [isSendingOtp, setIsSendingOtp] = useState(false);
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const handleGoogleSignIn = async () => {
     await authClient.signIn.social({
       provider: "google",
       callbackURL: "/app",
     });
+  };
+
+  const handleSendOtp = async () => {
+    setError(null);
+    setIsSendingOtp(true);
+    try {
+      await authClient.emailOtp.sendVerificationOtp({
+        email,
+        type: "sign-in",
+      });
+      setOtpSent(true);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Failed to send OTP");
+    } finally {
+      setIsSendingOtp(false);
+    }
+  };
+
+  const handleEmailOtpSignIn = async () => {
+    setError(null);
+    setIsSigningIn(true);
+    try {
+      await authClient.signIn.emailOtp({
+        email,
+        otp,
+      });
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Failed to sign in");
+    } finally {
+      setIsSigningIn(false);
+    }
   };
 
   return (
@@ -37,6 +77,63 @@ export function GoogleLogin() {
             </svg>
             Continue with Google
           </Button>
+
+          <div className="my-6 h-px w-full bg-border" />
+
+          <div className="space-y-3">
+            <Input
+              type="email"
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={isSendingOtp || isSigningIn || otpSent}
+              aria-label="Email"
+            />
+
+            {!otpSent ? (
+              <Button
+                onClick={handleSendOtp}
+                className="w-full h-12 text-base"
+                disabled={!email || isSendingOtp}
+              >
+                {isSendingOtp ? "Sending code…" : "Send code"}
+              </Button>
+            ) : (
+              <>
+                <Input
+                  inputMode="numeric"
+                  placeholder="Enter the code"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  disabled={isSigningIn}
+                  aria-label="One-time code"
+                />
+                <Button
+                  onClick={handleEmailOtpSignIn}
+                  className="w-full h-12 text-base"
+                  disabled={!otp || isSigningIn}
+                >
+                  {isSigningIn ? "Signing in…" : "Sign in"}
+                </Button>
+                <Button
+                  onClick={() => {
+                    setOtpSent(false);
+                    setOtp("");
+                    setError(null);
+                  }}
+                  className="w-full"
+                  variant="outline"
+                  disabled={isSigningIn}
+                >
+                  Use a different email
+                </Button>
+              </>
+            )}
+
+            {error ? (
+              <div className="text-sm text-destructive">{error}</div>
+            ) : null}
+          </div>
         </CardContent>
       </Card>
     </div>

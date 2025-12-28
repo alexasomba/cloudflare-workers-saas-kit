@@ -6,27 +6,27 @@ A modern, full-stack React application built with TanStack Start and deployed on
 
 ```bash
 # Install dependencies
-pnpm install
+bun install
 
 # Start development server
-pnpm dev
+bun run dev
 
 # Build for production
-pnpm build
+bun run build
 
 # Deploy to Cloudflare
-pnpm deploy
+bun run deploy
 ```
 
 ## 📦 Development Workflow
 
 This project provides a comprehensive development workflow with the following scripts:
 
-- **`pnpm dev`** - Start development server on port 3000
-- **`pnpm build`** - Build the application for production
-- **`pnpm deploy`** - Build and deploy to Cloudflare Workers
-- **`pnpm serve`** - Preview production build locally
-- **`pnpm cf-typegen`** - Generate TypeScript types for Cloudflare environment
+- **`bun run dev`** - Start development server on port 3000
+- **`bun run build`** - Build the application for production
+- **`bun run deploy`** - Build and deploy to Cloudflare Workers
+- **`bun run serve`** - Preview production build locally
+- **`bun run cf-typegen`** - Generate TypeScript types for Cloudflare environment
 
 ## 🌩️ Cloudflare Integration
 
@@ -36,7 +36,7 @@ This project includes full TypeScript support for Cloudflare Workers environment
 
 ```bash
 # Generate types for Cloudflare environment
-pnpm cf-typegen
+bun run cf-typegen
 ```
 
 This creates type definitions allowing you to safely import and use Cloudflare environment variables:
@@ -104,13 +104,14 @@ Add beautiful, accessible components using Shadcn/UI:
 
 ```bash
 # Add individual components
-pnpx shadcn@latest add button
-pnpx shadcn@latest add card
-pnpx shadcn@latest add form
+bunx shadcn@latest add button
+bunx shadcn@latest add card
+bunx shadcn@latest add form
 
 # Components use semantic color tokens and CSS variables
 # Perfect for light/dark theme support
 ```
+
 
 
 
@@ -263,7 +264,7 @@ This project uses [Vitest](https://vitest.dev/) for fast unit and integration te
 
 ```bash
 # Run tests
-pnpm test
+bun run test
 
 # Test configuration is in vite.config.ts
 # Uses jsdom environment for DOM testing

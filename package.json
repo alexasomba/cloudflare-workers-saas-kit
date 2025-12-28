@@ -3,19 +3,30 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "setup": "pnpm i && pnpm run build:data-ops",
-    "build:data-ops": "pnpm run --filter data-ops build",
-    "dev:user-application": "pnpm run --filter user-application dev",
-    "deploy:user-application": "pnpm run build:data-ops && pnpm run --filter user-application deploy",
-    "dev:data-service": "pnpm run --filter data-service dev",
-    "deploy:data-service": "pnpm run build:data-ops && pnpm run --filter data-service deploy"
+    "setup": "bun install && bun run build:data-ops",
+    "build:data-ops": "bun run --filter ./packages/data-ops build",
+    "dev:user-application": "bun run --filter user-application dev",
+    "deploy:user-application": "bun run build:data-ops && bun run --filter user-application deploy",
+    "dev:data-service": "bun run --filter data-service dev",
+    "deploy:data-service": "bun run build:data-ops && bun run --filter data-service deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "bun@1.3.5",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "trustedDependencies": [
+    "@tailwindcss/oxide",
+    "better-sqlite3",
+    "esbuild",
+    "sharp",
+    "workerd"
+  ],
   "devDependencies": {
-    "@types/node": "^22.18.12",
+    "@types/node": "^24.10.4",
     "typescript": "^5.9.3"
   }
 }
