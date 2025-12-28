@@ -17,7 +17,7 @@
       "database_name": "saas-kit-db",
       "database_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "remote": false,
-      //"migrations_dir": "packages/data-ops/src/drizzle",
+      "migrations_dir": "packages/data-ops/src/drizzle",
     },
   ],
 }
