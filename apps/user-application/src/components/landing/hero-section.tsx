@@ -42,17 +42,21 @@ export function HeroSection() {
             </Button>
           </Link>
 
-          <Button variant="outline" size="lg" asChild>
-            <a
-              href="https://github.com/backpine/saas-kit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center"
-            >
-              <IconBrandGithub className="mr-2 h-4 w-4" />
-              View on GitHub
-            </a>
-          </Button>
+          <Button
+            variant="outline"
+            size="lg"
+            render={
+              <a
+                href="https://github.com/backpine/saas-kit"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center"
+              >
+                <IconBrandGithub className="mr-2 h-4 w-4" />
+                View on GitHub
+              </a>
+            }
+          />
         </div>
       </div>
 

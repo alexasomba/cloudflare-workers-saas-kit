@@ -80,9 +80,7 @@ export function AccountDialog({ children }: AccountDialogProps) {
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        {children}
-      </DialogTrigger>
+      <DialogTrigger render={children as React.ReactElement} />
       <DialogContent className="sm:max-w-md">
         <DialogHeader className="text-center pb-4">
           <DialogTitle>Account</DialogTitle>

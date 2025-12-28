@@ -79,12 +79,15 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
             </Button>
 
             {isRoot ? (
-              <Button variant="outline" asChild>
-                <Link to="/" className="flex items-center gap-2">
-                  <IconHome className="h-4 w-4" />
-                  Go to Home
-                </Link>
-              </Button>
+              <Button
+                variant="outline"
+                render={
+                  <Link to="/" className="flex items-center gap-2">
+                    <IconHome className="h-4 w-4" />
+                    Go to Home
+                  </Link>
+                }
+              />
             ) : (
               <Button
                 variant="outline"
@@ -100,19 +103,21 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
           {/* Error Details (Collapsible) */}
           {hasStack && (
             <Collapsible open={showDetails} onOpenChange={setShowDetails}>
-              <CollapsibleTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
-                >
-                  <IconBug className="h-4 w-4" />
-                  Technical Details
-                  <IconChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${showDetails ? "rotate-180" : ""}`}
-                  />
-                </Button>
-              </CollapsibleTrigger>
+              <CollapsibleTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
+                  >
+                    <IconBug className="h-4 w-4" />
+                    Technical Details
+                    <IconChevronDown
+                      className={`h-4 w-4 transition-transform duration-200 ${showDetails ? "rotate-180" : ""}`}
+                    />
+                  </Button>
+                }
+              />
               <CollapsibleContent className="space-y-2">
                 <div className="rounded-lg bg-muted p-4">
                   <h4 className="text-sm font-medium mb-2">

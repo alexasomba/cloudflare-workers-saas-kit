@@ -85,31 +85,33 @@ export function ThemeToggle({
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant={variant}
-          size={size}
-          className={`
-            relative overflow-hidden transition-all duration-200 ease-in-out
-            hover:scale-105 active:scale-95
-            focus:ring-2 focus:ring-ring focus:ring-offset-2
-            ${showLabel ? "gap-2" : "aspect-square"}
-          `}
-          aria-label="Toggle theme"
-        >
-          <div className="relative flex items-center justify-center">
-            {getCurrentIcon()}
-          </div>
-          {showLabel && (
-            <span className="text-sm font-medium">
-              {themeOptions.find(option => option.value === theme)?.label}
+      <DropdownMenuTrigger
+        render={
+          <Button
+            variant={variant}
+            size={size}
+            className={`
+              relative overflow-hidden transition-all duration-200 ease-in-out
+              hover:scale-105 active:scale-95
+              focus:ring-2 focus:ring-ring focus:ring-offset-2
+              ${showLabel ? "gap-2" : "aspect-square"}
+            `}
+            aria-label="Toggle theme"
+          >
+            <div className="relative flex items-center justify-center">
+              {getCurrentIcon()}
+            </div>
+            {showLabel && (
+              <span className="text-sm font-medium">
+                {themeOptions.find(option => option.value === theme)?.label}
+              </span>
+            )}
+            <span className="sr-only">
+              Current theme: {theme === "system" ? `System (${resolvedTheme})` : theme}
             </span>
-          )}
-          <span className="sr-only">
-            Current theme: {theme === "system" ? `System (${resolvedTheme})` : theme}
-          </span>
-        </Button>
-      </DropdownMenuTrigger>
+          </Button>
+        }
+      />
       
       <DropdownMenuContent 
         align={align} 

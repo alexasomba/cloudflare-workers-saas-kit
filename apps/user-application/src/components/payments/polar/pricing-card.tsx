@@ -76,9 +76,12 @@ export function PricingCard({
                 Status: {subscription.status}
               </p>
             </div>
-            <Button asChild className="w-full" size="lg" variant="outline">
-              <a href="/app/polar/portal">Manage Subscription</a>
-            </Button>
+            <Button
+              className="w-full"
+              size="lg"
+              variant="outline"
+              render={<a href="/app/polar/portal">Manage Subscription</a>}
+            />
           </div>
         );
       } else {
@@ -87,9 +90,12 @@ export function PricingCard({
             <p className="text-sm text-muted-foreground mb-4">
               Manage your subscription in the portal
             </p>
-            <Button asChild className="w-full" size="lg" variant="secondary">
-              <a href="/app/polar/portal">Go to Portal</a>
-            </Button>
+            <Button
+              className="w-full"
+              size="lg"
+              variant="secondary"
+              render={<a href="/app/polar/portal">Go to Portal</a>}
+            />
           </div>
         );
       }

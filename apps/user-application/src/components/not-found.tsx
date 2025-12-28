@@ -38,12 +38,15 @@ export function NotFound({ children }: { children?: any }) {
                 <IconArrowLeft className="h-4 w-4" />
                 Go Back
               </Button>
-              <Button variant="outline" asChild>
-                <Link to="/" className="flex items-center gap-2">
-                  <IconHome className="h-4 w-4" />
-                  Home
-                </Link>
-              </Button>
+              <Button
+                variant="outline"
+                render={
+                  <Link to="/" className="flex items-center gap-2">
+                    <IconHome className="h-4 w-4" />
+                    Home
+                  </Link>
+                }
+              />
             </div>
 
             {/* Help text */}

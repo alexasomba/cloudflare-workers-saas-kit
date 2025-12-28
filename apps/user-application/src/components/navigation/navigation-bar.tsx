@@ -168,16 +168,18 @@ export function NavigationBar() {
           <div className="lg:hidden flex items-center space-x-2">
             <ThemeToggle variant="ghost" align="end" />
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="relative h-10 w-10 hover:bg-accent/50"
-                >
-                  <IconMenu2 className="h-5 w-5" />
-                  <span className="sr-only">Open navigation menu</span>
-                </Button>
-              </SheetTrigger>
+              <SheetTrigger
+                render={
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="relative h-10 w-10 hover:bg-accent/50"
+                  >
+                    <IconMenu2 className="h-5 w-5" />
+                    <span className="sr-only">Open navigation menu</span>
+                  </Button>
+                }
+              />
               <SheetContent
                 side="right"
                 className="w-[300px] bg-background/95 backdrop-blur-xl border-l border-border/50"

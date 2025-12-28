@@ -364,16 +364,19 @@ function RouteComponent() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" asChild>
-              <a
-                href="https://learn.backpine.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Enroll in Course
-                <IconArrowRight className="ml-2 h-4 w-4" />
-              </a>
-            </Button>
+            <Button
+              size="lg"
+              render={
+                <a
+                  href="https://learn.backpine.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Enroll in Course
+                  <IconArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              }
+            />
           </div>
         </div>
       </div>
