@@ -7,6 +7,7 @@ Skills live under `.github/skills/<skill-name>/SKILL.md`.
 ## Included skills
 
 - `beads-issue-tracking`: bd (beads) workflow + mandatory end-of-session push steps
+- `bun-monorepo-workflows`: bun install/run/filter workflows + pnpm → bun migration checklist for this monorepo
 - `pnpm-monorepo-workflows`: setup/dev/build commands for this pnpm monorepo
 - `d1-drizzle-migrations`: D1 + Drizzle + Better Auth schema/migration workflow
 - `cloudflare-worker-typegen`: regenerate worker binding types when `wrangler.jsonc` changes
