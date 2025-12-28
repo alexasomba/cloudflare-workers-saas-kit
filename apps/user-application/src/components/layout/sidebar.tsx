@@ -1,7 +1,7 @@
 import { cn } from "@workspace/ui/lib/utils";
 import { Button } from "@workspace/ui/components/button";
 import { ScrollArea } from "@workspace/ui/components/scroll-area";
-import { IconHome, IconMenu2 } from "@tabler/icons-react";
+import { IconCreditCard, IconHome, IconMenu2 } from "@tabler/icons-react";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 
@@ -16,7 +16,12 @@ const navigationItems: NavigationItem[] = [
   {
     name: "Dashboard",
     icon: IconHome,
-    href: "/dashboard",
+    href: "/app",
+  },
+  {
+    name: "Subscriptions",
+    icon: IconCreditCard,
+    href: "/app/polar/subscriptions",
   },
 ];
 
@@ -60,8 +65,9 @@ export function Sidebar({ className }: SidebarProps) {
         <ScrollArea className="flex-1 px-3 py-4">
           <nav className="space-y-2">
             {navigationItems.map((item) => {
-              const isActive = currentPath === item.href || 
-                (item.href !== "/dashboard" && currentPath.startsWith(item.href));
+              const isActive =
+                currentPath === item.href ||
+                (item.href !== "/app" && currentPath.startsWith(item.href));
               
               return (
                 <Button
