@@ -8,6 +8,23 @@ description: Use this when installing dependencies, running scripts, filtering p
 This repo is migrating to Bun as the package manager (some older branches/PRs may still be pnpm-based).
 This skill covers (1) day-to-day Bun equivalents for pnpm workflows and (2) a safe pnpm → Bun migration checklist.
 
+## Multiple Bun installs (PATH gotcha)
+
+It’s common to have Bun installed via **pnpm**, **Homebrew**, and/or **~/.bun**. If Bun appears to “do nothing” (no output, no errors), you may be hitting a **broken shim earlier on PATH**.
+
+Debug:
+
+- `which bun` and `which bunx`
+- `ls -l $(which bun) $(which bunx)`
+
+Repo fix / workaround:
+
+- Prefer the workspace shims:
+  - `./scripts/bun` (forces a real Bun binary)
+  - `./scripts/bunx` (routes to `bun x`)
+
+VS Code note: changes to `terminal.integrated.env.osx` only apply to **new terminals** (close/reopen the integrated terminal).
+
 ## Quick commands (Bun)
 
 - Install all deps: `bun install`

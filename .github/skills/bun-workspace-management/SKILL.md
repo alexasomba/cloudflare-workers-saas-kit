@@ -8,6 +8,21 @@ description: Use this when managing apps/packages in this monorepo with Bun inst
 This skill is for routine monorepo work *after* the repo uses Bun.
 For pnpm → Bun migration steps, use the `bun-monorepo-workflows` skill.
 
+## bun/bunx troubleshooting (PATH)
+
+If `bun` or `bunx` prints nothing or behaves inconsistently, you likely have multiple installs and the wrong one is first on PATH.
+
+Quick checks:
+
+- `which bun` / `which bunx`
+- `bun --version` (should print a version)
+
+Repo standard (most reliable):
+
+- Use `./scripts/bun ...` and `./scripts/bunx ...` from the repo root.
+
+VS Code note: PATH overrides in `.vscode/settings.json` apply only to **new** integrated terminals.
+
 ## Run scripts (root + workspaces)
 
 - Run a root script: `bun run <script>`

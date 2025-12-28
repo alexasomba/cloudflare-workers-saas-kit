@@ -32,12 +32,22 @@ The shadcn CLI supports monorepos. In this repo, each workspace has a `component
 
 Run from the app workspace so the CLI can resolve monorepo paths correctly:
 
-- From repo root: `bunx shadcn@latest add button --cwd apps/user-application`
-- Or cd first: `cd apps/user-application && bunx shadcn@latest add button`
+- Most reliable (cd first):
+	- `cd apps/user-application && ../../scripts/bunx --bun shadcn@latest add button --yes`
+- Alternative (if your `bunx` is healthy):
+	- `cd apps/user-application && bunx --bun shadcn@latest add button --yes`
+- If you must run from repo root, ensure shadcn runs with the correct working directory (support varies by CLI version):
+	- Prefer `cd apps/user-application` over relying on a `--cwd` flag.
 
 Notes:
 - Adding a “block” (e.g. `login-01`) may install primitives into `packages/ui` and the composed block into the app.
 - If you need to control where files land, use `--path` (and prefer app-level composition in `apps/user-application/src/components`).
+
+Troubleshooting:
+
+- If shadcn says it can’t detect a supported framework or can’t find `components.json`, you’re probably in the wrong directory. Run from `apps/user-application`.
+- If `bunx` outputs nothing, check `which bunx`. If it points to a package-manager shim (pnpm, etc.), use `../../scripts/bunx` or `bun x`.
+- VS Code note: PATH overrides in `.vscode/settings.json` apply only to **new** integrated terminals.
 
 ### Updating existing components
 
