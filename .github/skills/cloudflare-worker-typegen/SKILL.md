@@ -18,6 +18,11 @@ Use this skill when the user modifies `wrangler.jsonc`, adds/removes bindings, c
 
 This updates `worker-configuration.d.ts` based on `apps/user-application/wrangler.jsonc`.
 
+- For the data service:
+  - `pnpm run --filter data-service cf-typegen`
+
+This updates `worker-configuration.d.ts` based on `apps/data-service/wrangler.jsonc`.
+
 ## Notes
 
 - Local secrets belong in `apps/user-application/.dev.vars`.

@@ -21,17 +21,19 @@ Use this skill whenever the user asks to start work on an issue, check work queu
 ## Hard rules (this repo)
 
 - If code changes were made, do not end the session until **push succeeds**.
-- Prefer the repository’s documented workflows in `AGENTS.md`.
+- Prefer the repository’s documented workflows in `_AGENTS.md`.
 
 ## “Landing the plane” checklist (must follow)
 
 1. Run appropriate quality gates for the changed area (tests/build/lint if available).
 2. Update bd issue status (close finished work, or set blocked with notes).
-3. Git sync + push:
-   - `git pull --rebase`
-   - `bd sync`
-   - `git push`
-   - `git status` (must show “up to date with origin”)
+3. Follow the mandatory session close protocol (do not skip steps):
+   - `git status` (confirm what changed)
+   - `git add <files>` (stage code changes)
+   - `bd sync` (commit beads changes)
+   - `git commit -m "..."` (commit code)
+   - `bd sync` (commit any new beads changes)
+   - `git push` (must succeed)
 
 ## Guidance for agents
 

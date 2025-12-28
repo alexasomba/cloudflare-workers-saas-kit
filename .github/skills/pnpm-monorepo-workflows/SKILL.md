@@ -34,6 +34,15 @@ Use this skill whenever the user asks to set up the repo, run dev servers, rebui
   - `pnpm --filter user-application <script>`
   - `pnpm --filter data-service <script>`
 
+## Linting & typechecking
+
+- Lint UI package: `pnpm --filter @workspace/ui lint`
+- Typecheck a single package/app (recommended when debugging TS issues):
+  - `pnpm -C apps/user-application tsc --noEmit`
+  - `pnpm -C apps/data-service tsc --noEmit`
+  - `pnpm -C packages/data-ops tsc --noEmit`
+  - `pnpm -C packages/ui tsc --noEmit`
+
 ## Troubleshooting quick checks
 
 - Ensure `pnpm-lock.yaml` is consistent (avoid mixing npm/yarn).

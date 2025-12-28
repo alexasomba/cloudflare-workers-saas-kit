@@ -10,6 +10,8 @@ Skills live under `.github/skills/<skill-name>/SKILL.md`.
 - `pnpm-monorepo-workflows`: setup/dev/build commands for this pnpm monorepo
 - `d1-drizzle-migrations`: D1 + Drizzle + Better Auth schema/migration workflow
 - `cloudflare-worker-typegen`: regenerate worker binding types when `wrangler.jsonc` changes
+- `shadcn-ui-builder`: add/update shadcn/ui components and blocks (monorepo + Tailwind v4)
+- `tanstack-server-functions`: TanStack Start server functions + middleware patterns
 
 ## Notes
 

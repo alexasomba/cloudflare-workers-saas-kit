@@ -22,13 +22,22 @@ Use this skill when the user asks to add or modify tables, regenerate auth schem
 - Generate SQL migrations:
   - `pnpm run --filter data-ops drizzle:generate`
 
+- Run migrations (uses the `packages/data-ops` script `drizzle:migrate`):
+  - `pnpm run --filter data-ops drizzle:migrate`
+
 ## Apply migrations
 
-- Apply locally (from `apps/user-application`):
+- Apply locally (recommended):
+  - Run the user app at least once so a local D1 SQLite file exists under `apps/user-application/.wrangler/state/...`.
+  - Then run: `pnpm run --filter data-ops drizzle:migrate`
+
+- Apply locally (manual / fallback, run from `apps/user-application`):
   - `npx wrangler d1 execute DB --local --file=../../packages/data-ops/src/drizzle/<migration_file>.sql`
 
-- Apply remotely:
-  - `pnpm run --filter data-ops drizzle:migrate`
+- Apply remotely (D1 HTTP driver):
+  - `NODE_ENV=production pnpm run --filter data-ops drizzle:migrate`
+
+Remote migrate requires `CLOUDFLARE_ACCOUNT_ID` (or `CLOUDFLARE_D1_ACCOUNT_ID`), `CLOUDFLARE_DATABASE_ID`, and `CLOUDFLARE_D1_TOKEN` (or `CLOUDFLARE_D1_API_TOKEN`).
 
 ## Verification
 
