@@ -1,16 +1,16 @@
+import { IconCheck, IconCopy } from "@tabler/icons-react";
 import { createFileRoute, notFound } from "@tanstack/react-router";
+import "highlight.js/styles/github-dark.css";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkBreaks from "remark-breaks";
 import rehypeHighlight from "rehype-highlight";
-import "highlight.js/styles/github-dark.css";
-import { IconCopy, IconCheck } from "@tabler/icons-react";
+import remarkBreaks from "remark-breaks";
+import remarkGfm from "remark-gfm";
 
 export const Route = createFileRoute("/_static/docs/$name")({
   component: RouteComponent,
   loader: async (event) => {
-    const response = await fetch(`${event.location.url}.md`);
+    const response = await fetch(`${event.location.pathname}.md`);
     if (!response.ok) throw notFound();
     const markdown = await response.text();
     console.log(markdown);

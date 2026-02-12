@@ -5,7 +5,7 @@ export class ExampleDurableObject extends DurableObject {
 
   constructor(ctx: DurableObjectState, env: Env) {
     super(ctx, env);
-    ctx.blockConcurrencyWhile(async () => {
+    void ctx.blockConcurrencyWhile(async () => {
       const [savedData] = await Promise.all([
         ctx.storage.get<string>("savedData"),
       ]);

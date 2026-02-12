@@ -1,4 +1,8 @@
-import { IconExternalLink, IconBrandGithub, IconBrandX } from "@tabler/icons-react";
+import {
+  IconBrandGithub,
+  IconBrandX,
+  IconExternalLink,
+} from "@tabler/icons-react";
 
 const navigation = {
   main: [
@@ -26,7 +30,6 @@ const navigation = {
     },
   ],
 };
-
 
 export function Footer() {
   return (

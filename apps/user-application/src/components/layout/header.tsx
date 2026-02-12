@@ -1,15 +1,15 @@
-import { cn } from "@workspace/ui/lib/utils";
+import { IconBell, IconMenu2, IconSearch } from "@tabler/icons-react";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@workspace/ui/components/avatar";
 import { Button } from "@workspace/ui/components/button";
 import { Input } from "@workspace/ui/components/input";
-import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar";
-import { AccountDialog } from "@/components/auth/account-dialog";
-import { 
-  IconBell, 
-  IconSearch, 
-  IconMenu2
-} from "@tabler/icons-react";
+import { cn } from "@workspace/ui/lib/utils";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
+import { AccountDialog } from "@/components/auth/account-dialog";
 
 interface HeaderProps {
   className?: string;
@@ -19,17 +19,17 @@ interface HeaderProps {
 export function Header({ className, onMobileMenuToggle }: HeaderProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const { data: session } = authClient.useSession();
-  
+
   const user = session?.user;
   const fallbackText = user?.name
     ? user.name.charAt(0).toUpperCase()
-    : user?.email?.charAt(0).toUpperCase() || "U";
+    : user?.email.charAt(0).toUpperCase() || "U";
 
   return (
     <header
       className={cn(
         "flex h-16 items-center justify-between border-b border-border bg-background px-6",
-        className
+        className,
       )}
     >
       {/* Left side - Mobile menu button and search */}
@@ -64,13 +64,18 @@ export function Header({ className, onMobileMenuToggle }: HeaderProps) {
         <AccountDialog>
           <Button variant="ghost" className="flex items-center gap-2 px-3">
             <Avatar className="h-8 w-8">
-              <AvatarImage src={user?.image || undefined} alt={user?.name || "User"} />
+              <AvatarImage
+                src={user?.image || undefined}
+                alt={user?.name || "User"}
+              />
               <AvatarFallback className="bg-primary text-primary-foreground text-sm">
                 {fallbackText}
               </AvatarFallback>
             </Avatar>
             <div className="hidden sm:flex flex-col items-start">
-              <span className="text-sm font-medium">{user?.name || "User"}</span>
+              <span className="text-sm font-medium">
+                {user?.name || "User"}
+              </span>
               <span className="text-xs text-muted-foreground">Online</span>
             </div>
           </Button>

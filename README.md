@@ -15,11 +15,13 @@ This installs all dependencies and builds required packages.
 ## Development
 
 ### User Application
+
 ```bash
 bun run dev:user-application
 ```
 
 ### Data Service
+
 ```bash
 bun run dev:data-service
 ```
@@ -27,11 +29,13 @@ bun run dev:data-service
 ## Deployment
 
 ### User Application (Cloudflare)
+
 ```bash
 bun run deploy:user-application
 ```
 
 ### Data Service
+
 ```bash
 bun run deploy:data-service
 ```

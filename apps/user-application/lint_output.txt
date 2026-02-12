@@ -1,0 +1,21 @@
+
+/Users/alexasomba/Documents/GitHub/alexasomba/cloudflare-workers-saas-kit/apps/user-application/src/components/dashboard/data-table.tsx
+  330:17  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+/Users/alexasomba/Documents/GitHub/alexasomba/cloudflare-workers-saas-kit/apps/user-application/src/components/dashboard/data-table.tsx:330:17
+  328 |   );
+  329 |
+> 330 |   const table = useReactTable({
+      |                 ^^^^^^^^^^^^^ TanStack Table's `useReactTable()` API returns functions that cannot be memoized safely
+  331 |     data,
+  332 |     columns,
+  333 |     state: {  react-hooks/incompatible-library
+  357:9   error    Unnecessary conditional, value is always truthy                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unnecessary-condition
+
+/Users/alexasomba/Documents/GitHub/alexasomba/cloudflare-workers-saas-kit/apps/user-application/src/core/functions/example-functions.ts
+  18:24  warning  Async arrow function has no 'await' expression  @typescript-eslint/require-await
+
+✖ 3 problems (1 error, 2 warnings)
+

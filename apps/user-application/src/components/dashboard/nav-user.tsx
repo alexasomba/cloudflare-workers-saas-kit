@@ -8,7 +8,6 @@ import {
   IconUserCircle,
 } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
-import { authClient } from "@/lib/auth-client";
 import {
   Avatar,
   AvatarFallback,
@@ -28,15 +27,20 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@workspace/ui/components/sidebar";
+import { authClient } from "@/lib/auth-client";
 
 export function NavUser() {
   const navigate = useNavigate();
   const { data: session } = authClient.useSession();
 
+  if (!session) {
+    return null;
+  }
+
   const user = {
-    name: session?.user?.name ?? "User",
-    email: session?.user?.email ?? "user@example.com",
-    avatar: session?.user?.image ?? "",
+    name: session.user.name,
+    email: session.user.email,
+    avatar: session.user.image ?? "",
   };
 
   const initials = user.name
@@ -64,7 +68,9 @@ export function NavUser() {
               >
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">{initials}</AvatarFallback>
+                  <AvatarFallback className="rounded-lg">
+                    {initials}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
@@ -87,7 +93,9 @@ export function NavUser() {
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <Avatar className="h-8 w-8 rounded-lg">
                     <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback className="rounded-lg">{initials}</AvatarFallback>
+                    <AvatarFallback className="rounded-lg">
+                      {initials}
+                    </AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{user.name}</span>

@@ -7,6 +7,7 @@ description: Legacy pnpm workflows for older branches/PRs. Use only when the rep
 
 This repo has migrated to Bun.
 Prefer:
+
 - `bun-monorepo-workflows` for migration/CI guidance
 - `bun-workspace-management` for day-to-day commands
 

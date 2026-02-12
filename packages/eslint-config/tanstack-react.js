@@ -1,25 +1,25 @@
-import eslintConfigPrettier from 'eslint-config-prettier'
-import pluginReact from 'eslint-plugin-react'
-import pluginReactHooks from 'eslint-plugin-react-hooks'
-import globals from 'globals'
-import { tanstackConfig } from '@tanstack/eslint-config'
+import { tanstackConfig } from "@tanstack/eslint-config";
+import eslintConfigPrettier from "eslint-config-prettier";
+import pluginReact from "eslint-plugin-react";
+import pluginReactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
 
 /**
  * TanStack's strict JS/TS/import/node rules + React/Hooks + Prettier alignment.
  *
  * @type {import('eslint').Linter.Config[]}
  */
-export const tanstackReactConfig = [
+export const config = [
   {
-    name: 'workspace/extra-ignores',
-    ignores: ['**/eslint.config.js', '**/worker-configuration.d.ts'],
+    name: "workspace/extra-ignores",
+    ignores: ["**/eslint.config.js", "**/worker-configuration.d.ts"],
   },
   ...tanstackConfig,
 
   // React recommended rules
   pluginReact.configs.flat.recommended,
   {
-    name: 'workspace/react-globals',
+    name: "workspace/react-globals",
     languageOptions: {
       ...pluginReact.configs.flat.recommended.languageOptions,
       globals: {
@@ -29,18 +29,18 @@ export const tanstackReactConfig = [
     },
   },
   {
-    name: 'workspace/react-hooks',
+    name: "workspace/react-hooks",
     plugins: {
-      'react-hooks': pluginReactHooks,
+      "react-hooks": pluginReactHooks,
     },
-    settings: { react: { version: 'detect' } },
+    settings: { react: { version: "detect" } },
     rules: {
       ...pluginReactHooks.configs.recommended.rules,
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types': 'off',
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
     },
   },
 
   // Ensure formatting is handled by Prettier
   eslintConfigPrettier,
-]
+];

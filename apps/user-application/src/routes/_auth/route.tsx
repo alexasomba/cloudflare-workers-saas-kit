@@ -1,9 +1,12 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { Outlet, createFileRoute } from "@tanstack/react-router";
+import {
+  SidebarInset,
+  SidebarProvider,
+} from "@workspace/ui/components/sidebar";
 import { GoogleLogin } from "@/components/auth/google-login";
 import { authClient } from "@/lib/auth-client";
 import { AppSidebar } from "@/components/dashboard/app-sidebar";
 import { SiteHeader } from "@/components/dashboard/site-header";
-import { SidebarInset, SidebarProvider } from "@workspace/ui/components/sidebar";
 
 export const Route = createFileRoute("/_auth")({
   component: RouteComponent,

@@ -1,97 +1,115 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@workspace/ui/components/card"
-import { Badge } from "@workspace/ui/components/badge"
-import { 
-  IconRoute, 
-  IconDatabase, 
-  IconBolt, 
-  IconShield, 
-  IconPalette, 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card";
+import { Badge } from "@workspace/ui/components/badge";
+import {
+  IconBolt,
   IconCode,
+  IconDatabase,
+  IconPalette,
+  IconRoute,
   IconServer,
-  IconStack
-} from "@tabler/icons-react"
+  IconShield,
+  IconStack,
+} from "@tabler/icons-react";
 
 const features = [
   {
     icon: IconRoute,
     title: "TanStack Router",
-    description: "Type-safe, file-based routing with powerful features like nested layouts, loaders, and search params validation.",
-    badge: "Type-Safe"
+    description:
+      "Type-safe, file-based routing with powerful features like nested layouts, loaders, and search params validation.",
+    badge: "Type-Safe",
   },
   {
     icon: IconDatabase,
     title: "TanStack Query",
-    description: "Powerful data synchronization with server state management, caching, and background updates built-in.",
-    badge: "Server State"
+    description:
+      "Powerful data synchronization with server state management, caching, and background updates built-in.",
+    badge: "Server State",
   },
   {
     icon: IconCode,
     title: "React 19",
-    description: "Latest React with concurrent features, improved performance, and modern development patterns.",
-    badge: "Latest"
+    description:
+      "Latest React with concurrent features, improved performance, and modern development patterns.",
+    badge: "Latest",
   },
   {
     icon: IconBolt,
     title: "Vite",
-    description: "Lightning-fast build tool with hot module replacement and optimized production builds.",
-    badge: "Fast"
+    description:
+      "Lightning-fast build tool with hot module replacement and optimized production builds.",
+    badge: "Fast",
   },
   {
     icon: IconShield,
     title: "TypeScript",
-    description: "Full TypeScript support with strict typing, IntelliSense, and compile-time error checking.",
-    badge: "Type-Safe"
+    description:
+      "Full TypeScript support with strict typing, IntelliSense, and compile-time error checking.",
+    badge: "Type-Safe",
   },
   {
     icon: IconPalette,
     title: "Tailwind CSS v4",
-    description: "Modern utility-first CSS framework with CSS variables and a comprehensive design system.",
-    badge: "Styling"
+    description:
+      "Modern utility-first CSS framework with CSS variables and a comprehensive design system.",
+    badge: "Styling",
   },
   {
     icon: IconServer,
     title: "SSR Ready",
-    description: "Server-side rendering support with seamless hydration and SEO optimization out of the box.",
-    badge: "Performance"
+    description:
+      "Server-side rendering support with seamless hydration and SEO optimization out of the box.",
+    badge: "Performance",
   },
   {
     icon: IconStack,
     title: "Shadcn/UI",
-    description: "Beautiful, accessible component library with customizable themes and modern design patterns.",
-    badge: "Components"
-  }
-]
+    description:
+      "Beautiful, accessible component library with customizable themes and modern design patterns.",
+    badge: "Components",
+  },
+];
 
 const templateFeatures = [
   {
     image: "/cloudflare.png",
     title: "Edge Database",
-    description: "Serverless PostgreSQL with Cloudflare D1 or Hyperdrive. Edge-optimized with connection pooling and HTTP proxy to prevent connection overwhelm.",
+    description:
+      "Serverless PostgreSQL with Cloudflare D1 or Hyperdrive. Edge-optimized with connection pooling and HTTP proxy to prevent connection overwhelm.",
     badge: "Database",
-    highlight: true
+    highlight: true,
   },
   {
     image: "/better-auth.png",
     title: "Better Auth",
-    description: "Complete authentication solution with social providers, email/password, and session management. Database-agnostic and edge-compatible.",
+    description:
+      "Complete authentication solution with social providers, email/password, and session management. Database-agnostic and edge-compatible.",
     badge: "Authentication",
-    highlight: true
+    highlight: true,
   },
   {
     image: "/polar.png",
     title: "Polar Payments",
-    description: "Modern subscription management and payment processing. No webhooks needed, developer-focused API with built-in product metadata.",
+    description:
+      "Modern subscription management and payment processing. No webhooks needed, developer-focused API with built-in product metadata.",
     badge: "Payments",
-    highlight: true
+    highlight: true,
   },
   {
     image: "/monorepo.svg",
     title: "Monorepo Architecture",
-    description: "Organized workspace structure with Bun workspaces. Shared components, utilities, and configurations across multiple applications.",
+    description:
+      "Organized workspace structure with Bun workspaces. Shared components, utilities, and configurations across multiple applications.",
     badge: "Architecture",
-    highlight: true
-  }
-]
+    highlight: true,
+  },
+];
 
 export function FeaturesSection() {
   return (
@@ -103,19 +121,23 @@ export function FeaturesSection() {
             Production-Ready SaaS Template
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Pre-configured with authentication, database, and payments - ready to deploy
+            Pre-configured with authentication, database, and payments - ready
+            to deploy
           </p>
         </div>
-        
+
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-2 xl:grid-cols-4">
           {templateFeatures.map((feature) => {
             return (
-              <Card key={feature.title} className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-primary/20">
+              <Card
+                key={feature.title}
+                className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-primary/20"
+              >
                 <CardHeader>
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex h-12 w-12 items-center justify-center rounded-lg border bg-background p-2">
-                      <img 
-                        src={feature.image} 
+                      <img
+                        src={feature.image}
                         alt={feature.title}
                         className="h-full w-full object-contain"
                       />
@@ -132,7 +154,7 @@ export function FeaturesSection() {
                   </CardDescription>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
 
@@ -142,15 +164,19 @@ export function FeaturesSection() {
             Built with Modern Technologies
           </h3>
           <p className="mt-4 text-lg text-muted-foreground">
-            A carefully curated stack of the best tools and libraries for React development
+            A carefully curated stack of the best tools and libraries for React
+            development
           </p>
         </div>
-        
+
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 lg:mx-0 lg:max-w-none lg:grid-cols-2 xl:grid-cols-4">
           {features.map((feature) => {
-            const IconComponent = feature.icon
+            const IconComponent = feature.icon;
             return (
-              <Card key={feature.title} className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <Card
+                key={feature.title}
+                className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+              >
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
@@ -168,10 +194,10 @@ export function FeaturesSection() {
                   </CardDescription>
                 </CardContent>
               </Card>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }

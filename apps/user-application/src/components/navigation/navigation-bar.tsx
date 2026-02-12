@@ -1,6 +1,15 @@
-import * as React from "react";
+import {
+  IconBrandGithub,
+  IconExternalLink,
+  IconLogin,
+  IconMenu2,
+} from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { IconMenu2, IconBrandGithub, IconExternalLink, IconLogin } from "@tabler/icons-react";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "@workspace/ui/components/avatar";
 import { Button } from "@workspace/ui/components/button";
 import {
   Sheet,
@@ -10,11 +19,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@workspace/ui/components/sheet";
-import { cn } from "@workspace/ui/lib/utils";
 import { ThemeToggle } from "@workspace/ui/components/theme-toggle";
+import { cn } from "@workspace/ui/lib/utils";
+import * as React from "react";
 import { authClient } from "@/lib/auth-client";
 import { AccountDialog } from "@/components/auth/account-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar";
 
 interface NavigationItem {
   label: string;
@@ -23,7 +32,7 @@ interface NavigationItem {
   scrollTo?: string;
 }
 
-const navigationItems: NavigationItem[] = [
+const navigationItems: Array<NavigationItem> = [
   { label: "Features", href: "/#features", scrollTo: "features" },
   {
     label: "Documentation",
@@ -52,7 +61,7 @@ export function NavigationBar() {
   const user = session?.user;
   const fallbackText = user?.name
     ? user.name.charAt(0).toUpperCase()
-    : user?.email?.charAt(0).toUpperCase() || "U";
+    : user?.email.charAt(0).toUpperCase() || "U";
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -84,7 +93,7 @@ export function NavigationBar() {
             className="group flex items-center space-x-3 no-underline"
           >
             <div className="flex flex-col">
-              <span className="text-lg lg:text-xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent group-hover:from-primary group-hover:to-primary/80 transition-all duration-300">
+              <span className="text-lg lg:text-xl font-bold bg-linear-to-r from-foreground to-foreground/80 bg-clip-text text-transparent group-hover:from-primary group-hover:to-primary/80 transition-all duration-300">
                 SaaS Starter Kit
               </span>
               <span className="text-xs text-muted-foreground font-medium tracking-wider">
@@ -120,7 +129,7 @@ export function NavigationBar() {
                     {item.label}
                   </Link>
                 )}
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/80 transition-all duration-300 group-hover:w-3/4" />
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-linear-to-r from-primary to-primary/80 transition-all duration-300 group-hover:w-3/4" />
               </div>
             ))}
 
@@ -182,10 +191,10 @@ export function NavigationBar() {
               />
               <SheetContent
                 side="right"
-                className="w-[300px] bg-background/95 backdrop-blur-xl border-l border-border/50"
+                className="w-75 bg-background/95 backdrop-blur-xl border-l border-border/50"
               >
                 <SheetHeader className="text-left space-y-1 pb-6">
-                  <SheetTitle className="text-xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                  <SheetTitle className="text-xl font-bold bg-linear-to-r from-primary to-primary/80 bg-clip-text text-transparent">
                     Navigation
                   </SheetTitle>
                   <SheetDescription className="text-muted-foreground">

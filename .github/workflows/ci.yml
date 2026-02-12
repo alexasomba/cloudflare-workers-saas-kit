@@ -131,4 +131,3 @@ jobs:
 
       - name: Test data-service
         run: bun run --filter ./apps/data-service test -- --run --passWithNoTests
-

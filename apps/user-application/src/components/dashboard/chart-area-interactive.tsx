@@ -14,7 +14,6 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  type ChartConfig,
 } from "@workspace/ui/components/chart";
 import {
   Select,
@@ -23,6 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@workspace/ui/components/select";
+import type { ChartConfig } from "@workspace/ui/components/chart";
 
 const chartData = [
   { date: "2024-04-01", desktop: 222, mobile: 150 },

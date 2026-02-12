@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
+import type { DataItem } from "@/components/dashboard/data-table";
 import { ChartAreaInteractive } from "@/components/dashboard/chart-area-interactive";
-import { DataTable, type DataItem } from "@/components/dashboard/data-table";
+import { DataTable } from "@/components/dashboard/data-table";
 import { SectionCards } from "@/components/dashboard/section-cards";
 
 export const Route = createFileRoute("/_auth/app/")({
@@ -8,7 +9,7 @@ export const Route = createFileRoute("/_auth/app/")({
 });
 
 // Sample data - in a real app, this would come from an API
-const data: DataItem[] = [
+const data: Array<DataItem> = [
   {
     id: 1,
     header: "Cover page",

@@ -33,13 +33,14 @@ The shadcn CLI supports monorepos. In this repo, each workspace has a `component
 Run from the app workspace so the CLI can resolve monorepo paths correctly:
 
 - Most reliable (cd first):
-	- `cd apps/user-application && ../../scripts/bunx --bun shadcn@latest add button --yes`
+  - `cd apps/user-application && ../../scripts/bunx --bun shadcn@latest add button --yes`
 - Alternative (if your `bunx` is healthy):
-	- `cd apps/user-application && bunx --bun shadcn@latest add button --yes`
+  - `cd apps/user-application && bunx --bun shadcn@latest add button --yes`
 - If you must run from repo root, ensure shadcn runs with the correct working directory (support varies by CLI version):
-	- Prefer `cd apps/user-application` over relying on a `--cwd` flag.
+  - Prefer `cd apps/user-application` over relying on a `--cwd` flag.
 
 Notes:
+
 - Adding a “block” (e.g. `login-01`) may install primitives into `packages/ui` and the composed block into the app.
 - If you need to control where files land, use `--path` (and prefer app-level composition in `apps/user-application/src/components`).
 

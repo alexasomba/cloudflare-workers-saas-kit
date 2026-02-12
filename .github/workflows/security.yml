@@ -36,4 +36,3 @@ jobs:
       - name: Run bun audit
         run: bun audit --audit-level=moderate
         continue-on-error: true
-

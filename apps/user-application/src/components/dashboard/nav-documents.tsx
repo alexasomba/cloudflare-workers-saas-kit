@@ -27,10 +27,10 @@ import {
 export function NavDocuments({
   items,
 }: {
-  items: {
+  items: Array<{
     name: string;
     url: string;
-  }[];
+  }>;
 }) {
   const navigate = useNavigate();
 

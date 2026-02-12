@@ -1,3 +1,11 @@
 {
-  "recommendations": ["bradlc.vscode-tailwindcss","Hono.hono","esbenp.prettier-vscode","vitest.explorer","nrwl.angular-console","dbaeumer.vscode-eslint","yy0931.vscode-sqlite3-editor"]
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "Hono.hono",
+    "esbenp.prettier-vscode",
+    "vitest.explorer",
+    "nrwl.angular-console",
+    "dbaeumer.vscode-eslint",
+    "yy0931.vscode-sqlite3-editor"
+  ]
 }

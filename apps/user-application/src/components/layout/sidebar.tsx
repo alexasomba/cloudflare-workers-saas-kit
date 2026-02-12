@@ -12,7 +12,7 @@ interface NavigationItem {
   badge?: string | number;
 }
 
-const navigationItems: NavigationItem[] = [
+const navigationItems: Array<NavigationItem> = [
   {
     name: "Dashboard",
     icon: IconHome,
@@ -43,7 +43,7 @@ export function Sidebar({ className }: SidebarProps) {
           "hidden lg:flex lg:flex-col lg:border-r lg:border-border lg:bg-background",
           isCollapsed ? "lg:w-16" : "lg:w-64",
           "transition-all duration-300 ease-in-out",
-          className
+          className,
         )}
       >
         <div className="flex h-16 items-center justify-between px-6 border-b border-border">
@@ -68,7 +68,7 @@ export function Sidebar({ className }: SidebarProps) {
               const isActive =
                 currentPath === item.href ||
                 (item.href !== "/app" && currentPath.startsWith(item.href));
-              
+
               return (
                 <Button
                   key={item.name}
@@ -77,7 +77,8 @@ export function Sidebar({ className }: SidebarProps) {
                     "w-full justify-start gap-3 h-10",
                     isCollapsed && "px-2 justify-center",
                     isActive && "bg-primary text-primary-foreground shadow-sm",
-                    !isActive && "text-muted-foreground hover:text-foreground hover:bg-accent"
+                    !isActive &&
+                      "text-muted-foreground hover:text-foreground hover:bg-accent",
                   )}
                   onClick={() => navigate({ to: item.href })}
                 >
@@ -102,7 +103,7 @@ export function Sidebar({ className }: SidebarProps) {
           <div
             className={cn(
               "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted/50",
-              isCollapsed && "justify-center"
+              isCollapsed && "justify-center",
             )}
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-medium">
@@ -110,7 +111,9 @@ export function Sidebar({ className }: SidebarProps) {
             </div>
             {!isCollapsed && (
               <div className="flex flex-col truncate">
-                <span className="text-sm font-medium text-foreground">User</span>
+                <span className="text-sm font-medium text-foreground">
+                  User
+                </span>
                 <span className="text-xs text-muted-foreground truncate">
                   user@example.com
                 </span>

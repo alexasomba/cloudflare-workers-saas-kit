@@ -10,14 +10,17 @@ import fs from "fs";
 function getD1DatabasePath(): string {
   const d1Dir = path.resolve(
     __dirname,
-    "../../../apps/user-application/.wrangler/state/v3/d1/miniflare-D1DatabaseObject"
+    "../../../apps/user-application/.wrangler/state/v3/d1/miniflare-D1DatabaseObject",
   );
 
   // Find the .sqlite file (ignoring .sqlite-shm and .sqlite-wal)
   if (fs.existsSync(d1Dir)) {
     const files = fs.readdirSync(d1Dir);
     const sqliteFile = files.find(
-      (file) => file.endsWith(".sqlite") && !file.includes("-shm") && !file.includes("-wal")
+      (file) =>
+        file.endsWith(".sqlite") &&
+        !file.includes("-shm") &&
+        !file.includes("-wal"),
     );
     if (sqliteFile) {
       return path.join(d1Dir, sqliteFile);

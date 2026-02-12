@@ -1,5 +1,7 @@
 # Better Auth Setup
+
 ---
+
 ## Overview
 
 Better Auth provides a comprehensive authentication solution that works seamlessly with serverless and edge environments. It offers built-in support for multiple authentication strategies including social providers, email/password, and session management.
@@ -11,6 +13,7 @@ The authentication system is designed with **database-agnostic architecture** an
 - **Database Integration** - Works with PostgreSQL, MySQL, and SQLite and other providers through Drizzle ORM
 - **Type Safety** - Full TypeScript support with auto-generated schemas
 - **Edge Compatible** - Optimized for serverless and edge runtime environments
+
 ---
 
 ## Step 1: Configure environment variables
@@ -307,15 +310,18 @@ export const Route = createFileRoute("/api/auth/$")({
 ### How TanStack Start API Routes Work
 
 **File-based Routing:**
+
 - `auth.$.tsx` - The `$` creates a splat/catch-all route that matches `/api/auth/*`
 - Automatically handles all authentication endpoints: `/api/auth/sign-in`, `/api/auth/callback/google`, `/api/auth/session`, etc.
 
 **Server Handlers:**
+
 - `server.handlers` - Defines HTTP methods (GET, POST) for server-side processing
 - `request` parameter - Contains the full HTTP request with headers, body, and URL
 - Each handler returns a Response object that TanStack Start automatically serves
 
 **Better Auth Integration:**
+
 - `getAuth()` - Retrieves the initialized Better Auth instance from your server setup
 - `auth.handler(request)` - Single method that routes requests to appropriate Better Auth endpoints
 - Handles OAuth callbacks, session validation, sign-in/out, and token refresh automatically
@@ -356,7 +362,7 @@ export function LoginButton() {
 
 # Better Auth Client Integration
 
-*Client Guide*
+_Client Guide_
 
 Implement secure authentication on the client side with React hooks
 
@@ -622,12 +628,14 @@ function RouteComponent() {
 ### Key Differences Between Approaches
 
 **Client-side:**
+
 - Authentication check happens in the browser
 - Loading state while checking session
 - Better for dynamic user experiences
 - Requires handling pending states
 
 **Server-side (SSR):**
+
 - Authentication validated on server
 - No loading state - immediate auth decision
 - Better security and SEO

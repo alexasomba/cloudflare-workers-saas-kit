@@ -1,9 +1,13 @@
-import { collectSubscription, validPayment } from "@/core/functions/payments";
+import {
+  IconAlertCircle,
+  IconCircleCheck,
+  IconLoader2,
+} from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { z } from "zod";
 import { Button } from "@workspace/ui/components/button";
-import { IconCircleCheck, IconLoader2, IconAlertCircle } from "@tabler/icons-react";
+import { z } from "zod";
+import { collectSubscription, validPayment } from "@/core/functions/payments";
 
 const searchSchema = z.object({
   checkout_id: z.string(),
@@ -12,7 +16,7 @@ const searchSchema = z.object({
 export const Route = createFileRoute("/_auth/app/polar/checkout/success")({
   component: RouteComponent,
   validateSearch: (search) => searchSchema.parse(search),
-  beforeLoad: async ({ search }) => {
+  beforeLoad: ({ search }) => {
     return search;
   },
   loader: async (input) => {
@@ -26,7 +30,7 @@ export const Route = createFileRoute("/_auth/app/polar/checkout/success")({
   },
   errorComponent: ({ error }) => {
     return (
-      <div className="h-ful flex flex-col items-center justify-center bg-background px-6 py-12">
+      <div className="h-full flex flex-col items-center justify-center bg-background px-6 py-12">
         <div className="max-w-lg w-full text-center space-y-8">
           <div className="flex justify-center">
             <IconAlertCircle className="w-16 h-16 text-destructive" />

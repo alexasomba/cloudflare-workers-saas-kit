@@ -1,10 +1,10 @@
-import { Button } from "@workspace/ui/components/button";
-import { Badge } from "@workspace/ui/components/badge";
 import { IconCircleCheck } from "@tabler/icons-react";
+import { Badge } from "@workspace/ui/components/badge";
+import { Button } from "@workspace/ui/components/button";
 
 export function CoursePromoSection() {
   return (
-    <section className="w-full py-16 bg-gradient-to-b from-background to-muted/20">
+    <section className="w-full py-16 bg-linear-to-b from-background to-muted/20">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="aspect-video w-full bg-black rounded-lg overflow-hidden">
@@ -37,7 +37,9 @@ export function CoursePromoSection() {
 
           <div className="grid md:grid-cols-2 gap-6 mb-8 text-left">
             <div className="space-y-3">
-              <h3 className="font-semibold text-lg mb-2">What You'll Build</h3>
+              <h3 className="font-semibold text-lg mb-2">
+                What You&apos;ll Build
+              </h3>
               <div className="space-y-2">
                 <div className="flex items-start gap-2">
                   <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />

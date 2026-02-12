@@ -1,41 +1,22 @@
 "use client";
 
-import * as React from "react";
-import { useState } from "react";
 import {
-  closestCenter,
   DndContext,
   KeyboardSensor,
   MouseSensor,
   TouchSensor,
+  closestCenter,
   useSensor,
   useSensors,
-  type DragEndEvent,
-  type UniqueIdentifier,
 } from "@dnd-kit/core";
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import {
-  arrayMove,
   SortableContext,
+  arrayMove,
   useSortable,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import {
-  flexRender,
-  getCoreRowModel,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-  type ColumnDef,
-  type ColumnFiltersState,
-  type Row,
-  type SortingState,
-  type VisibilityState,
-} from "@tanstack/react-table";
 import {
   IconChevronDown,
   IconChevronLeft,
@@ -48,6 +29,18 @@ import {
   IconLoader,
   IconPlus,
 } from "@tabler/icons-react";
+import {
+  flexRender,
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import * as React from "react";
+import { useState } from "react";
 import { z } from "zod";
 
 import { Badge } from "@workspace/ui/components/badge";
@@ -84,6 +77,14 @@ import {
   TabsList,
   TabsTrigger,
 } from "@workspace/ui/components/tabs";
+import type {
+  ColumnDef,
+  ColumnFiltersState,
+  Row,
+  SortingState,
+  VisibilityState,
+} from "@tanstack/react-table";
+import type { DragEndEvent, UniqueIdentifier } from "@dnd-kit/core";
 
 export const schema = z.object({
   id: z.number(),
@@ -114,7 +115,7 @@ function DragHandle({ id }: { id: number }) {
   );
 }
 
-const columns: ColumnDef<DataItem>[] = [
+const columns: Array<ColumnDef<DataItem>> = [
   {
     id: "drag",
     header: () => null,
@@ -240,7 +241,9 @@ const columns: ColumnDef<DataItem>[] = [
             </SelectTrigger>
             <SelectContent align="end">
               <SelectItem value="Eddie Lake">Eddie Lake</SelectItem>
-              <SelectItem value="Jamik Tashpulatov">Jamik Tashpulatov</SelectItem>
+              <SelectItem value="Jamik Tashpulatov">
+                Jamik Tashpulatov
+              </SelectItem>
             </SelectContent>
           </Select>
         </>
@@ -302,7 +305,7 @@ function DraggableRow({ row }: { row: Row<DataItem> }) {
   );
 }
 
-export function DataTable({ data: initialData }: { data: DataItem[] }) {
+export function DataTable({ data: initialData }: { data: Array<DataItem> }) {
   const [data, setData] = useState(() => initialData);
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -316,14 +319,15 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
   const sensors = useSensors(
     useSensor(MouseSensor, {}),
     useSensor(TouchSensor, {}),
-    useSensor(KeyboardSensor, {})
+    useSensor(KeyboardSensor, {}),
   );
 
-  const dataIds = React.useMemo<UniqueIdentifier[]>(
-    () => data?.map(({ id }) => id) || [],
-    [data]
+  const dataIds = React.useMemo<Array<UniqueIdentifier>>(
+    () => data.map(({ id }) => id),
+    [data],
   );
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,
@@ -351,11 +355,12 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (active && over && active.id !== over.id) {
-      setData((data) => {
+      setData((prevData) => {
         const oldIndex = dataIds.indexOf(active.id);
         const newIndex = dataIds.indexOf(over.id);
-        return arrayMove(data, oldIndex, newIndex);
+        return arrayMove(prevData, oldIndex, newIndex);
       });
     }
   }
@@ -410,7 +415,7 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
                 .filter(
                   (column) =>
                     typeof column.accessorFn !== "undefined" &&
-                    column.getCanHide()
+                    column.getCanHide(),
                 )
                 .map((column) => {
                   return (
@@ -457,7 +462,7 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
                             ? null
                             : flexRender(
                                 header.column.columnDef.header,
-                                header.getContext()
+                                header.getContext(),
                               )}
                         </TableHead>
                       );
@@ -466,7 +471,7 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
                 ))}
               </TableHeader>
               <TableBody className="**:data-[slot=table-cell]:first:w-8">
-                {table.getRowModel().rows?.length ? (
+                {table.getRowModel().rows.length ? (
                   <SortableContext
                     items={dataIds}
                     strategy={verticalListSortingStrategy}

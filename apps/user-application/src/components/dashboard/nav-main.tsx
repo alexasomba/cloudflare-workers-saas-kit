@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  IconCirclePlusFilled,
-  IconMail,
-  type Icon,
-} from "@tabler/icons-react";
+import { IconCirclePlusFilled, IconMail } from "@tabler/icons-react";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { Button } from "@workspace/ui/components/button";
 import {
@@ -15,15 +11,16 @@ import {
   SidebarMenuItem,
 } from "@workspace/ui/components/sidebar";
 import { cn } from "@workspace/ui/lib/utils";
+import type { Icon } from "@tabler/icons-react";
 
 export function NavMain({
   items,
 }: {
-  items: {
+  items: Array<{
     title: string;
     url: string;
     icon?: Icon;
-  }[];
+  }>;
 }) {
   const navigate = useNavigate();
   const routerState = useRouterState();
@@ -64,7 +61,7 @@ export function NavMain({
                   onClick={() => navigate({ to: item.url })}
                   className={cn(
                     isActive &&
-                      "bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary"
+                      "bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary",
                   )}
                 >
                   {item.icon && <item.icon />}

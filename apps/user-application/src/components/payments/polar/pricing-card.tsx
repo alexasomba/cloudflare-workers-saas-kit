@@ -1,3 +1,6 @@
+import { IconCheck } from "@tabler/icons-react";
+import { Badge } from "@workspace/ui/components/badge";
+import { Button } from "@workspace/ui/components/button";
 import {
   Card,
   CardContent,
@@ -5,10 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@workspace/ui/components/card";
-import { Button } from "@workspace/ui/components/button";
-import { Badge } from "@workspace/ui/components/badge";
-import { IconCheck } from "@tabler/icons-react";
-import { Price, Product, Subscription } from "./types";
+import type { Price, Product, Subscription } from "./types";
 
 interface PricingCardProps {
   product: Product;
@@ -25,25 +25,25 @@ export function PricingCard({
 }: PricingCardProps) {
   const price = product.prices[0];
 
-  const formatPrice = (price: Price | undefined) => {
-    if (!price) return "Price unavailable";
-    if (price.type !== "recurring") {
+  const formatPrice = (p: Price | undefined) => {
+    if (!p) return "Price unavailable";
+    if (p.type !== "recurring") {
       return "Currency not specified";
     }
 
-    if (price.amountType === "fixed" && price.priceAmount) {
+    if (p.amountType === "fixed" && p.priceAmount) {
       return new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: price.priceCurrency.toUpperCase(),
-      }).format(price.priceAmount / 100);
+        currency: p.priceCurrency.toUpperCase(),
+      }).format(p.priceAmount / 100);
     }
 
-    if (price.amountType === "custom") {
-      const min = price.minimumAmount ? price.minimumAmount / 100 : 0;
-      const max = price.maximumAmount ? price.maximumAmount / 100 : null;
+    if (p.amountType === "custom") {
+      const min = p.minimumAmount ? p.minimumAmount / 100 : 0;
+      const max = p.maximumAmount ? p.maximumAmount / 100 : null;
       const formatter = new Intl.NumberFormat("en-US", {
         style: "currency",
-        currency: price.priceCurrency.toUpperCase(),
+        currency: p.priceCurrency.toUpperCase(),
       });
 
       if (max) {
@@ -144,7 +144,7 @@ export function PricingCard({
           <div className="space-y-3 mb-6">
             {features.map((feature, index) => (
               <div key={index} className="flex items-start gap-2">
-                <IconCheck className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                <IconCheck className="w-4 h-4 text-green-600 mt-0.5 shrink-0" />
                 <span className="text-sm">{feature}</span>
               </div>
             ))}

@@ -1,23 +1,28 @@
-import { Link, rootRouteId, useMatch, useRouter } from "@tanstack/react-router";
-import type { ErrorComponentProps } from "@tanstack/react-router";
 import {
   IconAlertTriangle,
-  IconRefresh,
   IconArrowLeft,
-  IconHome,
-  IconChevronDown,
   IconBug,
+  IconChevronDown,
+  IconHome,
   IconMail,
+  IconRefresh,
 } from "@tabler/icons-react";
-import { Button } from "@workspace/ui/components/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@workspace/ui/components/card";
+import { Link, rootRouteId, useMatch, useRouter } from "@tanstack/react-router";
 import { Alert, AlertDescription } from "@workspace/ui/components/alert";
+import { Button } from "@workspace/ui/components/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@workspace/ui/components/collapsible";
 import { useState } from "react";
+import type { ErrorComponentProps } from "@tanstack/react-router";
 
 export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   const router = useRouter();
@@ -30,8 +35,8 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   console.error(error);
 
   // Format error details for display
-  const errorMessage = error?.message || "An unexpected error occurred";
-  const errorStack = error?.stack || "";
+  const errorMessage = error.message || "An unexpected error occurred";
+  const errorStack = error.stack || "";
   const hasStack = errorStack.length > 0;
 
   const handleReportError = () => {
@@ -123,7 +128,7 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
                   <h4 className="text-sm font-medium mb-2">
                     Error Stack Trace:
                   </h4>
-                  <pre className="text-xs text-muted-foreground whitespace-pre-wrap break-words max-h-40 overflow-y-auto">
+                  <pre className="text-xs text-muted-foreground whitespace-pre-wrap wrap-break-word max-h-40 overflow-y-auto">
                     {errorStack}
                   </pre>
                 </div>

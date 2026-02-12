@@ -10,7 +10,8 @@
     "dev:data-service": "nx run data-service:dev",
     "deploy:data-service": "nx run data-service:deploy",
     "prepare": "husky",
-    "typecheck": "nx run-many -t typecheck"
+    "typecheck": "nx run-many -t typecheck",
+    "lint": "nx run-many -t lint"
   },
   "keywords": [],
   "author": "",

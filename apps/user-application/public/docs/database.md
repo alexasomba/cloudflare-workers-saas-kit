@@ -1,6 +1,6 @@
 # Serverless Database Setup
 
-*Setup Guide*
+_Setup Guide_
 
 Configure your database for edge connections
 
@@ -147,6 +147,7 @@ In TanStack Start applications, database initialization occurs in the `src/serve
 ### PostgreSQL (Neon) Runtime Setup
 
 **Database Setup Function:**
+
 ```typescript
 // packages/data-ops/database/setup.ts
 import { drizzle } from "drizzle-orm/neon-http";
@@ -175,6 +176,7 @@ export function getDb() {
 ```
 
 **Server Entry Point:**
+
 ```typescript
 // src/server.ts - TanStack Start Server Entry
 import { initDatabase } from "@repo/data-ops/database/setup";
@@ -202,6 +204,7 @@ export default {
 ### MySQL (PlanetScale) Runtime Setup
 
 **Database Setup Function:**
+
 ```typescript
 // packages/data-ops/database/setup.ts
 import { drizzle } from "drizzle-orm/planetscale-serverless";
@@ -214,7 +217,7 @@ export function initDatabase(connection: {
   password: string;
 }) {
   if (db) {
-    return db
+    return db;
   }
   db = drizzle({ connection });
   return db;
@@ -229,6 +232,7 @@ export function getDb() {
 ```
 
 **Server Entry Point:**
+
 ```typescript
 // src/server.ts - TanStack Start Server Entry
 import { initDatabase } from "@repo/data-ops/database/setup";
@@ -256,6 +260,7 @@ export default {
 ### Cloudflare D1 Runtime Setup
 
 **Database Setup Function:**
+
 ```typescript
 // packages/data-ops/database/setup.ts
 import { drizzle } from "drizzle-orm/d1";
@@ -264,7 +269,7 @@ let db: ReturnType<typeof drizzle>;
 
 export function initDatabase(d1Db: D1Database) {
   if (db) {
-    return db
+    return db;
   }
   db = drizzle(d1Db);
   return db;
@@ -279,6 +284,7 @@ export function getDb() {
 ```
 
 **Server Entry Point:**
+
 ```typescript
 // src/server.ts - TanStack Start Server Entry
 import { initDatabase } from "@repo/data-ops/database/setup";
@@ -303,7 +309,7 @@ export default {
 
 # Database Queries
 
-*Development Guide*
+_Development Guide_
 
 Create reusable, type-safe database queries for your serverless application
 
@@ -549,15 +555,19 @@ export const ServerRoute = createServerFileRoute("/api/webhook/polar").methods({
 ## Benefits of Centralized Queries
 
 ### 🔄 Code Reuse
+
 Write database queries once and use them across multiple applications and services in your monorepo.
 
 ### 🛡️ Type Safety
+
 Drizzle ORM provides full TypeScript support with compile-time type checking and excellent autocompletion.
 
 ### 🧪 Easier Testing
+
 Centralized queries can be easily unit tested, ensuring your database logic is reliable and well-tested.
 
 ### 📦 Maintainability
+
 Keep all database logic in one place, making it easier to update schemas and optimize queries as your application grows.
 
 ---

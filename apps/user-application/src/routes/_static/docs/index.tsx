@@ -1,4 +1,15 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  IconArrowRight,
+  IconBook,
+  IconCircleCheck,
+  IconCreditCard,
+  IconDatabase,
+  IconShieldCheck,
+  IconSparkles,
+} from "@tabler/icons-react";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { Badge } from "@workspace/ui/components/badge";
+import { Button } from "@workspace/ui/components/button";
 import {
   Card,
   CardContent,
@@ -6,17 +17,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@workspace/ui/components/card";
-import { Badge } from "@workspace/ui/components/badge";
-import { Button } from "@workspace/ui/components/button";
-import {
-  IconArrowRight,
-  IconBook,
-  IconDatabase,
-  IconCreditCard,
-  IconShieldCheck,
-  IconSparkles,
-  IconCircleCheck,
-} from "@tabler/icons-react";
 
 export const Route = createFileRoute("/_static/docs/")({
   component: RouteComponent,
@@ -93,7 +93,7 @@ function RouteComponent() {
 
       {/* Tech Stack Banner */}
       <div className="mb-12">
-        <Card className="bg-gradient-to-r from-primary/5 to-secondary/5 border-primary/20">
+        <Card className="bg-linear-to-r from-primary/5 to-secondary/5 border-primary/20">
           <CardContent className="p-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div>
@@ -129,7 +129,7 @@ function RouteComponent() {
 
       {/* Claude Code Setup Section */}
       <div className="mb-12">
-        <Card className="bg-gradient-to-b from-background to-muted/20 border">
+        <Card className="bg-linear-to-b from-background to-muted/20 border">
           <CardContent className="p-8">
             <div className="text-center">
               <Badge variant="outline" className="mb-4">
@@ -277,7 +277,7 @@ function RouteComponent() {
       </Card>
 
       {/* Course Promo Section */}
-      <div className="mt-16 mb-8 bg-gradient-to-b from-background to-muted/20 -mx-4 px-4 py-8">
+      <div className="mt-16 mb-8 bg-linear-to-b from-background to-muted/20 -mx-4 px-4 py-8">
         <div className="aspect-video w-full bg-black rounded-lg overflow-hidden">
           <iframe
             className="w-full h-full"
@@ -307,7 +307,9 @@ function RouteComponent() {
 
           <div className="grid md:grid-cols-2 gap-6 mb-8 text-left max-w-3xl mx-auto">
             <div className="space-y-3">
-              <h3 className="font-semibold text-lg mb-2">What You'll Build</h3>
+              <h3 className="font-semibold text-lg mb-2">
+                What You&apos;ll Build
+              </h3>
               <div className="space-y-2">
                 <div className="flex items-start gap-2">
                   <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />

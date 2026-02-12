@@ -1,6 +1,6 @@
 "use client";
 
-import { IconSettings, type Icon } from "@tabler/icons-react";
+import { IconSettings } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import {
   SidebarGroup,
@@ -9,16 +9,17 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@workspace/ui/components/sidebar";
+import type { Icon } from "@tabler/icons-react";
 
 export function NavSecondary({
   items,
   ...props
 }: {
-  items: {
+  items: Array<{
     title: string;
     url: string;
     icon?: Icon;
-  }[];
+  }>;
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
   const navigate = useNavigate();
 

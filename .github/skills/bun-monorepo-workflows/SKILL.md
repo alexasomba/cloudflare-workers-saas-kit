@@ -56,7 +56,7 @@ Notes:
 
 ## Cloudflare/Wrangler note (important)
 
-This repo uses Cloudflare Workers tooling (Wrangler, workerd). Bun is fine as a *package manager*, but Wrangler is not universally supported when *executed via Bun’s runtime*.
+This repo uses Cloudflare Workers tooling (Wrangler, workerd). Bun is fine as a _package manager_, but Wrangler is not universally supported when _executed via Bun’s runtime_.
 
 Practical guidance:
 
@@ -90,7 +90,7 @@ Recommended sequence:
 Bun-specific notes that matter during migration:
 
 - Bun v1.2+ defaults to the text lockfile `bun.lock` (older versions used `bun.lockb`).
-- Bun does not run dependency lifecycle scripts by default; if a dependency *requires* scripts, add it to `trustedDependencies` in the relevant `package.json`, then reinstall.
+- Bun does not run dependency lifecycle scripts by default; if a dependency _requires_ scripts, add it to `trustedDependencies` in the relevant `package.json`, then reinstall.
 
 ## What to update in repo configs (typical)
 
