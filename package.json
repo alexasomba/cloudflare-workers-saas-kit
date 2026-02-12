@@ -3,21 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "setup": "bun install && bun run build:data-ops",
-    "build:data-ops": "bun run --filter ./packages/data-ops build",
-    "dev:user-application": "bun run --filter user-application dev",
-    "deploy:user-application": "bun run build:data-ops && bun run --filter user-application deploy",
-    "dev:data-service": "bun run --filter data-service dev",
-    "deploy:data-service": "bun run build:data-ops && bun run --filter data-service deploy"
+    "setup": "pnpm install && pnpm run build:data-ops",
+    "build:data-ops": "nx run @repo/data-ops:build",
+    "dev:user-application": "nx run user-application:dev",
+    "deploy:user-application": "nx run user-application:deploy",
+    "dev:data-service": "nx run data-service:dev",
+    "deploy:data-service": "nx run data-service:deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "bun@1.3.5",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
+  "packageManager": "pnpm@10.4.1",
   "trustedDependencies": [
     "@tailwindcss/oxide",
     "better-sqlite3",
@@ -27,6 +23,7 @@
   ],
   "devDependencies": {
     "@types/node": "^24.10.4",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "nx": "22.5.0"
   }
 }

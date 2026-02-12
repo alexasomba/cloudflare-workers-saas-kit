@@ -75,8 +75,8 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/docs/$name': typeof StaticDocsNameRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/app': typeof AuthAppIndexRoute
-  '/docs': typeof StaticDocsIndexRoute
+  '/app/': typeof AuthAppIndexRoute
+  '/docs/': typeof StaticDocsIndexRoute
   '/app/polar/portal': typeof AuthAppPolarPortalRoute
   '/app/polar/subscriptions': typeof AuthAppPolarSubscriptionsRoute
   '/app/polar/checkout/success': typeof AuthAppPolarCheckoutSuccessRoute
@@ -110,8 +110,8 @@ export interface FileRouteTypes {
     | '/'
     | '/docs/$name'
     | '/api/auth/$'
-    | '/app'
-    | '/docs'
+    | '/app/'
+    | '/docs/'
     | '/app/polar/portal'
     | '/app/polar/subscriptions'
     | '/app/polar/checkout/success'
@@ -151,14 +151,14 @@ declare module '@tanstack/react-router' {
     '/_static': {
       id: '/_static'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof StaticRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
       id: '/_auth'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -172,14 +172,14 @@ declare module '@tanstack/react-router' {
     '/_static/docs/': {
       id: '/_static/docs/'
       path: '/docs'
-      fullPath: '/docs'
+      fullPath: '/docs/'
       preLoaderRoute: typeof StaticDocsIndexRouteImport
       parentRoute: typeof StaticRouteRoute
     }
     '/_auth/app/': {
       id: '/_auth/app/'
       path: '/app'
-      fullPath: '/app'
+      fullPath: '/app/'
       preLoaderRoute: typeof AuthAppIndexRouteImport
       parentRoute: typeof AuthRouteRoute
     }

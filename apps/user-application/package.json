@@ -6,7 +6,7 @@
     "dev": "vite dev --port 3000",
     "build": "vite build",
     "test": "vitest",
-    "deploy": "bun run build && wrangler deploy",
+    "deploy": "pnpm run build && wrangler deploy",
     "serve": "vite preview",
     "cf-typegen": "wrangler types --env-interface Env"
   },
