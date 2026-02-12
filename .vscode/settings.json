@@ -12,6 +12,21 @@
     },
     "terminal.integrated.env.osx": {
         "PATH": "${workspaceFolder}/scripts:${env:HOME}/.bun/bin:${env:HOME}/.local/bin:${env:PATH}"
-    }
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "astro"
+    ],
+    "eslint.workingDirectories": [
+        {
+            "mode": "auto"
+        }
+    ]
 }
 

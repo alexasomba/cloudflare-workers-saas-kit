@@ -6,7 +6,6 @@ Skills live under `.github/skills/<skill-name>/SKILL.md`.
 
 ## Included skills
 
-- `beads-issue-tracking`: bd (beads) workflow + mandatory end-of-session push steps
 - `bun-monorepo-workflows`: bun install/run/filter workflows + pnpm → bun migration checklist for this monorepo
 - `bun-workspace-management`: day-to-day Bun workflows for managing apps/packages (bun run --filter, add/remove deps, trustedDependencies, bun audit)
 - `pnpm-monorepo-workflows`: legacy pnpm workflows (deprecated)
