@@ -1,4 +1,61 @@
 {
   "version": "2.0.0",
-  "tasks": []
+  "tasks": [
+    {
+      "label": "Project: Setup",
+      "type": "shell",
+      "command": "pnpm run setup",
+      "group": "build",
+      "detail": "Install dependencies and build core packages (@repo/data-ops)",
+      "problemMatcher": []
+    },
+    {
+      "label": "Types: Generate Worker Bindings",
+      "type": "shell",
+      "command": "pnpm run --filter user-application cf-typegen && pnpm run --filter data-service cf-typegen",
+      "group": "none",
+      "detail": "Update worker-configuration.d.ts from wrangler.jsonc",
+      "problemMatcher": []
+    },
+    {
+      "label": "DB: Generate Migration",
+      "type": "shell",
+      "command": "pnpm run --filter @repo/data-ops drizzle:generate",
+      "group": "none",
+      "detail": "Generate a new SQL migration file after schema changes",
+      "problemMatcher": []
+    },
+    {
+      "label": "DB: Apply Migration (Production)",
+      "type": "shell",
+      "command": "pnpm run --filter @repo/data-ops drizzle:migrate",
+      "group": "none",
+      "detail": "Push pending migrations to the production Cloudflare D1 database",
+      "problemMatcher": []
+    },
+    {
+      "label": "Auth: Generate Schema",
+      "type": "shell",
+      "command": "pnpm run --filter @repo/data-ops better-auth:generate",
+      "group": "none",
+      "detail": "Update the Drizzle auth schema based on Better Auth config",
+      "problemMatcher": []
+    },
+    {
+      "label": "Check: Lint All",
+      "type": "shell",
+      "command": "nx run-many -t lint",
+      "group": "test",
+      "detail": "Run linter across all workspace packages",
+      "problemMatcher": []
+    },
+    {
+      "label": "Check: Typecheck All",
+      "type": "shell",
+      "command": "nx run-many -t typecheck",
+      "group": "test",
+      "detail": "Run TypeScript compiler check across all workspace packages",
+      "problemMatcher": ["$tsc"]
+    }
+  ]
 }
