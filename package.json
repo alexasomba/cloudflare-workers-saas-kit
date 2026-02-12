@@ -8,7 +8,9 @@
     "dev:user-application": "nx run user-application:dev",
     "deploy:user-application": "nx run user-application:deploy",
     "dev:data-service": "nx run data-service:dev",
-    "deploy:data-service": "nx run data-service:deploy"
+    "deploy:data-service": "nx run data-service:deploy",
+    "prepare": "husky",
+    "typecheck": "nx run-many -t typecheck"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +25,22 @@
   ],
   "devDependencies": {
     "@types/node": "^24.10.13",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "nx": "22.5.0",
+    "prettier": "^3.8.1",
     "typescript": "^5.9.3"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,astro}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "pnpm run typecheck"
+    ],
+    "*.{json,md,yml,css}": [
+      "prettier --write"
+    ]
   }
 }
