@@ -1,22 +1,19 @@
+import type { QueryClient } from '@tanstack/react-query'
 import {
+  createRootRouteWithContext,
   HeadContent,
   Scripts,
-  createRootRouteWithContext,
 } from '@tanstack/react-router'
-import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
-import { TanStackDevtools } from '@tanstack/react-devtools'
-
+import React, { lazy, Suspense } from 'react'
 import Header from '../components/Header'
-
-import AiDevtools from '../lib/ai-devtools'
-
-import StoreDevtools from '../lib/demo-store-devtools'
-
-import TanStackQueryDevtools from '../integrations/tanstack-query/devtools'
-
 import appCss from '../styles.css?url'
 
-import type { QueryClient } from '@tanstack/react-query'
+const Devtools =
+  process.env.NODE_ENV === 'production'
+    ? () => null
+    : lazy(() =>
+        import('../components/Devtools').then((m) => ({ default: m.Devtools })),
+      )
 
 interface MyRouterContext {
   queryClient: QueryClient
@@ -55,20 +52,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <body>
         <Header />
         {children}
-        <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-            AiDevtools,
-            StoreDevtools,
-            TanStackQueryDevtools,
-          ]}
-        />
+        <Suspense>
+          <Devtools />
+        </Suspense>
         <Scripts />
       </body>
     </html>

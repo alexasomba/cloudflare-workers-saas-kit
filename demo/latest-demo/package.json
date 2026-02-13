@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "dotenv -e .env.local -- sh -c \"NODE_OPTIONS='--import ./instrument.server.mjs' vite dev --port 3000\"",
-    "build": "vite build && cp instrument.server.mjs .output/server",
+    "build": "NODE_OPTIONS='--max-old-space-size=8192' vite build && mkdir -p .output/server && cp instrument.server.mjs .output/server",
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint",
@@ -58,7 +58,7 @@
     "@tanstack/eslint-config": "^0.3.4",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",
-    "@types/node": "^22.19.11",
+    "@types/node": "^24.10.13",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.4",

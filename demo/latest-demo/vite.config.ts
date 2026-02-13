@@ -12,6 +12,7 @@ const config = defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+    conditions: ['import', 'browser', 'worker'],
   },
   plugins: [
     devtools(),
@@ -24,6 +25,18 @@ const config = defineConfig({
     tanstackStart(),
     viteReact(),
   ],
+  ssr: {
+    noExternal: [
+      'tiny-warning',
+      'tiny-invariant',
+      '@tanstack/react-devtools',
+      '@tanstack/react-query-devtools',
+      '@tanstack/react-router-devtools',
+      '@tanstack/react-ai-devtools',
+      'solid-js',
+      'solid-js/web',
+    ],
+  },
 })
 
 export default config

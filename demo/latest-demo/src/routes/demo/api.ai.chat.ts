@@ -1,9 +1,9 @@
-import { createFileRoute } from '@tanstack/react-router'
 import { chat, maxIterations, toServerSentEventsResponse } from '@tanstack/ai'
 import { anthropicText } from '@tanstack/ai-anthropic'
-import { openaiText } from '@tanstack/ai-openai'
 import { geminiText } from '@tanstack/ai-gemini'
 import { ollamaText } from '@tanstack/ai-ollama'
+import { openaiText } from '@tanstack/ai-openai'
+import { createFileRoute } from '@tanstack/react-router'
 
 import { getGuitars, recommendGuitarToolDef } from '@/lib/demo-guitar-tools'
 
@@ -65,7 +65,8 @@ export const Route = createFileRoute('/demo/api/ai/chat')({
             ollama: () => ollamaText((model || 'mistral:7b') as any),
           }
 
-          const adapter = adapterConfig[provider]()
+          const adapter =
+            adapterConfig[provider as keyof typeof adapterConfig]()
 
           const stream = chat({
             adapter,
