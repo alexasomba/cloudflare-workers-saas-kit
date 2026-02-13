@@ -12,7 +12,12 @@ import globals from 'globals';
 export const config = [
   {
     name: 'workspace/extra-ignores',
-    ignores: ['**/eslint.config.js', '**/prettier.config.js', '**/worker-configuration.d.ts'],
+    ignores: [
+      '**/eslint.config.js',
+      '**/prettier.config.js',
+      '**/worker-configuration.d.ts',
+      '**/routeTree.gen.ts',
+    ],
   },
   ...tanstackConfig,
 

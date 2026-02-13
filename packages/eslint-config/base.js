@@ -17,7 +17,13 @@ export const config = [
     },
   },
   {
-    ignores: ['dist/**', '**/prettier.config.js', '**/postcss.config.js', '**/tailwind.config.js'],
+    ignores: [
+      'dist/**',
+      '**/prettier.config.js',
+      '**/postcss.config.js',
+      '**/tailwind.config.js',
+      '**/routeTree.gen.ts',
+    ],
   },
   eslintConfigPrettier,
 ];

@@ -9,6 +9,7 @@ export default tseslint.config(js.configs.recommended, ...tseslint.configs.recom
     '**/prettier.config.js',
     '**/postcss.config.js',
     '**/tailwind.config.js',
+    '**/routeTree.gen.ts',
     'demo/**', // Ignore demo directory for now to avoid noise
   ],
 });
