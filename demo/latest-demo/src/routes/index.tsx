@@ -1,25 +1,25 @@
-import { createFileRoute } from '@tanstack/react-router'
 import {
-  Route as RouteIcon,
-  Server,
+  Database,
+  Lightning,
+  Path as RouteIcon,
   Shield,
-  Sparkles,
+  Sparkle,
   Waves,
-  Zap,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
+import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/')({ component: App })
 
 function App() {
   const features = [
     {
-      icon: <Zap className="w-12 h-12 text-cyan-400" />,
+      icon: <Lightning className="w-12 h-12 text-cyan-400" />,
       title: 'Powerful Server Functions',
       description:
         'Write server-side code that seamlessly integrates with your client components. Type-safe, secure, and simple.',
     },
     {
-      icon: <Server className="w-12 h-12 text-cyan-400" />,
+      icon: <Database className="w-12 h-12 text-cyan-400" />,
       title: 'Flexible Server Side Rendering',
       description:
         'Full-document SSR, streaming, and progressive enhancement out of the box. Control exactly what renders where.',
@@ -43,7 +43,7 @@ function App() {
         'Stream data from server to client progressively. Perfect for AI applications and real-time updates.',
     },
     {
-      icon: <Sparkles className="w-12 h-12 text-cyan-400" />,
+      icon: <Sparkle className="w-12 h-12 text-cyan-400" />,
       title: 'Next Generation Ready',
       description:
         'Built from the ground up for modern web applications. Deploy anywhere JavaScript runs.',

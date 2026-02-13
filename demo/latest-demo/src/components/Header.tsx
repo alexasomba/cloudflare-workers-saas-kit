@@ -1,21 +1,21 @@
 import { Link } from '@tanstack/react-router'
 
-import { useState } from 'react'
 import {
+  Chats,
   ChefHat,
-  ClipboardType,
+  ClipboardText, // Added based on the provided code edit snippet
   Database,
   Globe,
-  Home,
-  ImageIcon,
-  Menu,
-  MessagesSquare,
+  House,
+  Image,
+  List,
   Network,
-  Store,
+  Storefront,
   Table,
-  Webhook,
+  WebhooksLogo,
   X,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
+import { useState } from 'react'
 import TanChatAIAssistant from './demo-AIAssistant.tsx'
 
 export default function Header() {
@@ -29,7 +29,7 @@ export default function Header() {
           className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
           aria-label="Open menu"
         >
-          <Menu size={24} />
+          <List size={24} />
         </button>
         <h1 className="ml-4 text-xl font-semibold">
           <Link to="/">
@@ -68,7 +68,7 @@ export default function Header() {
                 'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
             }}
           >
-            <Home size={20} />
+            <House size={20} />
             <span className="font-medium">Home</span>
           </Link>
 
@@ -96,7 +96,7 @@ export default function Header() {
                 'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
             }}
           >
-            <MessagesSquare size={20} />
+            <Chats size={20} />
             <span className="font-medium">Chat</span>
           </Link>
 
@@ -109,7 +109,7 @@ export default function Header() {
                 'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
             }}
           >
-            <ImageIcon size={20} />
+            <Image size={20} />
             <span className="font-medium">Generate Image</span>
           </Link>
 
@@ -148,7 +148,7 @@ export default function Header() {
                 'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
             }}
           >
-            <ClipboardType size={20} />
+            <ClipboardText size={20} />
             <span className="font-medium">Simple Form</span>
           </Link>
 
@@ -161,7 +161,7 @@ export default function Header() {
                 'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
             }}
           >
-            <ClipboardType size={20} />
+            <ClipboardText size={20} />
             <span className="font-medium">Address Form</span>
           </Link>
 
@@ -174,7 +174,7 @@ export default function Header() {
                 'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
             }}
           >
-            <Webhook size={20} />
+            <WebhooksLogo size={20} />
             <span className="font-medium">MCP</span>
           </Link>
 
@@ -200,7 +200,7 @@ export default function Header() {
                 'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
             }}
           >
-            <Store size={20} />
+            <Storefront size={20} />
             <span className="font-medium">Store</span>
           </Link>
 

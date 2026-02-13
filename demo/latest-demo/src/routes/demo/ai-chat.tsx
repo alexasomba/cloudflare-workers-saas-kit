@@ -1,13 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
 import {
-  Loader2,
-  Mic,
-  MicOff,
-  Send,
+  CircleNotch,
+  Microphone,
+  MicrophoneSlash,
+  PaperPlaneRight,
+  SpeakerHigh,
+  SpeakerSlash,
   Square,
-  Volume2,
-  VolumeX,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
+import { createFileRoute } from '@tanstack/react-router'
 import { useEffect, useRef, useState } from 'react'
 import { Streamdown } from 'streamdown'
 
@@ -145,9 +145,9 @@ function Messages({
                     title={isPlaying ? 'Stop speaking' : 'Read aloud'}
                   >
                     {isPlaying ? (
-                      <VolumeX className="w-4 h-4" />
+                      <SpeakerSlash className="w-4 h-4" />
                     ) : (
-                      <Volume2 className="w-4 h-4" />
+                      <SpeakerHigh className="w-4 h-4" />
                     )}
                   </button>
                 )}
@@ -203,7 +203,7 @@ function ChatPage() {
                   onClick={stop}
                   className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
                 >
-                  <Square className="w-4 h-4 fill-current" />
+                  <Square weight="fill" className="w-4 h-4" />
                   Stop
                 </button>
               </div>
@@ -230,11 +230,11 @@ function ChatPage() {
                   title={isRecording ? 'Stop recording' : 'Start recording'}
                 >
                   {isTranscribing ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <CircleNotch className="w-4 h-4 animate-spin" />
                   ) : isRecording ? (
-                    <MicOff className="w-4 h-4" />
+                    <MicrophoneSlash className="w-4 h-4" />
                   ) : (
-                    <Mic className="w-4 h-4" />
+                    <Microphone className="w-4 h-4" />
                   )}
                 </button>
 
@@ -266,7 +266,7 @@ function ChatPage() {
                     disabled={!input.trim() || isLoading}
                     className="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-orange-500 hover:text-orange-400 disabled:text-gray-500 transition-colors focus:outline-none"
                   >
-                    <Send className="w-4 h-4" />
+                    <PaperPlaneRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>

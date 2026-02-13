@@ -2,7 +2,7 @@ import { useStore } from '@tanstack/react-store'
 import { Store } from '@tanstack/store'
 import { useEffect, useRef, useState } from 'react'
 
-import { BotIcon, ChevronRight, Send, X } from 'lucide-react'
+import { CaretRight, PaperPlaneRight, Robot, X } from '@phosphor-icons/react'
 import { Streamdown } from 'streamdown'
 
 import GuitarRecommendation from './demo-GuitarRecommendation'
@@ -85,10 +85,10 @@ export default function AIAssistant() {
         className="w-full flex items-center justify-between px-4 py-2.5 rounded-lg bg-linear-to-r from-green-700 to-green-900 text-white hover:opacity-90 transition-opacity"
       >
         <div className="flex items-center gap-2">
-          <BotIcon size={24} />
+          <Robot size={24} />
           <span className="font-medium">AI Assistant</span>
         </div>
-        <ChevronRight className="w-4 h-4" />
+        <CaretRight className="w-4 h-4" />
       </button>
 
       {isOpen && (
@@ -142,7 +142,7 @@ export default function AIAssistant() {
                   disabled={!input.trim()}
                   className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-orange-500 hover:text-orange-400 disabled:text-gray-500 transition-colors focus:outline-none"
                 >
-                  <Send className="w-4 h-4" />
+                  <PaperPlaneRight weight="fill" />
                 </button>
               </div>
             </form>

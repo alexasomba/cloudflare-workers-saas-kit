@@ -1,5 +1,9 @@
+import {
+  CircleNotch,
+  DownloadSimple,
+  Image as ImageIcon,
+} from '@phosphor-icons/react'
 import { createFileRoute } from '@tanstack/react-router'
-import { Download, ImageIcon, Loader2 } from 'lucide-react'
 import { useState } from 'react'
 
 const SIZES = ['1024x1024', '1536x1024', '1024x1536', 'auto']
@@ -142,7 +146,7 @@ function ImagePage() {
             >
               {isLoading ? (
                 <>
-                  <Loader2 className="w-5 h-5 animate-spin" />
+                  <CircleNotch weight="bold" className="w-5 h-5 animate-spin" />
                   Generating...
                 </>
               ) : (
@@ -178,7 +182,7 @@ function ImagePage() {
                         className="absolute top-2 right-2 p-2 bg-gray-900/80 hover:bg-gray-900 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
                         title="Download image"
                       >
-                        <Download className="w-4 h-4 text-white" />
+                        <DownloadSimple className="w-4 h-4 text-white" />
                       </button>
                       {image.revisedPrompt && (
                         <p className="mt-2 text-xs text-gray-400 italic">
@@ -189,14 +193,22 @@ function ImagePage() {
                   ))}
                 </div>
               </div>
-            ) : !error && !isLoading ? (
+            ) : isLoading ? (
+              <div className="h-full flex flex-col items-center justify-center text-gray-400 gap-4">
+                <CircleNotch
+                  size={48}
+                  className="animate-spin text-orange-500"
+                />
+                <p className="text-lg">Creating your masterpiece...</p>
+              </div>
+            ) : (
               <div className="flex flex-col items-center justify-center h-64 text-gray-500">
                 <ImageIcon className="w-16 h-16 mb-4 opacity-50" />
                 <p>
                   Enter a prompt and click "Generate Image" to create an image.
                 </p>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </div>
