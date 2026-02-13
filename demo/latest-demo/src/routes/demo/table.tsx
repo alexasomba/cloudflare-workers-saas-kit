@@ -1,4 +1,4 @@
-import React from 'react'
+import { compareItems, rankItem } from '@tanstack/match-sorter-utils'
 import { createFileRoute } from '@tanstack/react-router'
 import {
   flexRender,
@@ -9,10 +9,9 @@ import {
   sortingFns,
   useReactTable,
 } from '@tanstack/react-table'
-import { compareItems, rankItem } from '@tanstack/match-sorter-utils'
+import React from 'react'
 
-import { makeData } from '@/data/demo-table-data'
-
+import type { RankingInfo } from '@tanstack/match-sorter-utils'
 import type {
   Column,
   ColumnDef,
@@ -20,9 +19,9 @@ import type {
   FilterFn,
   SortingFn,
 } from '@tanstack/react-table'
-import type { RankingInfo } from '@tanstack/match-sorter-utils'
 
 import type { Person } from '@/data/demo-table-data'
+import { makeData } from '@/data/demo-table-data'
 
 export const Route = createFileRoute('/demo/table')({
   component: TableDemo,
@@ -56,10 +55,10 @@ const fuzzySort: SortingFn<any> = (rowA, rowB, columnId) => {
   let dir = 0
 
   // Only sort by rank if the column has ranking information
-  if (rowA.columnFiltersMeta[columnId]) {
+  if ((rowA.columnFiltersMeta as any)[columnId]) {
     dir = compareItems(
-      rowA.columnFiltersMeta[columnId]?.itemRank!,
-      rowB.columnFiltersMeta[columnId]?.itemRank!,
+      (rowA.columnFiltersMeta as any)[columnId].itemRank,
+      (rowB.columnFiltersMeta as any)[columnId].itemRank,
     )
   }
 
@@ -75,45 +74,45 @@ function TableDemo() {
   )
   const [globalFilter, setGlobalFilter] = React.useState('')
 
-  const columns = React.useMemo<ColumnDef<Person, any>[]>(
+  const columns = React.useMemo<Array<ColumnDef<Person, any>>>(
     () => [
       {
         accessorKey: 'id',
-        filterFn: 'equalsString', //note: normal non-fuzzy filter column - exact match required
+        filterFn: 'equalsString', // note: normal non-fuzzy filter column - exact match required
       },
       {
         accessorKey: 'firstName',
         cell: (info) => info.getValue(),
-        filterFn: 'includesStringSensitive', //note: normal non-fuzzy filter column - case sensitive
+        filterFn: 'includesStringSensitive', // note: normal non-fuzzy filter column - case sensitive
       },
       {
         accessorFn: (row) => row.lastName,
         id: 'lastName',
         cell: (info) => info.getValue(),
         header: () => <span>Last Name</span>,
-        filterFn: 'includesString', //note: normal non-fuzzy filter column - case insensitive
+        filterFn: 'includesString', // note: normal non-fuzzy filter column - case insensitive
       },
       {
         accessorFn: (row) => `${row.firstName} ${row.lastName}`,
         id: 'fullName',
         header: 'Full Name',
         cell: (info) => info.getValue(),
-        filterFn: 'fuzzy', //using our custom fuzzy filter function
+        filterFn: 'fuzzy', // using our custom fuzzy filter function
         // filterFn: fuzzyFilter, //or just define with the function
-        sortingFn: fuzzySort, //sort by fuzzy rank (falls back to alphanumeric)
+        sortingFn: fuzzySort, // sort by fuzzy rank (falls back to alphanumeric)
       },
     ],
     [],
   )
 
-  const [data, setData] = React.useState<Person[]>(() => makeData(5_000))
-  const refreshData = () => setData((_old) => makeData(50_000)) //stress test
+  const [data, setData] = React.useState<Array<Person>>(() => makeData(5_000))
+  const refreshData = () => setData((_old) => makeData(50_000)) // stress test
 
   const table = useReactTable({
     data,
     columns,
     filterFns: {
-      fuzzy: fuzzyFilter, //define as a filter function that can be used in column definitions
+      fuzzy: fuzzyFilter, // define as a filter function that can be used in column definitions
     },
     state: {
       columnFilters,
@@ -121,9 +120,9 @@ function TableDemo() {
     },
     onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: 'fuzzy', //apply fuzzy filter to the global filter (most common use case for fuzzy filter)
+    globalFilterFn: 'fuzzy', // apply fuzzy filter to the global filter (most common use case for fuzzy filter)
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(), //client side filtering
+    getFilteredRowModel: getFilteredRowModel(), // client side filtering
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
@@ -131,7 +130,7 @@ function TableDemo() {
     debugColumns: false,
   })
 
-  //apply the fuzzy sort if the fullName column is being filtered
+  // apply the fuzzy sort if the fullName column is being filtered
   React.useEffect(() => {
     if (table.getState().columnFilters[0]?.id === 'fullName') {
       if (table.getState().sorting[0]?.id !== 'fullName') {
@@ -144,7 +143,7 @@ function TableDemo() {
     <div className="min-h-screen bg-gray-900 p-6">
       <div>
         <DebouncedInput
-          value={globalFilter ?? ''}
+          value={globalFilter}
           onChange={(value) => setGlobalFilter(String(value))}
           className="w-full p-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
           placeholder="Search all columns..."

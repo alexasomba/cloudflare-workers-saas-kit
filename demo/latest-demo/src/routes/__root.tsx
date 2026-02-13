@@ -1,12 +1,12 @@
-import type { QueryClient } from '@tanstack/react-query'
 import {
-  createRootRouteWithContext,
   HeadContent,
   Scripts,
+  createRootRouteWithContext,
 } from '@tanstack/react-router'
-import React, { lazy, Suspense } from 'react'
+import React, { Suspense, lazy } from 'react'
 import Header from '../components/Header'
 import appCss from '../styles.css?url'
+import type { QueryClient } from '@tanstack/react-query'
 
 const Devtools =
   process.env.NODE_ENV === 'production'

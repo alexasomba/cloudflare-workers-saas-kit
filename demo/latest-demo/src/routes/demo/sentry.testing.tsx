@@ -7,10 +7,10 @@
  */
 
 import * as fs from 'node:fs/promises'
+import * as Sentry from '@sentry/tanstackstart-react'
 import { createFileRoute } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
-import * as Sentry from '@sentry/tanstackstart-react'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/demo/sentry/testing')({
   component: RouteComponent,
@@ -269,7 +269,7 @@ function ProgressBar({ loading }: { loading: boolean }) {
       />
       <div className="flex-1 h-2 bg-[#2D2640] rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-[#7553FF] to-[#B3A1FF] rounded-full transition-all duration-500"
+          className="h-full bg-linear-to-r from-[#7553FF] to-[#B3A1FF] rounded-full transition-all duration-500"
           style={{ width: loading ? '60%' : '100%' }}
         />
       </div>
@@ -301,7 +301,7 @@ function RouteComponent() {
     try {
       await Sentry.startSpan(
         { name: 'Client Error Flow Demo', op: 'demo.client-error' },
-        async () => {
+        () => {
           Sentry.setContext('demo', {
             feature: 'client-error-demo',
             triggered_at: new Date().toISOString(),
@@ -422,7 +422,7 @@ function RouteComponent() {
         {showWarning && (
           <div className="mb-8 flex items-center gap-3 bg-[#E5A000]/10 border border-[#E5A000]/30 rounded-xl px-6 py-4">
             <svg
-              className="w-6 h-6 text-[#E5A000] flex-shrink-0"
+              className="w-6 h-6 text-[#E5A000] shrink-0"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -511,7 +511,7 @@ function RouteComponent() {
                 {isLoading.clientError && (
                   <ProgressBar loading={isLoading.clientError} />
                 )}
-                {results.clientError && !isLoading.clientError && (
+                {(results as any).clientError && !isLoading.clientError && (
                   <ResultBadge
                     type={results.clientError.type}
                     spanOp={results.clientError.spanOp}
@@ -532,7 +532,7 @@ function RouteComponent() {
                 {isLoading.clientTrace && (
                   <ProgressBar loading={isLoading.clientTrace} />
                 )}
-                {results.clientTrace && !isLoading.clientTrace && (
+                {(results as any).clientTrace && !isLoading.clientTrace && (
                   <ResultBadge
                     type={results.clientTrace.type}
                     spanOp={results.clientTrace.spanOp}
@@ -563,7 +563,7 @@ function RouteComponent() {
                 {isLoading.serverError && (
                   <ProgressBar loading={isLoading.serverError} />
                 )}
-                {results.serverError && !isLoading.serverError && (
+                {(results as any).serverError && !isLoading.serverError && (
                   <ResultBadge
                     type={results.serverError.type}
                     spanOp={results.serverError.spanOp}
@@ -584,7 +584,7 @@ function RouteComponent() {
                 {isLoading.serverTrace && (
                   <ProgressBar loading={isLoading.serverTrace} />
                 )}
-                {results.serverTrace && !isLoading.serverTrace && (
+                {(results as any).serverTrace && !isLoading.serverTrace && (
                   <ResultBadge
                     type={results.serverTrace.type}
                     spanOp={results.serverTrace.spanOp}

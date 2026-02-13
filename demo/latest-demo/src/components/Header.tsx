@@ -1,7 +1,5 @@
 import { Link } from '@tanstack/react-router'
 
-import TanChatAIAssistant from './demo-AIAssistant.tsx'
-
 import { useState } from 'react'
 import {
   ChefHat,
@@ -18,6 +16,7 @@ import {
   Webhook,
   X,
 } from 'lucide-react'
+import TanChatAIAssistant from './demo-AIAssistant.tsx'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
