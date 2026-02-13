@@ -12,7 +12,7 @@ export default function GuitarRecommendation({ id }: { id: string }) {
   }
   return (
     <div className="my-4 rounded-lg overflow-hidden border border-orange-500/20 bg-gray-800/50">
-      <div className="aspect-[4/3] relative overflow-hidden">
+      <div className="aspect-4/3 relative overflow-hidden">
         <img
           src={guitar.image}
           alt={guitar.name}
@@ -36,7 +36,7 @@ export default function GuitarRecommendation({ id }: { id: string }) {
               })
               showAIAssistant.setState(() => false)
             }}
-            className="bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-1.5 rounded-lg text-sm hover:opacity-90 transition-opacity"
+            className="bg-linear-to-r from-orange-500 to-red-600 text-white px-4 py-1.5 rounded-lg text-sm hover:opacity-90 transition-opacity"
           >
             View Details
           </button>
