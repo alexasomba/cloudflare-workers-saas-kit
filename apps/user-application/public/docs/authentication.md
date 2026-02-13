@@ -70,9 +70,9 @@ Update your `packages/data-ops/config/auth.ts` file based on your database provi
 
 ```typescript
 // packages/data-ops/config/auth.ts
-import { createBetterAuth } from "../src/auth/setup";
-import { initDatabase } from "../src/database/setup";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { createBetterAuth } from '../src/auth/setup';
+import { initDatabase } from '../src/database/setup';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
 export const auth = createBetterAuth({
   database: drizzleAdapter(
@@ -82,8 +82,8 @@ export const auth = createBetterAuth({
       username: process.env.DATABASE_USERNAME!,
     }),
     {
-      provider: "pg",
-    },
+      provider: 'pg',
+    }
   ),
 });
 ```
@@ -92,9 +92,9 @@ export const auth = createBetterAuth({
 
 ```typescript
 // packages/data-ops/config/auth.ts
-import { createBetterAuth } from "../src/auth/setup";
-import { initDatabase } from "../src/database/setup";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { createBetterAuth } from '../src/auth/setup';
+import { initDatabase } from '../src/database/setup';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
 export const auth = createBetterAuth({
   database: drizzleAdapter(
@@ -104,8 +104,8 @@ export const auth = createBetterAuth({
       username: process.env.DATABASE_USERNAME!,
     }),
     {
-      provider: "mysql",
-    },
+      provider: 'mysql',
+    }
   ),
 });
 ```
@@ -114,14 +114,14 @@ export const auth = createBetterAuth({
 
 ```typescript
 // packages/data-ops/config/auth.ts
-import { createBetterAuth } from "../src/auth/setup";
-import Database from "better-sqlite3";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { createBetterAuth } from '../src/auth/setup';
+import Database from 'better-sqlite3';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
 // For CLI use - uses dummy SQLite database
 export const auth = createBetterAuth({
-  database: drizzleAdapter(new Database("./config/test.sqlite"), {
-    provider: "sqlite",
+  database: drizzleAdapter(new Database('./config/test.sqlite'), {
+    provider: 'sqlite',
   }),
 });
 ```
@@ -133,7 +133,7 @@ Use Better Auth CLI to generate the database schemas and TypeScript types. This 
 ### 1. Generate Better Auth schemas
 
 ```bash
-bun run --filter ./packages/data-ops better-auth:generate
+pnpm run --filter ./packages/data-ops better-auth:generate
 ```
 
 This creates `packages/data-ops/src/drizzle/auth-schema.ts` with your authentication tables
@@ -141,7 +141,7 @@ This creates `packages/data-ops/src/drizzle/auth-schema.ts` with your authentica
 ### 2. Generate Drizzle migrations
 
 ```bash
-bun run --filter ./packages/data-ops drizzle:generate
+pnpm run --filter ./packages/data-ops drizzle:generate
 ```
 
 This creates SQL migration files in `packages/data-ops/src/drizzle`
@@ -149,7 +149,7 @@ This creates SQL migration files in `packages/data-ops/src/drizzle`
 ### 3. Run migrations (optional)
 
 ```bash
-bun run --filter ./packages/data-ops drizzle:migrate
+pnpm run --filter ./packages/data-ops drizzle:migrate
 ```
 
 This automatically applies migrations to create the auth tables
@@ -166,10 +166,10 @@ This setup occurs in your server entry point, typically `src/server.ts`, where y
 
 ```typescript
 // src/server.ts - TanStack Start Server Entry
-import { setAuth } from "@repo/data-ops/auth/server";
-import { initDatabase } from "@repo/data-ops/database/setup";
-import handler from "@tanstack/react-start/server-entry";
-import { env } from "cloudflare:workers";
+import { setAuth } from '@repo/data-ops/auth/server';
+import { initDatabase } from '@repo/data-ops/database/setup';
+import handler from '@tanstack/react-start/server-entry';
+import { env } from 'cloudflare:workers';
 
 export default {
   fetch(request: Request) {
@@ -189,7 +189,7 @@ export default {
       },
       adapter: {
         drizzleDb: db,
-        provider: "pg",
+        provider: 'pg',
       },
     });
 
@@ -206,10 +206,10 @@ export default {
 
 ```typescript
 // src/server.ts - TanStack Start Server Entry
-import { setAuth } from "@repo/data-ops/auth/server";
-import { initDatabase } from "@repo/data-ops/database/setup";
-import handler from "@tanstack/react-start/server-entry";
-import { env } from "cloudflare:workers";
+import { setAuth } from '@repo/data-ops/auth/server';
+import { initDatabase } from '@repo/data-ops/database/setup';
+import handler from '@tanstack/react-start/server-entry';
+import { env } from 'cloudflare:workers';
 
 export default {
   fetch(request: Request) {
@@ -229,7 +229,7 @@ export default {
       },
       adapter: {
         drizzleDb: db,
-        provider: "mysql",
+        provider: 'mysql',
       },
     });
 
@@ -246,10 +246,10 @@ export default {
 
 ```typescript
 // src/server.ts - TanStack Start Server Entry
-import { setAuth } from "@repo/data-ops/auth/server";
-import { initDatabase } from "@repo/data-ops/database/setup";
-import handler from "@tanstack/react-start/server-entry";
-import { env } from "cloudflare:workers";
+import { setAuth } from '@repo/data-ops/auth/server';
+import { initDatabase } from '@repo/data-ops/database/setup';
+import handler from '@tanstack/react-start/server-entry';
+import { env } from 'cloudflare:workers';
 
 export default {
   fetch(request: Request) {
@@ -265,7 +265,7 @@ export default {
       },
       adapter: {
         drizzleDb: db,
-        provider: "sqlite",
+        provider: 'sqlite',
       },
     });
 
@@ -288,10 +288,10 @@ TanStack Start uses file-based routing for API endpoints. The `auth.$.tsx` route
 
 ```typescript
 // src/routes/api/auth.$.tsx
-import { createFileRoute } from "@tanstack/react-router";
-import { getAuth } from "@repo/data-ops/auth/server";
+import { createFileRoute } from '@tanstack/react-router';
+import { getAuth } from '@repo/data-ops/auth/server';
 
-export const Route = createFileRoute("/api/auth/$")({
+export const Route = createFileRoute('/api/auth/$')({
   server: {
     handlers: {
       GET: ({ request }) => {
@@ -386,7 +386,7 @@ The client automatically handles session management, token refresh, and provides
 
 ```typescript
 // src/components/auth/client.ts
-import { createAuthClient } from "better-auth/react";
+import { createAuthClient } from 'better-auth/react';
 
 export const authClient = createAuthClient();
 ```

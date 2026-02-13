@@ -24,22 +24,22 @@ This project is a high-performance, full-stack monorepo SaaS kit built for the C
 ### Initial Setup
 
 ```bash
-bun run setup
+pnpm run setup
 ```
 
 This installs dependencies and performs an initial build of the `@repo/data-ops` package.
 
 ### Development
 
-- **Start User Application**: `bun run dev:user-application` (Port 3000)
-- **Start Data Service**: `bun run dev:data-service` (Port 8787)
+- **Start User Application**: `pnpm run dev:user-application` (Port 3000)
+- **Start Data Service**: `pnpm run dev:data-service` (Port 8787)
 
 ### Common Tasks
 
-- **Build Shared Ops**: `bun run build:data-ops` (Required after changing schemas/auth)
-- **Type Generation**: `bun run --filter ./apps/user-application cf-typegen`
-- **Lint All**: `bun run lint`
-- **Typecheck All**: `bun run typecheck`
+- **Build Shared Ops**: `pnpm run build:data-ops` (Required after changing schemas/auth)
+- **Type Generation**: `pnpm run --filter user-application cf-typegen`
+- **Lint All**: `pnpm run lint`
+- **Typecheck All**: `pnpm run typecheck`
 
 ## Development Conventions
 

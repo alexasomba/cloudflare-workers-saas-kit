@@ -1,86 +1,76 @@
-import {
-  IconDeviceDesktop,
-  IconMoon,
-  IconSun,
-  IconCheck,
-} from "@tabler/icons-react";
+import { Check, Desktop, Moon, Sun } from '@phosphor-icons/react';
 
-import { Button } from "@workspace/ui/components/button";
+import { Button } from '@workspace/ui/components/button';
+import { cn } from '@workspace/ui/lib/utils';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@workspace/ui/components/dropdown-menu";
-import { useTheme } from "./theme-provider";
+} from '@workspace/ui/components/dropdown-menu';
+import { useTheme } from './theme-provider';
 
 interface ThemeToggleProps {
-  variant?: "default" | "outline" | "ghost";
-  size?: "sm" | "default" | "lg";
+  variant?: 'default' | 'outline' | 'ghost';
+  size?: 'sm' | 'default' | 'lg';
   showLabel?: boolean;
-  align?: "start" | "center" | "end";
+  align?: 'start' | 'center' | 'end';
+  className?: string;
 }
 
 export function ThemeToggle({
-  variant = "ghost",
-  size = "default",
+  variant = 'ghost',
+  size = 'default',
   showLabel = false,
-  align = "end",
+  align = 'end',
+  className,
 }: ThemeToggleProps) {
   const { theme, setTheme, resolvedTheme } = useTheme();
 
   // Animation variants for icons
   const iconVariants = {
-    sun: "transition-all duration-500 ease-in-out",
-    moon: "transition-all duration-500 ease-in-out",
-    system: "transition-all duration-300 ease-in-out",
+    sun: 'transition-all duration-500 ease-in-out',
+    moon: 'transition-all duration-500 ease-in-out',
+    system: 'transition-all duration-300 ease-in-out',
   };
 
   const getCurrentIcon = () => {
-    if (theme === "system") {
+    if (theme === 'system') {
       return (
-        <IconDeviceDesktop
+        <Desktop
           className={`h-4 w-4 ${iconVariants.system} rotate-0 scale-100`}
           aria-hidden="true"
         />
       );
     }
 
-    if (resolvedTheme === "dark") {
+    if (resolvedTheme === 'dark') {
       return (
-        <IconMoon
-          className={`h-4 w-4 ${iconVariants.moon} rotate-0 scale-100`}
-          aria-hidden="true"
-        />
+        <Moon className={`h-4 w-4 ${iconVariants.moon} rotate-0 scale-100`} aria-hidden="true" />
       );
     }
 
-    return (
-      <IconSun
-        className={`h-4 w-4 ${iconVariants.sun} rotate-0 scale-100`}
-        aria-hidden="true"
-      />
-    );
+    return <Sun className={`h-4 w-4 ${iconVariants.sun} rotate-0 scale-100`} aria-hidden="true" />;
   };
 
   const themeOptions = [
     {
-      value: "light",
-      label: "Light",
-      icon: IconSun,
-      description: "Use light theme",
+      value: 'light',
+      label: 'Light',
+      icon: Sun,
+      description: 'Use light theme',
     },
     {
-      value: "dark",
-      label: "Dark",
-      icon: IconMoon,
-      description: "Use dark theme",
+      value: 'dark',
+      label: 'Dark',
+      icon: Moon,
+      description: 'Use dark theme',
     },
     {
-      value: "system",
-      label: "System",
-      icon: IconDeviceDesktop,
-      description: "Use system theme",
+      value: 'system',
+      label: 'System',
+      icon: Desktop,
+      description: 'Use system theme',
     },
   ] as const;
 
@@ -95,25 +85,21 @@ export function ThemeToggle({
           <Button
             variant={variant}
             size={size}
-            className={`
-              relative overflow-hidden transition-all duration-200 ease-in-out
-              hover:scale-105 active:scale-95
-              focus:ring-2 focus:ring-ring focus:ring-offset-2
-              ${showLabel ? "gap-2" : "aspect-square"}
-            `}
+            className={cn(
+              'relative overflow-hidden transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 focus:ring-2 focus:ring-ring focus:ring-offset-2',
+              showLabel ? 'gap-2' : 'aspect-square',
+              className
+            )}
             aria-label="Toggle theme"
           >
-            <div className="relative flex items-center justify-center">
-              {getCurrentIcon()}
-            </div>
+            <div className="relative flex items-center justify-center">{getCurrentIcon()}</div>
             {showLabel && (
               <span className="text-sm font-medium">
                 {themeOptions.find((option) => option.value === theme)?.label}
               </span>
             )}
             <span className="sr-only">
-              Current theme:{" "}
-              {theme === "system" ? `System (${resolvedTheme})` : theme}
+              Current theme: {theme === 'system' ? `System (${resolvedTheme})` : theme}
             </span>
           </Button>
         }
@@ -137,14 +123,14 @@ export function ThemeToggle({
                   transition-all duration-200 ease-in-out
                   hover:bg-accent/80 focus:bg-accent/80
                   rounded-md group
-                  ${isSelected ? "bg-accent/60 text-accent-foreground" : ""}
+                  ${isSelected ? 'bg-accent/60 text-accent-foreground' : ''}
                 `}
               >
                 <div className="flex items-center justify-center w-5 h-5">
                   <Icon
                     className={`
                       h-4 w-4 transition-all duration-200
-                      ${isSelected ? "text-accent-foreground scale-110" : "text-muted-foreground"}
+                      ${isSelected ? 'text-accent-foreground scale-110' : 'text-muted-foreground'}
                       group-hover:scale-105
                     `}
                   />
@@ -154,7 +140,7 @@ export function ThemeToggle({
                   <span
                     className={`
                     text-sm font-medium leading-none
-                    ${isSelected ? "text-accent-foreground" : "text-foreground"}
+                    ${isSelected ? 'text-accent-foreground' : 'text-foreground'}
                   `}
                   >
                     {option.label}
@@ -165,7 +151,7 @@ export function ThemeToggle({
                 </div>
 
                 {isSelected && (
-                  <IconCheck className="h-4 w-4 text-accent-foreground animate-in fade-in-0 zoom-in-75 duration-150" />
+                  <Check className="h-4 w-4 text-accent-foreground animate-in fade-in-0 zoom-in-75 duration-150" />
                 )}
               </DropdownMenuItem>
             );
@@ -178,7 +164,7 @@ export function ThemeToggle({
               <div
                 className={`
                 w-2 h-2 rounded-full transition-colors duration-200
-                ${resolvedTheme === "dark" ? "bg-blue-500" : "bg-amber-500"}
+                ${resolvedTheme === 'dark' ? 'bg-blue-500' : 'bg-amber-500'}
               `}
               />
               Currently using {resolvedTheme} theme
@@ -195,12 +181,12 @@ export function ThemeToggleSimple() {
   const { theme, setTheme, resolvedTheme } = useTheme();
 
   const handleToggle = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else if (theme === "dark") {
-      setTheme("system");
+    if (theme === 'light') {
+      setTheme('dark');
+    } else if (theme === 'dark') {
+      setTheme('system');
     } else {
-      setTheme("light");
+      setTheme('light');
     }
   };
 
@@ -215,22 +201,21 @@ export function ThemeToggleSimple() {
         hover:scale-105 active:scale-95
         focus:ring-2 focus:ring-ring focus:ring-offset-2
       `}
-      aria-label={`Switch to ${theme === "light" ? "dark" : theme === "dark" ? "system" : "light"} theme`}
+      aria-label={`Switch to ${theme === 'light' ? 'dark' : theme === 'dark' ? 'system' : 'light'} theme`}
     >
       <div className="relative flex items-center justify-center">
-        {theme === "system" && (
-          <IconDeviceDesktop className="h-4 w-4 transition-all duration-300 ease-in-out rotate-0 scale-100" />
+        {theme === 'system' && (
+          <Desktop className="h-4 w-4 transition-all duration-300 ease-in-out rotate-0 scale-100" />
         )}
-        {resolvedTheme === "dark" && theme !== "system" && (
-          <IconMoon className="h-4 w-4 transition-all duration-500 ease-in-out rotate-0 scale-100" />
+        {resolvedTheme === 'dark' && theme !== 'system' && (
+          <Moon className="h-4 w-4 transition-all duration-500 ease-in-out rotate-0 scale-100" />
         )}
-        {resolvedTheme === "light" && theme !== "system" && (
-          <IconSun className="h-4 w-4 transition-all duration-500 ease-in-out rotate-0 scale-100" />
+        {resolvedTheme === 'light' && theme !== 'system' && (
+          <Sun className="h-4 w-4 transition-all duration-500 ease-in-out rotate-0 scale-100" />
         )}
       </div>
       <span className="sr-only">
-        Current theme:{" "}
-        {theme === "system" ? `System (${resolvedTheme})` : theme}
+        Current theme: {theme === 'system' ? `System (${resolvedTheme})` : theme}
       </span>
     </Button>
   );

@@ -1,31 +1,27 @@
-import {
-  IconBrandGithub,
-  IconBrandX,
-  IconExternalLink,
-} from "@tabler/icons-react";
+import { IconBrandGithub, IconBrandX, IconExternalLink } from '@tabler/icons-react';
 
 const navigation = {
   main: [
-    { name: "TanStack Start", href: "https://tanstack.com/start" },
-    { name: "TanStack Router", href: "https://tanstack.com/router" },
-    { name: "TanStack Query", href: "https://tanstack.com/query" },
-    { name: "React", href: "https://react.dev" },
+    { name: 'TanStack Start', href: 'https://tanstack.com/start' },
+    { name: 'TanStack Router', href: 'https://tanstack.com/router' },
+    { name: 'TanStack Query', href: 'https://tanstack.com/query' },
+    { name: 'React', href: 'https://react.dev' },
   ],
   tools: [
-    { name: "Vite", href: "https://vitejs.dev" },
-    { name: "Shadcn/UI", href: "https://ui.shadcn.com" },
-    { name: "Bun Workspaces", href: "https://bun.sh/docs/install/workspaces" },
-    { name: "Drizzle ORM", href: "https://orm.drizzle.team" },
+    { name: 'Vite', href: 'https://vitejs.dev' },
+    { name: 'Shadcn/UI', href: 'https://ui.shadcn.com' },
+    { name: 'pnpm Workspaces', href: 'https://pnpm.io/workspaces' },
+    { name: 'Drizzle ORM', href: 'https://orm.drizzle.team' },
   ],
   social: [
     {
-      name: "GitHub",
-      href: "https://github.com/backpine/saas-kit",
+      name: 'GitHub',
+      href: 'https://github.com/backpine/saas-kit',
       icon: IconBrandGithub,
     },
     {
-      name: "X",
-      href: "https://x.com/backpinelabs",
+      name: 'X',
+      href: 'https://x.com/backpinelabs',
       icon: IconBrandX,
     },
   ],
@@ -37,9 +33,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-12 md:flex md:items-center md:justify-between lg:px-8">
         <div className="flex flex-col md:flex-row md:items-center md:space-x-8 space-y-6 md:space-y-0">
           <div>
-            <h3 className="text-sm font-semibold text-foreground">
-              TanStack Ecosystem
-            </h3>
+            <h3 className="text-sm font-semibold text-foreground">TanStack Ecosystem</h3>
             <ul role="list" className="mt-2 space-y-1">
               {navigation.main.map((item) => (
                 <li key={item.name}>
@@ -58,9 +52,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold text-foreground">
-              Development Tools
-            </h3>
+            <h3 className="text-sm font-semibold text-foreground">Development Tools</h3>
             <ul role="list" className="mt-2 space-y-1">
               {navigation.tools.map((item) => (
                 <li key={item.name}>
@@ -99,9 +91,7 @@ export function Footer() {
           </div>
 
           <div className="text-center md:text-right">
-            <p className="text-xs text-muted-foreground">
-              Built with TanStack Start
-            </p>
+            <p className="text-xs text-muted-foreground">Built with TanStack Start</p>
             <p className="text-xs text-muted-foreground mt-1">
               &copy; {new Date().getFullYear()} Backpine SaaS Kit. MIT Licensed.
             </p>

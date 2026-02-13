@@ -6,14 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Development
 
-- `bun run dev` - Start development server on port 3000
-- `bun run build` - Build for production
-- `bun run serve` - Preview production build
-- `bun run test` - Run tests with Vitest
+- `pnpm run dev` - Start development server on port 3000
+- `pnpm run build` - Build for production
+- `pnpm run serve` - Preview production build
+- `pnpm run test` - Run tests with Vitest
 
 ### Shadcn Components
 
-- `bunx shadcn@latest add <component>` - Add new Shadcn components (use latest version)
+- `pnpm dlx shadcn@latest add <component>` - Add new Shadcn components (use latest version)
 
 ## Architecture
 
@@ -52,7 +52,7 @@ This is a TanStack Start application - a type-safe, client-first, full-stack Rea
 ### Development Notes
 
 - Demo files (prefixed with `demo`) can be safely deleted
-- The project uses Bun as the package manager
+- The project uses pnpm as the package manager
 - Devtools are included for both Router and Query in development
 - Routes support loaders, error boundaries, and not-found components
 - File-based routing automatically generates type-safe route definitions

@@ -75,21 +75,21 @@ CLOUDFLARE_D1_TOKEN="<Create in Cloudflare Dashboard>"
 
 Drizzle Kit helps you manage your database schema and generate TypeScript types automatically. In the `data-ops` package within your monorepo, you'll configure Drizzle Kit to connect to your database and pull existing schemas into your project.
 
-After configuring Drizzle Kit, you can run `bun run drizzle:pull` to pull in existing database schemas from your database to the project. The generated schemas will be available in `src/drizzle/schema.ts`, which you can then use to create type-safe queries throughout your application.
+After configuring Drizzle Kit, you can run `pnpm run drizzle:pull` to pull in existing database schemas from your database to the project. The generated schemas will be available in `src/drizzle/schema.ts`, which you can then use to create type-safe queries throughout your application.
 
 ### PostgreSQL Drizzle Configuration
 
 ```typescript
 // packages/data-ops/drizzle.config.ts
-import type { Config } from "drizzle-kit";
+import type { Config } from 'drizzle-kit';
 const config: Config = {
-  out: "./src/drizzle",
-  schema: ["./src/drizzle/auth-schema.ts"],
-  dialect: "postgresql",
+  out: './src/drizzle',
+  schema: ['./src/drizzle/auth-schema.ts'],
+  dialect: 'postgresql',
   dbCredentials: {
     url: `postgresql://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}`,
   },
-  tablesFilter: ["!_cf_KV", "!auth_*"],
+  tablesFilter: ['!_cf_KV', '!auth_*'],
 };
 
 export default config satisfies Config;
@@ -99,15 +99,15 @@ export default config satisfies Config;
 
 ```typescript
 // packages/data-ops/drizzle.config.ts
-import type { Config } from "drizzle-kit";
+import type { Config } from 'drizzle-kit';
 const config: Config = {
-  out: "./src/drizzle",
-  schema: ["./src/drizzle/auth-schema.ts"],
-  dialect: "mysql",
+  out: './src/drizzle',
+  schema: ['./src/drizzle/auth-schema.ts'],
+  dialect: 'mysql',
   dbCredentials: {
     url: `mysql://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}`,
   },
-  tablesFilter: ["!_cf_KV", "!auth_*"],
+  tablesFilter: ['!_cf_KV', '!auth_*'],
 };
 
 export default config satisfies Config;
@@ -117,18 +117,18 @@ export default config satisfies Config;
 
 ```typescript
 // packages/data-ops/drizzle.config.ts
-import type { Config } from "drizzle-kit";
+import type { Config } from 'drizzle-kit';
 const config: Config = {
-  out: "./src/drizzle",
-  schema: ["./src/drizzle/auth-schema.ts"],
-  dialect: "sqlite",
-  driver: "d1-http",
+  out: './src/drizzle',
+  schema: ['./src/drizzle/auth-schema.ts'],
+  dialect: 'sqlite',
+  driver: 'd1-http',
   dbCredentials: {
     accountId: process.env.CLOUDFLARE_ACCOUNT_ID!,
     databaseId: process.env.CLOUDFLARE_DATABASE_ID!,
     token: process.env.CLOUDFLARE_D1_TOKEN!,
   },
-  tablesFilter: ["!_cf_KV", "!auth_*"],
+  tablesFilter: ['!_cf_KV', '!auth_*'],
 };
 
 export default config satisfies Config;
@@ -150,15 +150,11 @@ In TanStack Start applications, database initialization occurs in the `src/serve
 
 ```typescript
 // packages/data-ops/database/setup.ts
-import { drizzle } from "drizzle-orm/neon-http";
+import { drizzle } from 'drizzle-orm/neon-http';
 
 let db: ReturnType<typeof drizzle>;
 
-export function initDatabase(connection: {
-  host: string;
-  username: string;
-  password: string;
-}) {
+export function initDatabase(connection: { host: string; username: string; password: string }) {
   if (db) {
     return db;
   }
@@ -169,7 +165,7 @@ export function initDatabase(connection: {
 
 export function getDb() {
   if (!db) {
-    throw new Error("Database not initialized");
+    throw new Error('Database not initialized');
   }
   return db;
 }
@@ -179,9 +175,9 @@ export function getDb() {
 
 ```typescript
 // src/server.ts - TanStack Start Server Entry
-import { initDatabase } from "@repo/data-ops/database/setup";
-import handler from "@tanstack/react-start/server-entry";
-import { env } from "cloudflare:workers";
+import { initDatabase } from '@repo/data-ops/database/setup';
+import handler from '@tanstack/react-start/server-entry';
+import { env } from 'cloudflare:workers';
 
 export default {
   fetch(request: Request) {
@@ -207,15 +203,11 @@ export default {
 
 ```typescript
 // packages/data-ops/database/setup.ts
-import { drizzle } from "drizzle-orm/planetscale-serverless";
+import { drizzle } from 'drizzle-orm/planetscale-serverless';
 
 let db: ReturnType<typeof drizzle>;
 
-export function initDatabase(connection: {
-  host: string;
-  username: string;
-  password: string;
-}) {
+export function initDatabase(connection: { host: string; username: string; password: string }) {
   if (db) {
     return db;
   }
@@ -225,7 +217,7 @@ export function initDatabase(connection: {
 
 export function getDb() {
   if (!db) {
-    throw new Error("Database not initialized");
+    throw new Error('Database not initialized');
   }
   return db;
 }
@@ -235,9 +227,9 @@ export function getDb() {
 
 ```typescript
 // src/server.ts - TanStack Start Server Entry
-import { initDatabase } from "@repo/data-ops/database/setup";
-import handler from "@tanstack/react-start/server-entry";
-import { env } from "cloudflare:workers";
+import { initDatabase } from '@repo/data-ops/database/setup';
+import handler from '@tanstack/react-start/server-entry';
+import { env } from 'cloudflare:workers';
 
 export default {
   fetch(request: Request) {
@@ -263,7 +255,7 @@ export default {
 
 ```typescript
 // packages/data-ops/database/setup.ts
-import { drizzle } from "drizzle-orm/d1";
+import { drizzle } from 'drizzle-orm/d1';
 
 let db: ReturnType<typeof drizzle>;
 
@@ -277,7 +269,7 @@ export function initDatabase(d1Db: D1Database) {
 
 export function getDb() {
   if (!db) {
-    throw new Error("Database not initialized");
+    throw new Error('Database not initialized');
   }
   return db;
 }
@@ -287,9 +279,9 @@ export function getDb() {
 
 ```typescript
 // src/server.ts - TanStack Start Server Entry
-import { initDatabase } from "@repo/data-ops/database/setup";
-import handler from "@tanstack/react-start/server-entry";
-import { env } from "cloudflare:workers";
+import { initDatabase } from '@repo/data-ops/database/setup';
+import handler from '@tanstack/react-start/server-entry';
+import { env } from 'cloudflare:workers';
 
 export default {
   fetch(request: Request) {
@@ -329,9 +321,9 @@ All queries use the `getDb()` function to access the database instance, ensuring
 
 ```typescript
 // packages/data-ops/src/queries/polar.ts
-import { getDb } from "@/database/setup";
-import { subscriptions } from "@/drizzle/schema";
-import { eq } from "drizzle-orm";
+import { getDb } from '@/database/setup';
+import { subscriptions } from '@/drizzle/schema';
+import { eq } from 'drizzle-orm';
 
 export async function updateSubscription(data: {
   userId: string;
@@ -404,7 +396,7 @@ The data-ops package is already configured to export all queries under the `./qu
 }
 ```
 
-> **Important:** After creating or modifying queries, run `bun run build` in the data-ops package to compile the TypeScript and make the queries available to other applications.
+> **Important:** After creating or modifying queries, run `pnpm run build` in the data-ops package to compile the TypeScript and make the queries available to other applications.
 
 ## Step 3: Install the Data-Ops Package
 
@@ -432,16 +424,11 @@ Import your queries directly into server functions for handling API requests and
 
 ```typescript
 // apps/user-application/src/server/functions/payments.ts
-import { createServerFn } from "@tanstack/react-start";
-import {
-  updateSubscription,
-  getSubscription,
-} from "@repo/data-ops/queries/polar";
-import { protectedFunctionMiddleware } from "@/server/middleware/auth";
+import { createServerFn } from '@tanstack/react-start';
+import { updateSubscription, getSubscription } from '@repo/data-ops/queries/polar';
+import { protectedFunctionMiddleware } from '@/server/middleware/auth';
 
-export const baseFunction = createServerFn().middleware([
-  protectedFunctionMiddleware,
-]);
+export const baseFunction = createServerFn().middleware([protectedFunctionMiddleware]);
 
 export const collectSubscription = baseFunction.handler(async (ctx) => {
   const subscription = await ctx.context.polar.subscriptions.list({
@@ -485,17 +472,17 @@ Queries can also be used in middleware for authentication, authorization, and re
 
 ```typescript
 // apps/user-application/src/server/middleware/user.ts
-import { createMiddleware } from "@tanstack/react-start";
-import { getUserByEmail } from "@repo/data-ops/queries/users";
+import { createMiddleware } from '@tanstack/react-start';
+import { getUserByEmail } from '@repo/data-ops/queries/users';
 
 export const userLookupMiddleware = createMiddleware({
-  type: "function",
+  type: 'function',
 }).server(async ({ next, context }) => {
   // Use imported query function in middleware
   const user = await getUserByEmail(context.email);
 
   if (!user) {
-    throw new Error("User not found");
+    throw new Error('User not found');
   }
 
   return next({
@@ -513,16 +500,16 @@ Import and use queries in API routes for handling webhooks, REST endpoints, and 
 
 ```typescript
 // apps/user-application/src/routes/api/webhook/polar.ts
-import { Subscription } from "@polar-sh/sdk/models/components/subscription.js";
-import { Webhooks } from "@polar-sh/tanstack-start";
-import { updateSubscription } from "@repo/data-ops/queries/polar";
-import { createServerFileRoute } from "@tanstack/react-start/server";
-import { env } from "cloudflare:workers";
+import { Subscription } from '@polar-sh/sdk/models/components/subscription.js';
+import { Webhooks } from '@polar-sh/tanstack-start';
+import { updateSubscription } from '@repo/data-ops/queries/polar';
+import { createServerFileRoute } from '@tanstack/react-start/server';
+import { env } from 'cloudflare:workers';
 
 async function handleSubscription(payload: { data: Subscription }) {
   const { data } = payload;
   if (!data.customer.externalId) {
-    console.error("Missing customer external ID");
+    console.error('Missing customer external ID');
     return;
   }
 
@@ -539,7 +526,7 @@ async function handleSubscription(payload: { data: Subscription }) {
   });
 }
 
-export const ServerRoute = createServerFileRoute("/api/webhook/polar").methods({
+export const ServerRoute = createServerFileRoute('/api/webhook/polar').methods({
   POST: Webhooks({
     webhookSecret: env.POLAR_WEBHOOK_SECRET,
     onSubscriptionActive: handleSubscription,
