@@ -1,8 +1,9 @@
-import { createServerFn } from "@tanstack/react-start";
-import { protectedFunctionMiddleware } from "@/core/middleware/auth";
-import { polarMiddleware } from "@/core/middleware/polar";
-import z from "zod";
-import { getRequestIP } from "@tanstack/react-start/server";
+import { createServerFn } from '@tanstack/react-start';
+import { getRequestIP } from '@tanstack/react-start/server';
+import z from 'zod';
+
+import { protectedFunctionMiddleware } from '@/core/middleware/auth';
+import { polarMiddleware } from '@/core/middleware/polar';
 
 export const baseFunction = createServerFn().middleware([
   protectedFunctionMiddleware,
@@ -39,9 +40,9 @@ export const createPaymentLink = baseFunction
 
 export const validPayment = baseFunction
   .inputValidator((data: string) => {
-    console.log("validatePayment", data);
-    if (typeof data !== "string") {
-      throw new Error("Invalid data type");
+    console.log('validatePayment', data);
+    if (typeof data !== 'string') {
+      throw new Error('Invalid data type');
     }
     return data;
   })
@@ -50,7 +51,7 @@ export const validPayment = baseFunction
       id: ctx.data,
     });
     console.log(payment);
-    if (payment.status === "succeeded") {
+    if (payment.status === 'succeeded') {
       return true;
     }
     return false;

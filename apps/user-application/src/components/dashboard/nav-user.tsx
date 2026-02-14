@@ -1,19 +1,8 @@
-"use client";
+'use client';
 
-import {
-  IconCreditCard,
-  IconDotsVertical,
-  IconLogout,
-  IconNotification,
-  IconUserCircle,
-} from "@tabler/icons-react";
-import { useNavigate } from "@tanstack/react-router";
-import { authClient } from "@/lib/auth-client";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@workspace/ui/components/avatar";
+import { Bell, CreditCard, DotsThreeVertical, SignOut, UserCircle } from '@phosphor-icons/react';
+import { useNavigate } from '@tanstack/react-router';
+import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,33 +11,35 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@workspace/ui/components/dropdown-menu";
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@workspace/ui/components/sidebar";
+} from '@workspace/ui/components/dropdown-menu';
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@workspace/ui/components/sidebar';
+
+import { authClient } from '@/lib/auth-client';
 
 export function NavUser() {
   const navigate = useNavigate();
   const { data: session } = authClient.useSession();
 
+  if (!session) {
+    return null;
+  }
+
   const user = {
-    name: session?.user?.name ?? "User",
-    email: session?.user?.email ?? "user@example.com",
-    avatar: session?.user?.image ?? "",
+    name: session.user.name,
+    email: session.user.email,
+    avatar: session.user.image ?? '',
   };
 
   const initials = user.name
-    .split(" ")
+    .split(' ')
     .map((n) => n[0])
-    .join("")
+    .join('')
     .toUpperCase()
     .slice(0, 2);
 
   const handleSignOut = async () => {
     await authClient.signOut();
-    navigate({ to: "/" });
+    navigate({ to: '/' });
   };
 
   return (
@@ -68,11 +59,9 @@ export function NavUser() {
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
-                  <span className="text-muted-foreground truncate text-xs">
-                    {user.email}
-                  </span>
+                  <span className="text-muted-foreground truncate text-xs">{user.email}</span>
                 </div>
-                <IconDotsVertical className="ml-auto size-4" />
+                <DotsThreeVertical className="ml-auto size-4" />
               </SidebarMenuButton>
             )}
           />
@@ -91,33 +80,29 @@ export function NavUser() {
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{user.name}</span>
-                    <span className="text-muted-foreground truncate text-xs">
-                      {user.email}
-                    </span>
+                    <span className="text-muted-foreground truncate text-xs">{user.email}</span>
                   </div>
                 </div>
               </DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => navigate({ to: "/app" })}>
-                <IconUserCircle />
+              <DropdownMenuItem onClick={() => navigate({ to: '/app' })}>
+                <UserCircle />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => navigate({ to: "/app/polar/subscriptions" })}
-              >
-                <IconCreditCard />
+              <DropdownMenuItem onClick={() => navigate({ to: '/app/polar/subscriptions' })}>
+                <CreditCard />
                 Billing
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <IconNotification />
+                <Bell />
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleSignOut}>
-              <IconLogout />
+              <SignOut />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

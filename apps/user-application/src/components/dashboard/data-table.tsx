@@ -1,26 +1,35 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { useState } from "react";
 import {
-  closestCenter,
   DndContext,
   KeyboardSensor,
   MouseSensor,
   TouchSensor,
+  closestCenter,
   useSensor,
   useSensors,
-  type DragEndEvent,
-  type UniqueIdentifier,
-} from "@dnd-kit/core";
-import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
+} from '@dnd-kit/core';
+import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import {
-  arrayMove,
   SortableContext,
+  arrayMove,
   useSortable,
   verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+} from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
+import {
+  CaretDoubleLeft,
+  CaretDoubleRight,
+  CaretDown,
+  CaretLeft,
+  CaretRight,
+  CheckCircle,
+  DotsSixVertical,
+  DotsThreeVertical,
+  Plus,
+  Spinner,
+} from '@phosphor-icons/react';
+import { rankItem } from '@tanstack/match-sorter-utils';
 import {
   flexRender,
   getCoreRowModel,
@@ -30,29 +39,10 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  type ColumnDef,
-  type ColumnFiltersState,
-  type Row,
-  type SortingState,
-  type VisibilityState,
-} from "@tanstack/react-table";
-import {
-  IconChevronDown,
-  IconChevronLeft,
-  IconChevronRight,
-  IconChevronsLeft,
-  IconChevronsRight,
-  IconCircleCheckFilled,
-  IconDotsVertical,
-  IconGripVertical,
-  IconLoader,
-  IconPlus,
-} from "@tabler/icons-react";
-import { z } from "zod";
-
-import { Badge } from "@workspace/ui/components/badge";
-import { Button } from "@workspace/ui/components/button";
-import { Checkbox } from "@workspace/ui/components/checkbox";
+} from '@tanstack/react-table';
+import { Badge } from '@workspace/ui/components/badge';
+import { Button } from '@workspace/ui/components/button';
+import { Checkbox } from '@workspace/ui/components/checkbox';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -60,16 +50,16 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@workspace/ui/components/dropdown-menu";
-import { Input } from "@workspace/ui/components/input";
-import { Label } from "@workspace/ui/components/label";
+} from '@workspace/ui/components/dropdown-menu';
+import { Input } from '@workspace/ui/components/input';
+import { Label } from '@workspace/ui/components/label';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@workspace/ui/components/select";
+} from '@workspace/ui/components/select';
 import {
   Table,
   TableBody,
@@ -77,13 +67,45 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@workspace/ui/components/table";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@workspace/ui/components/tabs";
+} from '@workspace/ui/components/table';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@workspace/ui/components/tabs';
+import * as React from 'react';
+import { useState } from 'react';
+import { z } from 'zod';
+
+import type { DragEndEvent, UniqueIdentifier } from '@dnd-kit/core';
+import type { RankingInfo } from '@tanstack/match-sorter-utils';
+import type {
+  ColumnDef,
+  ColumnFiltersState,
+  FilterFn,
+  Row,
+  SortingState,
+  VisibilityState,
+} from '@tanstack/react-table';
+
+declare module '@tanstack/react-table' {
+  interface FilterFns {
+    fuzzy: FilterFn<unknown>;
+  }
+  interface FilterMeta {
+    itemRank: RankingInfo;
+  }
+}
+
+// Define a custom fuzzy filter function that will apply ranking info to rows (using match-sorter utils)
+const fuzzyFilter: FilterFn<unknown> = (row, columnId, value, addMeta) => {
+  // Rank the item
+  const itemRank = rankItem(row.getValue(columnId), value);
+
+  // Store the itemRank info
+  addMeta({
+    itemRank,
+  });
+
+  // Return if the item should be filtered in/out
+  return itemRank.passed;
+};
 
 export const schema = z.object({
   id: z.number(),
@@ -108,20 +130,20 @@ function DragHandle({ id }: { id: number }) {
       size="icon"
       className="text-muted-foreground size-7 hover:bg-transparent"
     >
-      <IconGripVertical className="text-muted-foreground size-3" />
+      <DotsSixVertical className="text-muted-foreground size-3" />
       <span className="sr-only">Drag to reorder</span>
     </Button>
   );
 }
 
-const columns: ColumnDef<DataItem>[] = [
+const columns: Array<ColumnDef<DataItem>> = [
   {
-    id: "drag",
+    id: 'drag',
     header: () => null,
     cell: ({ row }) => <DragHandle id={row.original.id} />,
   },
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <div className="flex items-center justify-center">
         <Checkbox
@@ -144,8 +166,8 @@ const columns: ColumnDef<DataItem>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "header",
-    header: "Header",
+    accessorKey: 'header',
+    header: 'Header',
     cell: ({ row }) => (
       <Button variant="link" className="text-foreground w-fit px-0 text-left">
         {row.original.header}
@@ -154,8 +176,8 @@ const columns: ColumnDef<DataItem>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "type",
-    header: "Section Type",
+    accessorKey: 'type',
+    header: 'Section Type',
     cell: ({ row }) => (
       <div className="w-32">
         <Badge variant="outline" className="text-muted-foreground px-1.5">
@@ -165,21 +187,21 @@ const columns: ColumnDef<DataItem>[] = [
     ),
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: 'status',
+    header: 'Status',
     cell: ({ row }) => (
       <Badge variant="outline" className="text-muted-foreground px-1.5">
-        {row.original.status === "Done" ? (
-          <IconCircleCheckFilled className="fill-green-500 dark:fill-green-400" />
+        {row.original.status === 'Done' ? (
+          <CheckCircle weight="fill" className="fill-green-500 dark:fill-green-400" />
         ) : (
-          <IconLoader />
+          <Spinner />
         )}
         {row.original.status}
       </Badge>
     ),
   },
   {
-    accessorKey: "target",
+    accessorKey: 'target',
     header: () => <div className="w-full text-right">Target</div>,
     cell: ({ row }) => (
       <form
@@ -199,7 +221,7 @@ const columns: ColumnDef<DataItem>[] = [
     ),
   },
   {
-    accessorKey: "limit",
+    accessorKey: 'limit',
     header: () => <div className="w-full text-right">Limit</div>,
     cell: ({ row }) => (
       <form
@@ -219,10 +241,10 @@ const columns: ColumnDef<DataItem>[] = [
     ),
   },
   {
-    accessorKey: "reviewer",
-    header: "Reviewer",
+    accessorKey: 'reviewer',
+    header: 'Reviewer',
     cell: ({ row }) => {
-      const isAssigned = row.original.reviewer !== "Assign reviewer";
+      const isAssigned = row.original.reviewer !== 'Assign reviewer';
       if (isAssigned) {
         return row.original.reviewer;
       }
@@ -248,7 +270,7 @@ const columns: ColumnDef<DataItem>[] = [
     },
   },
   {
-    id: "actions",
+    id: 'actions',
     cell: () => (
       <DropdownMenu>
         <DropdownMenuTrigger
@@ -260,7 +282,7 @@ const columns: ColumnDef<DataItem>[] = [
             />
           }
         >
-          <IconDotsVertical />
+          <DotsThreeVertical />
           <span className="sr-only">Open menu</span>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
@@ -284,7 +306,7 @@ function DraggableRow({ row }: { row: Row<DataItem> }) {
 
   return (
     <TableRow
-      data-state={row.getIsSelected() && "selected"}
+      data-state={row.getIsSelected() && 'selected'}
       data-dragging={isDragging}
       ref={setNodeRef}
       className="relative z-0 data-[dragging=true]:z-10 data-[dragging=true]:opacity-80"
@@ -302,7 +324,7 @@ function DraggableRow({ row }: { row: Row<DataItem> }) {
   );
 }
 
-export function DataTable({ data: initialData }: { data: DataItem[] }) {
+export function DataTable({ data: initialData }: { data: Array<DataItem> }) {
   const [data, setData] = useState(() => initialData);
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -319,11 +341,9 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
     useSensor(KeyboardSensor, {})
   );
 
-  const dataIds = React.useMemo<UniqueIdentifier[]>(
-    () => data?.map(({ id }) => id) || [],
-    [data]
-  );
+  const dataIds = React.useMemo<Array<UniqueIdentifier>>(() => data.map(({ id }) => id), [data]);
 
+  // eslint-disable-next-line
   const table = useReactTable({
     data,
     columns,
@@ -347,33 +367,32 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
+    globalFilterFn: 'fuzzy',
   });
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
-    if (active && over && active.id !== over.id) {
-      setData((data) => {
+
+    if (over && active.id !== over.id) {
+      setData((prevData) => {
         const oldIndex = dataIds.indexOf(active.id);
         const newIndex = dataIds.indexOf(over.id);
-        return arrayMove(data, oldIndex, newIndex);
+        return arrayMove(prevData, oldIndex, newIndex);
       });
     }
   }
 
   return (
-    <Tabs
-      defaultValue="outline"
-      className="w-full flex-col justify-start gap-6"
-    >
+    <Tabs defaultValue="outline" className="w-full flex-col justify-start gap-6">
       <div className="flex items-center justify-between px-4 lg:px-6">
         <Label htmlFor="view-selector" className="sr-only">
           View
         </Label>
         <Select defaultValue="outline">
-          <SelectTrigger
-            className="flex w-fit @4xl/main:hidden"
-            id="view-selector"
-          >
+          <SelectTrigger className="flex w-fit @4xl/main:hidden" id="view-selector">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -400,27 +419,21 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
                 <Button variant="outline" size="sm">
                   <span className="hidden lg:inline">Customize Columns</span>
                   <span className="lg:hidden">Columns</span>
-                  <IconChevronDown />
+                  <CaretDown />
                 </Button>
               }
             ></DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               {table
                 .getAllColumns()
-                .filter(
-                  (column) =>
-                    typeof column.accessorFn !== "undefined" &&
-                    column.getCanHide()
-                )
+                .filter((column) => typeof column.accessorFn !== 'undefined' && column.getCanHide())
                 .map((column) => {
                   return (
                     <DropdownMenuCheckboxItem
                       key={column.id}
                       className="capitalize"
                       checked={column.getIsVisible()}
-                      onCheckedChange={(value) =>
-                        column.toggleVisibility(!!value)
-                      }
+                      onCheckedChange={(value) => column.toggleVisibility(!!value)}
                     >
                       {column.id}
                     </DropdownMenuCheckboxItem>
@@ -429,7 +442,7 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
             </DropdownMenuContent>
           </DropdownMenu>
           <Button variant="outline" size="sm">
-            <IconPlus />
+            <Plus />
             <span className="hidden lg:inline">Add Section</span>
           </Button>
         </div>
@@ -455,10 +468,7 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
                         <TableHead key={header.id} colSpan={header.colSpan}>
                           {header.isPlaceholder
                             ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
+                            : flexRender(header.column.columnDef.header, header.getContext())}
                         </TableHead>
                       );
                     })}
@@ -466,21 +476,15 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
                 ))}
               </TableHeader>
               <TableBody className="**:data-[slot=table-cell]:first:w-8">
-                {table.getRowModel().rows?.length ? (
-                  <SortableContext
-                    items={dataIds}
-                    strategy={verticalListSortingStrategy}
-                  >
+                {table.getRowModel().rows.length ? (
+                  <SortableContext items={dataIds} strategy={verticalListSortingStrategy}>
                     {table.getRowModel().rows.map((row) => (
                       <DraggableRow key={row.id} row={row} />
                     ))}
                   </SortableContext>
                 ) : (
                   <TableRow>
-                    <TableCell
-                      colSpan={columns.length}
-                      className="h-24 text-center"
-                    >
+                    <TableCell colSpan={columns.length} className="h-24 text-center">
                       No results.
                     </TableCell>
                   </TableRow>
@@ -491,7 +495,7 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
         </div>
         <div className="flex items-center justify-between px-4">
           <div className="text-muted-foreground hidden flex-1 text-sm lg:flex">
-            {table.getFilteredSelectedRowModel().rows.length} of{" "}
+            {table.getFilteredSelectedRowModel().rows.length} of{' '}
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
           <div className="flex w-full items-center gap-8 lg:w-fit">
@@ -518,8 +522,7 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
               </Select>
             </div>
             <div className="flex w-fit items-center justify-center text-sm font-medium">
-              Page {table.getState().pagination.pageIndex + 1} of{" "}
-              {table.getPageCount()}
+              Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
             </div>
             <div className="ml-auto flex items-center gap-2 lg:ml-0">
               <Button
@@ -529,7 +532,7 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
                 disabled={!table.getCanPreviousPage()}
               >
                 <span className="sr-only">Go to first page</span>
-                <IconChevronsLeft />
+                <CaretDoubleLeft />
               </Button>
               <Button
                 variant="outline"
@@ -539,7 +542,7 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
                 disabled={!table.getCanPreviousPage()}
               >
                 <span className="sr-only">Go to previous page</span>
-                <IconChevronLeft />
+                <CaretLeft />
               </Button>
               <Button
                 variant="outline"
@@ -549,7 +552,7 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
                 disabled={!table.getCanNextPage()}
               >
                 <span className="sr-only">Go to next page</span>
-                <IconChevronRight />
+                <CaretRight />
               </Button>
               <Button
                 variant="outline"
@@ -559,25 +562,19 @@ export function DataTable({ data: initialData }: { data: DataItem[] }) {
                 disabled={!table.getCanNextPage()}
               >
                 <span className="sr-only">Go to last page</span>
-                <IconChevronsRight />
+                <CaretDoubleRight />
               </Button>
             </div>
           </div>
         </div>
       </TabsContent>
-      <TabsContent
-        value="past-performance"
-        className="flex flex-col px-4 lg:px-6"
-      >
+      <TabsContent value="past-performance" className="flex flex-col px-4 lg:px-6">
         <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
       </TabsContent>
       <TabsContent value="key-personnel" className="flex flex-col px-4 lg:px-6">
         <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
       </TabsContent>
-      <TabsContent
-        value="focus-documents"
-        className="flex flex-col px-4 lg:px-6"
-      >
+      <TabsContent value="focus-documents" className="flex flex-col px-4 lg:px-6">
         <div className="aspect-video w-full flex-1 rounded-lg border border-dashed"></div>
       </TabsContent>
     </Tabs>

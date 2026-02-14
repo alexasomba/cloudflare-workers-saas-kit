@@ -5,7 +5,7 @@ description: Use this when managing apps/packages in this monorepo with Bun inst
 
 # Bun workspace/package management (day-to-day)
 
-This skill is for routine monorepo work *after* the repo uses Bun.
+This skill is for routine monorepo work _after_ the repo uses Bun.
 For pnpm → Bun migration steps, use the `bun-monorepo-workflows` skill.
 
 ## bun/bunx troubleshooting (PATH)

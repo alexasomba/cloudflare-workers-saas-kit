@@ -1,18 +1,19 @@
-import { collectSubscription, validPayment } from "@/core/functions/payments";
-import { useQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
-import { z } from "zod";
-import { Button } from "@workspace/ui/components/button";
-import { IconCircleCheck, IconLoader2, IconAlertCircle } from "@tabler/icons-react";
+import { CheckCircle, Spinner, WarningCircle } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
+import { createFileRoute } from '@tanstack/react-router';
+import { Button } from '@workspace/ui/components/button';
+import { z } from 'zod';
+
+import { collectSubscription, validPayment } from '@/core/functions/payments';
 
 const searchSchema = z.object({
   checkout_id: z.string(),
 });
 
-export const Route = createFileRoute("/_auth/app/polar/checkout/success")({
+export const Route = createFileRoute('/_auth/app/polar/checkout/success')({
   component: RouteComponent,
   validateSearch: (search) => searchSchema.parse(search),
-  beforeLoad: async ({ search }) => {
+  beforeLoad: ({ search }) => {
     return search;
   },
   loader: async (input) => {
@@ -26,10 +27,10 @@ export const Route = createFileRoute("/_auth/app/polar/checkout/success")({
   },
   errorComponent: ({ error }) => {
     return (
-      <div className="h-ful flex flex-col items-center justify-center bg-background px-6 py-12">
+      <div className="h-full flex flex-col items-center justify-center bg-background px-6 py-12">
         <div className="max-w-lg w-full text-center space-y-8">
           <div className="flex justify-center">
-            <IconAlertCircle className="w-16 h-16 text-destructive" />
+            <WarningCircle className="w-16 h-16 text-destructive" />
           </div>
 
           <div className="space-y-4">
@@ -40,9 +41,7 @@ export const Route = createFileRoute("/_auth/app/polar/checkout/success")({
           </div>
 
           <div className="pt-8">
-            <p className="text-sm text-muted-foreground font-mono">
-              {error.message}
-            </p>
+            <p className="text-sm text-muted-foreground font-mono">{error.message}</p>
           </div>
         </div>
       </div>
@@ -66,43 +65,41 @@ function RouteComponent() {
   });
 
   const getStatus = () => {
-    if (error) return "error";
-    if (data) return "success";
-    if (isFetching || isLoading) return "processing";
-    return "processing";
+    if (error) return 'error';
+    if (data) return 'success';
+    if (isFetching || isLoading) return 'processing';
+    return 'processing';
   };
 
   const status = getStatus();
 
   const getStatusIcon = () => {
     switch (status) {
-      case "success":
-        return <IconCircleCheck className="w-16 h-16 text-primary" />;
-      case "error":
-        return <IconAlertCircle className="w-16 h-16 text-destructive" />;
+      case 'success':
+        return <CheckCircle className="w-16 h-16 text-primary" />;
+      case 'error':
+        return <WarningCircle className="w-16 h-16 text-destructive" />;
       default:
-        return <IconLoader2 className="w-12 h-12 text-primary animate-spin" />;
+        return <Spinner className="w-12 h-12 text-primary animate-spin" />;
     }
   };
 
   const getStatusMessage = () => {
     switch (status) {
-      case "success":
+      case 'success':
         return {
-          title: "Payment Successful!",
-          description: "Your subscription has been activated successfully.",
+          title: 'Payment Successful!',
+          description: 'Your subscription has been activated successfully.',
         };
-      case "error":
+      case 'error':
         return {
-          title: "Payment Processing Error",
-          description:
-            "There was an issue processing your payment. Please contact support.",
+          title: 'Payment Processing Error',
+          description: 'There was an issue processing your payment. Please contact support.',
         };
       default:
         return {
-          title: "Processing Your Payment",
-          description:
-            "We're verifying your payment details. This may take a few moments...",
+          title: 'Processing Your Payment',
+          description: "We're verifying your payment details. This may take a few moments...",
         };
     }
   };
@@ -122,17 +119,13 @@ function RouteComponent() {
         </div>
 
         <div className="space-y-6">
-          {status === "success" && (
-            <Button
-              onClick={() => nav({ to: "/app" })}
-              size="lg"
-              className="px-8 py-3"
-            >
+          {status === 'success' && (
+            <Button onClick={() => nav({ to: '/app' })} size="lg" className="px-8 py-3">
               Continue to Dashboard
             </Button>
           )}
 
-          {status === "error" && (
+          {status === 'error' && (
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
                 onClick={() => window.location.reload()}
@@ -143,7 +136,7 @@ function RouteComponent() {
                 Try Again
               </Button>
               <Button
-                onClick={() => nav({ to: "/app/polar/subscriptions" })}
+                onClick={() => nav({ to: '/app/polar/subscriptions' })}
                 size="lg"
                 className="px-6"
               >
@@ -155,10 +148,8 @@ function RouteComponent() {
 
         <div className="pt-8">
           <p className="text-sm text-muted-foreground">
-            Transaction ID:{" "}
-            <span className="font-mono text-foreground">
-              {loaderData.checkoutId.slice(-8)}
-            </span>
+            Transaction ID:{' '}
+            <span className="font-mono text-foreground">{loaderData.checkoutId.slice(-8)}</span>
           </p>
         </div>
       </div>

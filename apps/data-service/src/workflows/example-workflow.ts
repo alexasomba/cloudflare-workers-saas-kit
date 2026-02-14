@@ -1,8 +1,5 @@
-import {
-  WorkflowEntrypoint,
-  WorkflowEvent,
-  WorkflowStep,
-} from "cloudflare:workers";
+import type { WorkflowEvent, WorkflowStep } from "cloudflare:workers";
+import { WorkflowEntrypoint } from "cloudflare:workers";
 
 export class ExampleWorkflow extends WorkflowEntrypoint<
   Env,
@@ -13,16 +10,15 @@ export class ExampleWorkflow extends WorkflowEntrypoint<
     step: WorkflowStep,
   ) {
     const randomNumber = await step.do("Get random number", async () => {
-      return Math.floor(Math.random() * 10) + 1;
+      return Promise.resolve(Math.floor(Math.random() * 10) + 1);
     });
 
-    await step.sleep(
-      "Wait for random number of seconds",
-      `${randomNumber} seconds`,
-    );
+    await step.sleep("Wait for random number of seconds", randomNumber);
 
     await step.do("Log data in payload", async () => {
+      // eslint-disable-next-line no-console
       console.log(event.payload);
+      return Promise.resolve(null);
     });
   }
 }

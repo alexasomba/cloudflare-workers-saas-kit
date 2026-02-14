@@ -2,10 +2,18 @@
   "extends": "@workspace/typescript-config/vite-react-library.json",
   "compilerOptions": {
     "baseUrl": ".",
+    "skipLibCheck": true,
     "paths": {
-      "@workspace/ui/*": ["./src/*"]
+      "@workspace/ui/*": ["./src/*"],
+      "@workspace/components/*": ["./src/components/*"],
+      "@workspace/hooks/*": ["./src/hooks/*"]
     }
   },
   "include": ["."],
-  "exclude": ["node_modules", "dist"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/components/auth/**",
+    "src/components/shadcn-blocks-inspiration/**"
+  ]
 }

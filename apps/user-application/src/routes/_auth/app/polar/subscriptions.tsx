@@ -1,18 +1,19 @@
-import { getProducts, collectSubscription } from "@/core/functions/payments";
-import { createFileRoute } from "@tanstack/react-router";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { PricingGrid, useCheckout } from "@/components/payments/polar";
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute("/_auth/app/polar/subscriptions")({
+import { PricingGrid, useCheckout } from '@/components/payments/polar';
+import { collectSubscription, getProducts } from '@/core/functions/payments';
+
+export const Route = createFileRoute('/_auth/app/polar/subscriptions')({
   component: RouteComponent,
   loader: async ({ context }) => {
     await Promise.all([
       context.queryClient.prefetchQuery({
-        queryKey: ["products"],
+        queryKey: ['products'],
         queryFn: getProducts,
       }),
       context.queryClient.prefetchQuery({
-        queryKey: ["subscription"],
+        queryKey: ['subscription'],
         queryFn: collectSubscription,
       }),
     ]);
@@ -21,13 +22,13 @@ export const Route = createFileRoute("/_auth/app/polar/subscriptions")({
 
 function RouteComponent() {
   const { data: products } = useSuspenseQuery({
-    queryKey: ["products"],
+    queryKey: ['products'],
     queryFn: getProducts,
     refetchOnWindowFocus: true,
   });
 
   const { data: subscription } = useSuspenseQuery({
-    queryKey: ["subscription"],
+    queryKey: ['subscription'],
     queryFn: collectSubscription,
     refetchOnWindowFocus: true,
   });
@@ -38,9 +39,7 @@ function RouteComponent() {
     <div className="container mx-auto py-8">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold mb-4">Choose Your Plan</h1>
-        <p className="text-muted-foreground">
-          Select the perfect plan for your needs
-        </p>
+        <p className="text-muted-foreground">Select the perfect plan for your needs</p>
       </div>
 
       <PricingGrid

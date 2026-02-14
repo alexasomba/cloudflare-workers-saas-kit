@@ -1,7 +1,7 @@
-import * as React from "react";
-import { Link } from "@tanstack/react-router";
-import { IconMenu2, IconBrandGithub, IconExternalLink, IconLogin } from "@tabler/icons-react";
-import { Button } from "@workspace/ui/components/button";
+import { ArrowSquareOut, GithubLogo, List, SignIn } from '@phosphor-icons/react';
+import { Link } from '@tanstack/react-router';
+import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
+import { Button } from '@workspace/ui/components/button';
 import {
   Sheet,
   SheetContent,
@@ -9,12 +9,13 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@workspace/ui/components/sheet";
-import { cn } from "@workspace/ui/lib/utils";
-import { ThemeToggle } from "@workspace/ui/components/theme-toggle";
-import { authClient } from "@/lib/auth-client";
-import { AccountDialog } from "@/components/auth/account-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "@workspace/ui/components/avatar";
+} from '@workspace/ui/components/sheet';
+import { ThemeToggle } from '@workspace/ui/components/theme-toggle';
+import { cn } from '@workspace/ui/lib/utils';
+import * as React from 'react';
+
+import { AccountDialog } from '@/components/auth/account-dialog';
+import { authClient } from '@/lib/auth-client';
 
 interface NavigationItem {
   label: string;
@@ -23,16 +24,16 @@ interface NavigationItem {
   scrollTo?: string;
 }
 
-const navigationItems: NavigationItem[] = [
-  { label: "Features", href: "/#features", scrollTo: "features" },
+const navigationItems: Array<NavigationItem> = [
+  { label: 'Features', href: '/#features', scrollTo: 'features' },
   {
-    label: "Documentation",
-    href: "/docs",
+    label: 'Documentation',
+    href: '/docs',
     isExternal: false,
   },
   {
-    label: "GitHub",
-    href: "https://github.com/backpine/saas-kit",
+    label: 'GitHub',
+    href: 'https://github.com/backpine/saas-kit',
     isExternal: true,
   },
 ];
@@ -44,23 +45,23 @@ export function NavigationBar() {
 
   const handleGoogleSignIn = async () => {
     await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/app",
+      provider: 'google',
+      callbackURL: '/app',
     });
   };
 
   const user = session?.user;
   const fallbackText = user?.name
     ? user.name.charAt(0).toUpperCase()
-    : user?.email?.charAt(0).toUpperCase() || "U";
+    : user?.email.charAt(0).toUpperCase() || 'U';
 
   React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleNavClick = () => {
@@ -70,21 +71,18 @@ export function NavigationBar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out",
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out',
         isScrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5"
-          : "bg-transparent",
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border/50 shadow-lg shadow-primary/5'
+          : 'bg-transparent'
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo and Brand */}
-          <Link
-            to="/"
-            className="group flex items-center space-x-3 no-underline"
-          >
+          <Link to="/" className="group flex items-center space-x-3 no-underline">
             <div className="flex flex-col">
-              <span className="text-lg lg:text-xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent group-hover:from-primary group-hover:to-primary/80 transition-all duration-300">
+              <span className="text-lg lg:text-xl font-bold bg-linear-to-r from-foreground to-foreground/80 bg-clip-text text-transparent group-hover:from-primary group-hover:to-primary/80 transition-all duration-300">
                 SaaS Starter Kit
               </span>
               <span className="text-xs text-muted-foreground font-medium tracking-wider">
@@ -105,10 +103,10 @@ export function NavigationBar() {
                     className="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-300 hover:bg-accent/50 group"
                   >
                     <span>{item.label}</span>
-                    {item.label === "GitHub" ? (
-                      <IconBrandGithub className="h-4 w-4" />
+                    {item.label === 'GitHub' ? (
+                      <GithubLogo className="h-4 w-4" />
                     ) : (
-                      <IconExternalLink className="h-4 w-4" />
+                      <ArrowSquareOut className="h-4 w-4" />
                     )}
                   </a>
                 ) : (
@@ -120,7 +118,7 @@ export function NavigationBar() {
                     {item.label}
                   </Link>
                 )}
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-primary to-primary/80 transition-all duration-300 group-hover:w-3/4" />
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-linear-to-r from-primary to-primary/80 transition-all duration-300 group-hover:w-3/4" />
               </div>
             ))}
 
@@ -134,31 +132,19 @@ export function NavigationBar() {
           <div className="hidden lg:block">
             {session ? (
               <AccountDialog>
-                <Button
-                  variant="ghost"
-                  className="flex items-center gap-2 px-3"
-                >
+                <Button variant="ghost" className="flex items-center gap-2 px-3">
                   <Avatar className="h-7 w-7">
-                    <AvatarImage
-                      src={user?.image || undefined}
-                      alt={user?.name || "User"}
-                    />
+                    <AvatarImage src={user?.image || undefined} alt={user?.name || 'User'} />
                     <AvatarFallback className="bg-primary text-primary-foreground text-xs">
                       {fallbackText}
                     </AvatarFallback>
                   </Avatar>
-                  <span className="text-sm font-medium">
-                    {user?.name || "Account"}
-                  </span>
+                  <span className="text-sm font-medium">{user?.name || 'Account'}</span>
                 </Button>
               </AccountDialog>
             ) : (
-              <Button
-                onClick={handleGoogleSignIn}
-                variant="default"
-                className="gap-2"
-              >
-                <IconLogin className="h-4 w-4" />
+              <Button onClick={handleGoogleSignIn} variant="default" className="gap-2">
+                <SignIn className="h-4 w-4" />
                 Sign In
               </Button>
             )}
@@ -175,17 +161,17 @@ export function NavigationBar() {
                     size="icon"
                     className="relative h-10 w-10 hover:bg-accent/50"
                   >
-                    <IconMenu2 className="h-5 w-5" />
+                    <List className="h-5 w-5" />
                     <span className="sr-only">Open navigation menu</span>
                   </Button>
                 }
               />
               <SheetContent
                 side="right"
-                className="w-[300px] bg-background/95 backdrop-blur-xl border-l border-border/50"
+                className="w-75 bg-background/95 backdrop-blur-xl border-l border-border/50"
               >
                 <SheetHeader className="text-left space-y-1 pb-6">
-                  <SheetTitle className="text-xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                  <SheetTitle className="text-xl font-bold bg-linear-to-r from-primary to-primary/80 bg-clip-text text-transparent">
                     Navigation
                   </SheetTitle>
                   <SheetDescription className="text-muted-foreground">
@@ -205,10 +191,10 @@ export function NavigationBar() {
                           onClick={() => setIsOpen(false)}
                         >
                           <span>{item.label}</span>
-                          {item.label === "GitHub" ? (
-                            <IconBrandGithub className="h-4 w-4" />
+                          {item.label === 'GitHub' ? (
+                            <GithubLogo className="h-4 w-4" />
                           ) : (
-                            <IconExternalLink className="h-4 w-4" />
+                            <ArrowSquareOut className="h-4 w-4" />
                           )}
                         </a>
                       ) : (
@@ -229,30 +215,19 @@ export function NavigationBar() {
                   {session ? (
                     <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-accent/30">
                       <Avatar className="h-10 w-10">
-                        <AvatarImage
-                          src={user?.image || undefined}
-                          alt={user?.name || "User"}
-                        />
+                        <AvatarImage src={user?.image || undefined} alt={user?.name || 'User'} />
                         <AvatarFallback className="bg-primary text-primary-foreground text-sm">
                           {fallbackText}
                         </AvatarFallback>
                       </Avatar>
                       <div className="flex-1">
-                        <p className="text-sm font-medium">
-                          {user?.name || "User"}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {user?.email}
-                        </p>
+                        <p className="text-sm font-medium">{user?.name || 'User'}</p>
+                        <p className="text-xs text-muted-foreground">{user?.email}</p>
                       </div>
                     </div>
                   ) : (
-                    <Button
-                      onClick={handleGoogleSignIn}
-                      variant="default"
-                      className="w-full gap-2"
-                    >
-                      <IconLogin className="h-4 w-4" />
+                    <Button onClick={handleGoogleSignIn} variant="default" className="w-full gap-2">
+                      <SignIn className="h-4 w-4" />
                       Sign In with Google
                     </Button>
                   )}

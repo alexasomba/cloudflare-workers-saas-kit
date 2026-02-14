@@ -17,5 +17,5 @@
     "lib": "@workspace/ui/lib",
     "hooks": "@workspace/ui/hooks"
   },
-  "iconLibrary": "tabler"
+  "iconLibrary": "phosphor"
 }

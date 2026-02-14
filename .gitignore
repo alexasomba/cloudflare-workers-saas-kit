@@ -141,3 +141,9 @@ vite.config.ts.timestamp-*
 
 /packages/ui-example
 .wrangler
+
+
+
+.nx/cache
+.nx/workspace-data
+.agent/skills/

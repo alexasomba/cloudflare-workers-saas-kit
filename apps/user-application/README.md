@@ -6,27 +6,27 @@ A modern, full-stack React application built with TanStack Start and deployed on
 
 ```bash
 # Install dependencies
-bun install
+pnpm install
 
 # Start development server
-bun run dev
+pnpm run dev
 
 # Build for production
-bun run build
+pnpm run build
 
 # Deploy to Cloudflare
-bun run deploy
+pnpm run deploy
 ```
 
 ## 📦 Development Workflow
 
 This project provides a comprehensive development workflow with the following scripts:
 
-- **`bun run dev`** - Start development server on port 3000
-- **`bun run build`** - Build the application for production
-- **`bun run deploy`** - Build and deploy to Cloudflare Workers
-- **`bun run serve`** - Preview production build locally
-- **`bun run cf-typegen`** - Generate TypeScript types for Cloudflare environment
+- **`pnpm run dev`** - Start development server on port 3000
+- **`pnpm run build`** - Build the application for production
+- **`pnpm run deploy`** - Build and deploy to Cloudflare Workers
+- **`pnpm run serve`** - Preview production build locally
+- **`pnpm run cf-typegen`** - Generate TypeScript types for Cloudflare environment
 
 ## 🌩️ Cloudflare Integration
 
@@ -36,13 +36,13 @@ This project includes full TypeScript support for Cloudflare Workers environment
 
 ```bash
 # Generate types for Cloudflare environment
-bun run cf-typegen
+pnpm run cf-typegen
 ```
 
 This creates type definitions allowing you to safely import and use Cloudflare environment variables:
 
 ```typescript
-import { env } from "cloudflare:workers";
+import { env } from 'cloudflare:workers';
 
 // Now env is fully typed with your Wrangler configuration
 console.log(env.MY_VAR); // TypeScript knows this exists
@@ -58,10 +58,10 @@ The `wrangler.jsonc` file configures your Cloudflare deployment:
   "name": "tanstack-start-app",
   "compatibility_date": "2025-09-02",
   "compatibility_flags": ["nodejs_compat"],
-  "main": "./src/server.ts",  // Custom server entry point
+  "main": "./src/server.ts", // Custom server entry point
   "vars": {
-    "MY_VAR": "Hello from Cloudflare"
-  }
+    "MY_VAR": "Hello from Cloudflare",
+  },
 }
 ```
 
@@ -70,7 +70,7 @@ The `wrangler.jsonc` file configures your Cloudflare deployment:
 The `src/server.ts` file is your custom Cloudflare Workers entry point where you can add additional Cloudflare features:
 
 ```typescript
-import handler from "@tanstack/react-start/server-entry";
+import handler from '@tanstack/react-start/server-entry';
 
 export default {
   fetch(request: Request) {
@@ -92,6 +92,7 @@ export default {
 ## 🎨 Styling & Components
 
 ### Tailwind CSS v4
+
 This project uses the latest Tailwind CSS v4 with CSS variables for theming:
 
 ```bash
@@ -100,20 +101,18 @@ This project uses the latest Tailwind CSS v4 with CSS variables for theming:
 ```
 
 ### Shadcn/UI Components
+
 Add beautiful, accessible components using Shadcn/UI:
 
 ```bash
 # Add individual components
-bunx shadcn@latest add button
-bunx shadcn@latest add card
-bunx shadcn@latest add form
+pnpm dlx shadcn@latest add button
+pnpm dlx shadcn@latest add card
+pnpm dlx shadcn@latest add form
 
 # Components use semantic color tokens and CSS variables
 # Perfect for light/dark theme support
 ```
-
-
-
 
 ## 🗂️ File-Based Routing
 
@@ -132,7 +131,7 @@ Now that you have two routes you can use a `Link` component to navigate between 
 To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
 
 ```tsx
-import { Link } from "@tanstack/react-router";
+import { Link } from '@tanstack/react-router';
 ```
 
 Then anywhere in your JSX you can use it like so:
@@ -152,10 +151,10 @@ In the File Based Routing setup the layout is located in `src/routes/__root.tsx`
 Here is an example layout that includes a header:
 
 ```tsx
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import { Outlet, createRootRoute } from '@tanstack/react-router';
+import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 
-import { Link } from "@tanstack/react-router";
+import { Link } from '@tanstack/react-router';
 
 export const Route = createRootRoute({
   component: () => (
@@ -170,13 +169,12 @@ export const Route = createRootRoute({
       <TanStackRouterDevtools />
     </>
   ),
-})
+});
 ```
 
 The `<TanStackRouterDevtools />` component is not required so you can remove it if you don't want it in your layout.
 
 More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
 
 ## 🔄 Data Fetching & Server Functions
 
@@ -189,13 +187,13 @@ Server functions run exclusively on the server and maintain type safety across n
 ```typescript
 // src/core/middleware/example-middleware.ts
 export const exampleMiddleware = createMiddleware({
-  type: 'function'
+  type: 'function',
 }).server(async ({ next }) => {
   console.log('Middleware executing on server');
   return next({
     context: {
-      data: 'Context from middleware'
-    }
+      data: 'Context from middleware',
+    },
   });
 });
 
@@ -206,9 +204,7 @@ const ExampleInputSchema = z.object({
 
 type ExampleInput = z.infer<typeof ExampleInputSchema>;
 
-const baseFunction = createServerFn().middleware([
-  exampleMiddleware,
-]);
+const baseFunction = createServerFn().middleware([exampleMiddleware]);
 
 export const exampleFunction = baseFunction
   .inputValidator((data: ExampleInput) => ExampleInputSchema.parse(data))
@@ -264,7 +260,7 @@ This project uses [Vitest](https://vitest.dev/) for fast unit and integration te
 
 ```bash
 # Run tests
-bun run test
+pnpm run test
 
 # Test configuration is in vite.config.ts
 # Uses jsdom environment for DOM testing
@@ -276,25 +272,30 @@ bun run test
 This template includes the latest and greatest from the React ecosystem:
 
 ### **Core Framework**
+
 - **TanStack Start** - Full-stack React framework with SSR
 - **React 19** - Latest React with concurrent features
 - **TypeScript** - Strict type checking enabled
 
 ### **Routing & Data**
+
 - **TanStack Router** - Type-safe, file-based routing
 - **TanStack Query** - Server state management with SSR integration
 
 ### **Styling & UI**
+
 - **Tailwind CSS v4** - Utility-first CSS with CSS variables
 - **Shadcn/UI** - Beautiful, accessible component library
 - **Lucide React** - Consistent icon set
 
 ### **Development Tools**
+
 - **Vite** - Lightning-fast build tool and dev server
 - **Vitest** - Unit testing with jsdom
 - **TypeScript** - Full type safety across client and server
 
 ### **Deployment**
+
 - **Cloudflare Workers** - Edge computing platform
 - **Wrangler** - Cloudflare deployment and development CLI
 

@@ -1,23 +1,24 @@
 {
   "name": "saas-kit",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "scripts": {
-    "setup": "bun install && bun run build:data-ops",
-    "build:data-ops": "bun run --filter ./packages/data-ops build",
-    "dev:user-application": "bun run --filter user-application dev",
-    "deploy:user-application": "bun run build:data-ops && bun run --filter user-application deploy",
-    "dev:data-service": "bun run --filter data-service dev",
-    "deploy:data-service": "bun run build:data-ops && bun run --filter data-service deploy"
+    "setup": "pnpm install && pnpm run build:data-ops",
+    "build:data-ops": "nx run @repo/data-ops:build",
+    "dev:user-application": "nx run user-application:dev",
+    "deploy:user-application": "nx run user-application:deploy",
+    "dev:data-service": "nx run data-service:dev",
+    "deploy:data-service": "nx run data-service:deploy",
+    "prepare": "husky",
+    "typecheck": "nx run-many -t typecheck",
+    "lint": "nx run-many -t lint",
+    "lint-staged": "lint-staged"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "bun@1.3.5",
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
+  "packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc",
   "trustedDependencies": [
     "@tailwindcss/oxide",
     "better-sqlite3",
@@ -26,7 +27,15 @@
     "workerd"
   ],
   "devDependencies": {
-    "@types/node": "^24.10.4",
-    "typescript": "^5.9.3"
+    "@eslint/js": "^9.39.2",
+    "@types/node": "^24.10.13",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "nx": "22.5.0",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.55.0"
   }
 }

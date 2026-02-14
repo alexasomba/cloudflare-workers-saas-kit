@@ -1,5 +1,7 @@
 # Better Auth Setup
+
 ---
+
 ## Overview
 
 Better Auth provides a comprehensive authentication solution that works seamlessly with serverless and edge environments. It offers built-in support for multiple authentication strategies including social providers, email/password, and session management.
@@ -11,6 +13,7 @@ The authentication system is designed with **database-agnostic architecture** an
 - **Database Integration** - Works with PostgreSQL, MySQL, and SQLite and other providers through Drizzle ORM
 - **Type Safety** - Full TypeScript support with auto-generated schemas
 - **Edge Compatible** - Optimized for serverless and edge runtime environments
+
 ---
 
 ## Step 1: Configure environment variables
@@ -67,9 +70,9 @@ Update your `packages/data-ops/config/auth.ts` file based on your database provi
 
 ```typescript
 // packages/data-ops/config/auth.ts
-import { createBetterAuth } from "../src/auth/setup";
-import { initDatabase } from "../src/database/setup";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { createBetterAuth } from '../src/auth/setup';
+import { initDatabase } from '../src/database/setup';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
 export const auth = createBetterAuth({
   database: drizzleAdapter(
@@ -79,8 +82,8 @@ export const auth = createBetterAuth({
       username: process.env.DATABASE_USERNAME!,
     }),
     {
-      provider: "pg",
-    },
+      provider: 'pg',
+    }
   ),
 });
 ```
@@ -89,9 +92,9 @@ export const auth = createBetterAuth({
 
 ```typescript
 // packages/data-ops/config/auth.ts
-import { createBetterAuth } from "../src/auth/setup";
-import { initDatabase } from "../src/database/setup";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { createBetterAuth } from '../src/auth/setup';
+import { initDatabase } from '../src/database/setup';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
 export const auth = createBetterAuth({
   database: drizzleAdapter(
@@ -101,8 +104,8 @@ export const auth = createBetterAuth({
       username: process.env.DATABASE_USERNAME!,
     }),
     {
-      provider: "mysql",
-    },
+      provider: 'mysql',
+    }
   ),
 });
 ```
@@ -111,14 +114,14 @@ export const auth = createBetterAuth({
 
 ```typescript
 // packages/data-ops/config/auth.ts
-import { createBetterAuth } from "../src/auth/setup";
-import Database from "better-sqlite3";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { createBetterAuth } from '../src/auth/setup';
+import Database from 'better-sqlite3';
+import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
 // For CLI use - uses dummy SQLite database
 export const auth = createBetterAuth({
-  database: drizzleAdapter(new Database("./config/test.sqlite"), {
-    provider: "sqlite",
+  database: drizzleAdapter(new Database('./config/test.sqlite'), {
+    provider: 'sqlite',
   }),
 });
 ```
@@ -130,7 +133,7 @@ Use Better Auth CLI to generate the database schemas and TypeScript types. This 
 ### 1. Generate Better Auth schemas
 
 ```bash
-bun run --filter ./packages/data-ops better-auth:generate
+pnpm run --filter ./packages/data-ops better-auth:generate
 ```
 
 This creates `packages/data-ops/src/drizzle/auth-schema.ts` with your authentication tables
@@ -138,7 +141,7 @@ This creates `packages/data-ops/src/drizzle/auth-schema.ts` with your authentica
 ### 2. Generate Drizzle migrations
 
 ```bash
-bun run --filter ./packages/data-ops drizzle:generate
+pnpm run --filter ./packages/data-ops drizzle:generate
 ```
 
 This creates SQL migration files in `packages/data-ops/src/drizzle`
@@ -146,7 +149,7 @@ This creates SQL migration files in `packages/data-ops/src/drizzle`
 ### 3. Run migrations (optional)
 
 ```bash
-bun run --filter ./packages/data-ops drizzle:migrate
+pnpm run --filter ./packages/data-ops drizzle:migrate
 ```
 
 This automatically applies migrations to create the auth tables
@@ -163,10 +166,10 @@ This setup occurs in your server entry point, typically `src/server.ts`, where y
 
 ```typescript
 // src/server.ts - TanStack Start Server Entry
-import { setAuth } from "@repo/data-ops/auth/server";
-import { initDatabase } from "@repo/data-ops/database/setup";
-import handler from "@tanstack/react-start/server-entry";
-import { env } from "cloudflare:workers";
+import { setAuth } from '@repo/data-ops/auth/server';
+import { initDatabase } from '@repo/data-ops/database/setup';
+import handler from '@tanstack/react-start/server-entry';
+import { env } from 'cloudflare:workers';
 
 export default {
   fetch(request: Request) {
@@ -186,7 +189,7 @@ export default {
       },
       adapter: {
         drizzleDb: db,
-        provider: "pg",
+        provider: 'pg',
       },
     });
 
@@ -203,10 +206,10 @@ export default {
 
 ```typescript
 // src/server.ts - TanStack Start Server Entry
-import { setAuth } from "@repo/data-ops/auth/server";
-import { initDatabase } from "@repo/data-ops/database/setup";
-import handler from "@tanstack/react-start/server-entry";
-import { env } from "cloudflare:workers";
+import { setAuth } from '@repo/data-ops/auth/server';
+import { initDatabase } from '@repo/data-ops/database/setup';
+import handler from '@tanstack/react-start/server-entry';
+import { env } from 'cloudflare:workers';
 
 export default {
   fetch(request: Request) {
@@ -226,7 +229,7 @@ export default {
       },
       adapter: {
         drizzleDb: db,
-        provider: "mysql",
+        provider: 'mysql',
       },
     });
 
@@ -243,10 +246,10 @@ export default {
 
 ```typescript
 // src/server.ts - TanStack Start Server Entry
-import { setAuth } from "@repo/data-ops/auth/server";
-import { initDatabase } from "@repo/data-ops/database/setup";
-import handler from "@tanstack/react-start/server-entry";
-import { env } from "cloudflare:workers";
+import { setAuth } from '@repo/data-ops/auth/server';
+import { initDatabase } from '@repo/data-ops/database/setup';
+import handler from '@tanstack/react-start/server-entry';
+import { env } from 'cloudflare:workers';
 
 export default {
   fetch(request: Request) {
@@ -262,7 +265,7 @@ export default {
       },
       adapter: {
         drizzleDb: db,
-        provider: "sqlite",
+        provider: 'sqlite',
       },
     });
 
@@ -285,10 +288,10 @@ TanStack Start uses file-based routing for API endpoints. The `auth.$.tsx` route
 
 ```typescript
 // src/routes/api/auth.$.tsx
-import { createFileRoute } from "@tanstack/react-router";
-import { getAuth } from "@repo/data-ops/auth/server";
+import { createFileRoute } from '@tanstack/react-router';
+import { getAuth } from '@repo/data-ops/auth/server';
 
-export const Route = createFileRoute("/api/auth/$")({
+export const Route = createFileRoute('/api/auth/$')({
   server: {
     handlers: {
       GET: ({ request }) => {
@@ -307,15 +310,18 @@ export const Route = createFileRoute("/api/auth/$")({
 ### How TanStack Start API Routes Work
 
 **File-based Routing:**
+
 - `auth.$.tsx` - The `$` creates a splat/catch-all route that matches `/api/auth/*`
 - Automatically handles all authentication endpoints: `/api/auth/sign-in`, `/api/auth/callback/google`, `/api/auth/session`, etc.
 
 **Server Handlers:**
+
 - `server.handlers` - Defines HTTP methods (GET, POST) for server-side processing
 - `request` parameter - Contains the full HTTP request with headers, body, and URL
 - Each handler returns a Response object that TanStack Start automatically serves
 
 **Better Auth Integration:**
+
 - `getAuth()` - Retrieves the initialized Better Auth instance from your server setup
 - `auth.handler(request)` - Single method that routes requests to appropriate Better Auth endpoints
 - Handles OAuth callbacks, session validation, sign-in/out, and token refresh automatically
@@ -356,7 +362,7 @@ export function LoginButton() {
 
 # Better Auth Client Integration
 
-*Client Guide*
+_Client Guide_
 
 Implement secure authentication on the client side with React hooks
 
@@ -380,7 +386,7 @@ The client automatically handles session management, token refresh, and provides
 
 ```typescript
 // src/components/auth/client.ts
-import { createAuthClient } from "better-auth/react";
+import { createAuthClient } from 'better-auth/react';
 
 export const authClient = createAuthClient();
 ```
@@ -622,12 +628,14 @@ function RouteComponent() {
 ### Key Differences Between Approaches
 
 **Client-side:**
+
 - Authentication check happens in the browser
 - Loading state while checking session
 - Better for dynamic user experiences
 - Requires handling pending states
 
 **Server-side (SSR):**
+
 - Authentication validated on server
 - No loading state - immediate auth decision
 - Better security and SEO

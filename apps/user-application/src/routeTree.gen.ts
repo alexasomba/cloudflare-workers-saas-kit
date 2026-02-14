@@ -9,17 +9,45 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as StaticRouteRouteImport } from './routes/_static/route'
 import { Route as AuthRouteRouteImport } from './routes/_auth/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
+import { Route as DemoTableRouteImport } from './routes/demo/table'
+import { Route as DemoStoreRouteImport } from './routes/demo/store'
+import { Route as DemoMcpTodosRouteImport } from './routes/demo/mcp-todos'
+import { Route as DemoDbChatRouteImport } from './routes/demo/db-chat'
+import { Route as DemoAiStructuredRouteImport } from './routes/demo/ai-structured'
+import { Route as DemoAiImageRouteImport } from './routes/demo/ai-image'
+import { Route as DemoAiEmbeddingsRouteImport } from './routes/demo/ai-embeddings'
+import { Route as DemoAiChatRouteImport } from './routes/demo/ai-chat'
+import { Route as ApiMcpTodosRouteImport } from './routes/api/mcp-todos'
+import { Route as ApiDbChatRouteImport } from './routes/api/db-chat'
+import { Route as DemoGuitarsIndexRouteImport } from './routes/demo/guitars/index'
 import { Route as StaticDocsIndexRouteImport } from './routes/_static/docs/index'
 import { Route as AuthAppIndexRouteImport } from './routes/_auth/app/index'
+import { Route as DemoSentryTestingRouteImport } from './routes/demo/sentry.testing'
+import { Route as DemoGuitarsGuitarIdRouteImport } from './routes/demo/guitars/$guitarId'
+import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
+import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
+import { Route as ApiAiTtsRouteImport } from './routes/api/ai/tts'
+import { Route as ApiAiTranscriptionRouteImport } from './routes/api/ai/transcription'
+import { Route as ApiAiStructuredRouteImport } from './routes/api/ai/structured'
+import { Route as ApiAiImageRouteImport } from './routes/api/ai/image'
+import { Route as ApiAiEmbeddingsRouteImport } from './routes/api/ai/embeddings'
+import { Route as ApiAiChatRouteImport } from './routes/api/ai/chat'
 import { Route as StaticDocsNameRouteImport } from './routes/_static/docs/$name'
 import { Route as AuthAppPolarSubscriptionsRouteImport } from './routes/_auth/app/polar/subscriptions'
 import { Route as AuthAppPolarPortalRouteImport } from './routes/_auth/app/polar/portal'
 import { Route as AuthAppPolarCheckoutSuccessRouteImport } from './routes/_auth/app/polar/checkout.success'
 
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StaticRouteRoute = StaticRouteRouteImport.update({
   id: '/_static',
   getParentRoute: () => rootRouteImport,
@@ -33,6 +61,66 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
+  id: '/demo/tanstack-query',
+  path: '/demo/tanstack-query',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoTableRoute = DemoTableRouteImport.update({
+  id: '/demo/table',
+  path: '/demo/table',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoStoreRoute = DemoStoreRouteImport.update({
+  id: '/demo/store',
+  path: '/demo/store',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoMcpTodosRoute = DemoMcpTodosRouteImport.update({
+  id: '/demo/mcp-todos',
+  path: '/demo/mcp-todos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoDbChatRoute = DemoDbChatRouteImport.update({
+  id: '/demo/db-chat',
+  path: '/demo/db-chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoAiStructuredRoute = DemoAiStructuredRouteImport.update({
+  id: '/demo/ai-structured',
+  path: '/demo/ai-structured',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoAiImageRoute = DemoAiImageRouteImport.update({
+  id: '/demo/ai-image',
+  path: '/demo/ai-image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoAiEmbeddingsRoute = DemoAiEmbeddingsRouteImport.update({
+  id: '/demo/ai-embeddings',
+  path: '/demo/ai-embeddings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoAiChatRoute = DemoAiChatRouteImport.update({
+  id: '/demo/ai-chat',
+  path: '/demo/ai-chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMcpTodosRoute = ApiMcpTodosRouteImport.update({
+  id: '/api/mcp-todos',
+  path: '/api/mcp-todos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDbChatRoute = ApiDbChatRouteImport.update({
+  id: '/api/db-chat',
+  path: '/api/db-chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoGuitarsIndexRoute = DemoGuitarsIndexRouteImport.update({
+  id: '/demo/guitars/',
+  path: '/demo/guitars/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const StaticDocsIndexRoute = StaticDocsIndexRouteImport.update({
   id: '/docs/',
   path: '/docs/',
@@ -43,9 +131,59 @@ const AuthAppIndexRoute = AuthAppIndexRouteImport.update({
   path: '/app/',
   getParentRoute: () => AuthRouteRoute,
 } as any)
+const DemoSentryTestingRoute = DemoSentryTestingRouteImport.update({
+  id: '/demo/sentry/testing',
+  path: '/demo/sentry/testing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoGuitarsGuitarIdRoute = DemoGuitarsGuitarIdRouteImport.update({
+  id: '/demo/guitars/$guitarId',
+  path: '/demo/guitars/$guitarId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoFormSimpleRoute = DemoFormSimpleRouteImport.update({
+  id: '/demo/form/simple',
+  path: '/demo/form/simple',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
+  id: '/demo/form/address',
+  path: '/demo/form/address',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiTtsRoute = ApiAiTtsRouteImport.update({
+  id: '/api/ai/tts',
+  path: '/api/ai/tts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiTranscriptionRoute = ApiAiTranscriptionRouteImport.update({
+  id: '/api/ai/transcription',
+  path: '/api/ai/transcription',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiStructuredRoute = ApiAiStructuredRouteImport.update({
+  id: '/api/ai/structured',
+  path: '/api/ai/structured',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiImageRoute = ApiAiImageRouteImport.update({
+  id: '/api/ai/image',
+  path: '/api/ai/image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiEmbeddingsRoute = ApiAiEmbeddingsRouteImport.update({
+  id: '/api/ai/embeddings',
+  path: '/api/ai/embeddings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiChatRoute = ApiAiChatRouteImport.update({
+  id: '/api/ai/chat',
+  path: '/api/ai/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StaticDocsNameRoute = StaticDocsNameRouteImport.update({
@@ -73,20 +211,66 @@ const AuthAppPolarCheckoutSuccessRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/mcp': typeof McpRoute
+  '/api/db-chat': typeof ApiDbChatRoute
+  '/api/mcp-todos': typeof ApiMcpTodosRoute
+  '/demo/ai-chat': typeof DemoAiChatRoute
+  '/demo/ai-embeddings': typeof DemoAiEmbeddingsRoute
+  '/demo/ai-image': typeof DemoAiImageRoute
+  '/demo/ai-structured': typeof DemoAiStructuredRoute
+  '/demo/db-chat': typeof DemoDbChatRoute
+  '/demo/mcp-todos': typeof DemoMcpTodosRoute
+  '/demo/store': typeof DemoStoreRoute
+  '/demo/table': typeof DemoTableRoute
+  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/docs/$name': typeof StaticDocsNameRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/embeddings': typeof ApiAiEmbeddingsRoute
+  '/api/ai/image': typeof ApiAiImageRoute
+  '/api/ai/structured': typeof ApiAiStructuredRoute
+  '/api/ai/transcription': typeof ApiAiTranscriptionRoute
+  '/api/ai/tts': typeof ApiAiTtsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/app': typeof AuthAppIndexRoute
-  '/docs': typeof StaticDocsIndexRoute
+  '/demo/form/address': typeof DemoFormAddressRoute
+  '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/demo/guitars/$guitarId': typeof DemoGuitarsGuitarIdRoute
+  '/demo/sentry/testing': typeof DemoSentryTestingRoute
+  '/app/': typeof AuthAppIndexRoute
+  '/docs/': typeof StaticDocsIndexRoute
+  '/demo/guitars/': typeof DemoGuitarsIndexRoute
   '/app/polar/portal': typeof AuthAppPolarPortalRoute
   '/app/polar/subscriptions': typeof AuthAppPolarSubscriptionsRoute
   '/app/polar/checkout/success': typeof AuthAppPolarCheckoutSuccessRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/mcp': typeof McpRoute
+  '/api/db-chat': typeof ApiDbChatRoute
+  '/api/mcp-todos': typeof ApiMcpTodosRoute
+  '/demo/ai-chat': typeof DemoAiChatRoute
+  '/demo/ai-embeddings': typeof DemoAiEmbeddingsRoute
+  '/demo/ai-image': typeof DemoAiImageRoute
+  '/demo/ai-structured': typeof DemoAiStructuredRoute
+  '/demo/db-chat': typeof DemoDbChatRoute
+  '/demo/mcp-todos': typeof DemoMcpTodosRoute
+  '/demo/store': typeof DemoStoreRoute
+  '/demo/table': typeof DemoTableRoute
+  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/docs/$name': typeof StaticDocsNameRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/embeddings': typeof ApiAiEmbeddingsRoute
+  '/api/ai/image': typeof ApiAiImageRoute
+  '/api/ai/structured': typeof ApiAiStructuredRoute
+  '/api/ai/transcription': typeof ApiAiTranscriptionRoute
+  '/api/ai/tts': typeof ApiAiTtsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/demo/form/address': typeof DemoFormAddressRoute
+  '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/demo/guitars/$guitarId': typeof DemoGuitarsGuitarIdRoute
+  '/demo/sentry/testing': typeof DemoSentryTestingRoute
   '/app': typeof AuthAppIndexRoute
   '/docs': typeof StaticDocsIndexRoute
+  '/demo/guitars': typeof DemoGuitarsIndexRoute
   '/app/polar/portal': typeof AuthAppPolarPortalRoute
   '/app/polar/subscriptions': typeof AuthAppPolarSubscriptionsRoute
   '/app/polar/checkout/success': typeof AuthAppPolarCheckoutSuccessRoute
@@ -96,10 +280,33 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_static': typeof StaticRouteRouteWithChildren
+  '/mcp': typeof McpRoute
+  '/api/db-chat': typeof ApiDbChatRoute
+  '/api/mcp-todos': typeof ApiMcpTodosRoute
+  '/demo/ai-chat': typeof DemoAiChatRoute
+  '/demo/ai-embeddings': typeof DemoAiEmbeddingsRoute
+  '/demo/ai-image': typeof DemoAiImageRoute
+  '/demo/ai-structured': typeof DemoAiStructuredRoute
+  '/demo/db-chat': typeof DemoDbChatRoute
+  '/demo/mcp-todos': typeof DemoMcpTodosRoute
+  '/demo/store': typeof DemoStoreRoute
+  '/demo/table': typeof DemoTableRoute
+  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/_static/docs/$name': typeof StaticDocsNameRoute
+  '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/embeddings': typeof ApiAiEmbeddingsRoute
+  '/api/ai/image': typeof ApiAiImageRoute
+  '/api/ai/structured': typeof ApiAiStructuredRoute
+  '/api/ai/transcription': typeof ApiAiTranscriptionRoute
+  '/api/ai/tts': typeof ApiAiTtsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/demo/form/address': typeof DemoFormAddressRoute
+  '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/demo/guitars/$guitarId': typeof DemoGuitarsGuitarIdRoute
+  '/demo/sentry/testing': typeof DemoSentryTestingRoute
   '/_auth/app/': typeof AuthAppIndexRoute
   '/_static/docs/': typeof StaticDocsIndexRoute
+  '/demo/guitars/': typeof DemoGuitarsIndexRoute
   '/_auth/app/polar/portal': typeof AuthAppPolarPortalRoute
   '/_auth/app/polar/subscriptions': typeof AuthAppPolarSubscriptionsRoute
   '/_auth/app/polar/checkout/success': typeof AuthAppPolarCheckoutSuccessRoute
@@ -108,20 +315,66 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/mcp'
+    | '/api/db-chat'
+    | '/api/mcp-todos'
+    | '/demo/ai-chat'
+    | '/demo/ai-embeddings'
+    | '/demo/ai-image'
+    | '/demo/ai-structured'
+    | '/demo/db-chat'
+    | '/demo/mcp-todos'
+    | '/demo/store'
+    | '/demo/table'
+    | '/demo/tanstack-query'
     | '/docs/$name'
+    | '/api/ai/chat'
+    | '/api/ai/embeddings'
+    | '/api/ai/image'
+    | '/api/ai/structured'
+    | '/api/ai/transcription'
+    | '/api/ai/tts'
     | '/api/auth/$'
-    | '/app'
-    | '/docs'
+    | '/demo/form/address'
+    | '/demo/form/simple'
+    | '/demo/guitars/$guitarId'
+    | '/demo/sentry/testing'
+    | '/app/'
+    | '/docs/'
+    | '/demo/guitars/'
     | '/app/polar/portal'
     | '/app/polar/subscriptions'
     | '/app/polar/checkout/success'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/mcp'
+    | '/api/db-chat'
+    | '/api/mcp-todos'
+    | '/demo/ai-chat'
+    | '/demo/ai-embeddings'
+    | '/demo/ai-image'
+    | '/demo/ai-structured'
+    | '/demo/db-chat'
+    | '/demo/mcp-todos'
+    | '/demo/store'
+    | '/demo/table'
+    | '/demo/tanstack-query'
     | '/docs/$name'
+    | '/api/ai/chat'
+    | '/api/ai/embeddings'
+    | '/api/ai/image'
+    | '/api/ai/structured'
+    | '/api/ai/transcription'
+    | '/api/ai/tts'
     | '/api/auth/$'
+    | '/demo/form/address'
+    | '/demo/form/simple'
+    | '/demo/guitars/$guitarId'
+    | '/demo/sentry/testing'
     | '/app'
     | '/docs'
+    | '/demo/guitars'
     | '/app/polar/portal'
     | '/app/polar/subscriptions'
     | '/app/polar/checkout/success'
@@ -130,10 +383,33 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/_static'
+    | '/mcp'
+    | '/api/db-chat'
+    | '/api/mcp-todos'
+    | '/demo/ai-chat'
+    | '/demo/ai-embeddings'
+    | '/demo/ai-image'
+    | '/demo/ai-structured'
+    | '/demo/db-chat'
+    | '/demo/mcp-todos'
+    | '/demo/store'
+    | '/demo/table'
+    | '/demo/tanstack-query'
     | '/_static/docs/$name'
+    | '/api/ai/chat'
+    | '/api/ai/embeddings'
+    | '/api/ai/image'
+    | '/api/ai/structured'
+    | '/api/ai/transcription'
+    | '/api/ai/tts'
     | '/api/auth/$'
+    | '/demo/form/address'
+    | '/demo/form/simple'
+    | '/demo/guitars/$guitarId'
+    | '/demo/sentry/testing'
     | '/_auth/app/'
     | '/_static/docs/'
+    | '/demo/guitars/'
     | '/_auth/app/polar/portal'
     | '/_auth/app/polar/subscriptions'
     | '/_auth/app/polar/checkout/success'
@@ -143,22 +419,52 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   StaticRouteRoute: typeof StaticRouteRouteWithChildren
+  McpRoute: typeof McpRoute
+  ApiDbChatRoute: typeof ApiDbChatRoute
+  ApiMcpTodosRoute: typeof ApiMcpTodosRoute
+  DemoAiChatRoute: typeof DemoAiChatRoute
+  DemoAiEmbeddingsRoute: typeof DemoAiEmbeddingsRoute
+  DemoAiImageRoute: typeof DemoAiImageRoute
+  DemoAiStructuredRoute: typeof DemoAiStructuredRoute
+  DemoDbChatRoute: typeof DemoDbChatRoute
+  DemoMcpTodosRoute: typeof DemoMcpTodosRoute
+  DemoStoreRoute: typeof DemoStoreRoute
+  DemoTableRoute: typeof DemoTableRoute
+  DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
+  ApiAiChatRoute: typeof ApiAiChatRoute
+  ApiAiEmbeddingsRoute: typeof ApiAiEmbeddingsRoute
+  ApiAiImageRoute: typeof ApiAiImageRoute
+  ApiAiStructuredRoute: typeof ApiAiStructuredRoute
+  ApiAiTranscriptionRoute: typeof ApiAiTranscriptionRoute
+  ApiAiTtsRoute: typeof ApiAiTtsRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  DemoFormAddressRoute: typeof DemoFormAddressRoute
+  DemoFormSimpleRoute: typeof DemoFormSimpleRoute
+  DemoGuitarsGuitarIdRoute: typeof DemoGuitarsGuitarIdRoute
+  DemoSentryTestingRoute: typeof DemoSentryTestingRoute
+  DemoGuitarsIndexRoute: typeof DemoGuitarsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_static': {
       id: '/_static'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof StaticRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_auth': {
       id: '/_auth'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AuthRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
@@ -169,25 +475,179 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo/tanstack-query': {
+      id: '/demo/tanstack-query'
+      path: '/demo/tanstack-query'
+      fullPath: '/demo/tanstack-query'
+      preLoaderRoute: typeof DemoTanstackQueryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/table': {
+      id: '/demo/table'
+      path: '/demo/table'
+      fullPath: '/demo/table'
+      preLoaderRoute: typeof DemoTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/store': {
+      id: '/demo/store'
+      path: '/demo/store'
+      fullPath: '/demo/store'
+      preLoaderRoute: typeof DemoStoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/mcp-todos': {
+      id: '/demo/mcp-todos'
+      path: '/demo/mcp-todos'
+      fullPath: '/demo/mcp-todos'
+      preLoaderRoute: typeof DemoMcpTodosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/db-chat': {
+      id: '/demo/db-chat'
+      path: '/demo/db-chat'
+      fullPath: '/demo/db-chat'
+      preLoaderRoute: typeof DemoDbChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/ai-structured': {
+      id: '/demo/ai-structured'
+      path: '/demo/ai-structured'
+      fullPath: '/demo/ai-structured'
+      preLoaderRoute: typeof DemoAiStructuredRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/ai-image': {
+      id: '/demo/ai-image'
+      path: '/demo/ai-image'
+      fullPath: '/demo/ai-image'
+      preLoaderRoute: typeof DemoAiImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/ai-embeddings': {
+      id: '/demo/ai-embeddings'
+      path: '/demo/ai-embeddings'
+      fullPath: '/demo/ai-embeddings'
+      preLoaderRoute: typeof DemoAiEmbeddingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/ai-chat': {
+      id: '/demo/ai-chat'
+      path: '/demo/ai-chat'
+      fullPath: '/demo/ai-chat'
+      preLoaderRoute: typeof DemoAiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/mcp-todos': {
+      id: '/api/mcp-todos'
+      path: '/api/mcp-todos'
+      fullPath: '/api/mcp-todos'
+      preLoaderRoute: typeof ApiMcpTodosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/db-chat': {
+      id: '/api/db-chat'
+      path: '/api/db-chat'
+      fullPath: '/api/db-chat'
+      preLoaderRoute: typeof ApiDbChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/guitars/': {
+      id: '/demo/guitars/'
+      path: '/demo/guitars'
+      fullPath: '/demo/guitars/'
+      preLoaderRoute: typeof DemoGuitarsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_static/docs/': {
       id: '/_static/docs/'
       path: '/docs'
-      fullPath: '/docs'
+      fullPath: '/docs/'
       preLoaderRoute: typeof StaticDocsIndexRouteImport
       parentRoute: typeof StaticRouteRoute
     }
     '/_auth/app/': {
       id: '/_auth/app/'
       path: '/app'
-      fullPath: '/app'
+      fullPath: '/app/'
       preLoaderRoute: typeof AuthAppIndexRouteImport
       parentRoute: typeof AuthRouteRoute
+    }
+    '/demo/sentry/testing': {
+      id: '/demo/sentry/testing'
+      path: '/demo/sentry/testing'
+      fullPath: '/demo/sentry/testing'
+      preLoaderRoute: typeof DemoSentryTestingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/guitars/$guitarId': {
+      id: '/demo/guitars/$guitarId'
+      path: '/demo/guitars/$guitarId'
+      fullPath: '/demo/guitars/$guitarId'
+      preLoaderRoute: typeof DemoGuitarsGuitarIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/form/simple': {
+      id: '/demo/form/simple'
+      path: '/demo/form/simple'
+      fullPath: '/demo/form/simple'
+      preLoaderRoute: typeof DemoFormSimpleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo/form/address': {
+      id: '/demo/form/address'
+      path: '/demo/form/address'
+      fullPath: '/demo/form/address'
+      preLoaderRoute: typeof DemoFormAddressRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
       fullPath: '/api/auth/$'
       preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/tts': {
+      id: '/api/ai/tts'
+      path: '/api/ai/tts'
+      fullPath: '/api/ai/tts'
+      preLoaderRoute: typeof ApiAiTtsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/transcription': {
+      id: '/api/ai/transcription'
+      path: '/api/ai/transcription'
+      fullPath: '/api/ai/transcription'
+      preLoaderRoute: typeof ApiAiTranscriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/structured': {
+      id: '/api/ai/structured'
+      path: '/api/ai/structured'
+      fullPath: '/api/ai/structured'
+      preLoaderRoute: typeof ApiAiStructuredRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/image': {
+      id: '/api/ai/image'
+      path: '/api/ai/image'
+      fullPath: '/api/ai/image'
+      preLoaderRoute: typeof ApiAiImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/embeddings': {
+      id: '/api/ai/embeddings'
+      path: '/api/ai/embeddings'
+      fullPath: '/api/ai/embeddings'
+      preLoaderRoute: typeof ApiAiEmbeddingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/chat': {
+      id: '/api/ai/chat'
+      path: '/api/ai/chat'
+      fullPath: '/api/ai/chat'
+      preLoaderRoute: typeof ApiAiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_static/docs/$name': {
@@ -257,7 +717,30 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRouteWithChildren,
   StaticRouteRoute: StaticRouteRouteWithChildren,
+  McpRoute: McpRoute,
+  ApiDbChatRoute: ApiDbChatRoute,
+  ApiMcpTodosRoute: ApiMcpTodosRoute,
+  DemoAiChatRoute: DemoAiChatRoute,
+  DemoAiEmbeddingsRoute: DemoAiEmbeddingsRoute,
+  DemoAiImageRoute: DemoAiImageRoute,
+  DemoAiStructuredRoute: DemoAiStructuredRoute,
+  DemoDbChatRoute: DemoDbChatRoute,
+  DemoMcpTodosRoute: DemoMcpTodosRoute,
+  DemoStoreRoute: DemoStoreRoute,
+  DemoTableRoute: DemoTableRoute,
+  DemoTanstackQueryRoute: DemoTanstackQueryRoute,
+  ApiAiChatRoute: ApiAiChatRoute,
+  ApiAiEmbeddingsRoute: ApiAiEmbeddingsRoute,
+  ApiAiImageRoute: ApiAiImageRoute,
+  ApiAiStructuredRoute: ApiAiStructuredRoute,
+  ApiAiTranscriptionRoute: ApiAiTranscriptionRoute,
+  ApiAiTtsRoute: ApiAiTtsRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  DemoFormAddressRoute: DemoFormAddressRoute,
+  DemoFormSimpleRoute: DemoFormSimpleRoute,
+  DemoGuitarsGuitarIdRoute: DemoGuitarsGuitarIdRoute,
+  DemoSentryTestingRoute: DemoSentryTestingRoute,
+  DemoGuitarsIndexRoute: DemoGuitarsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

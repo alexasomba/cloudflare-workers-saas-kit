@@ -41,6 +41,7 @@ The `data-ops` package manages the database schema and auth configuration.
 - **Apply Migrations (Remote)**: `bun run --filter ./packages/data-ops drizzle:migrate`
 
 ### 3. Type Generation
+
 - **Generate Worker Types**: `bun run --filter ./apps/user-application cf-typegen`
   - Updates `worker-configuration.d.ts` based on `wrangler.jsonc`.
   - Run this after modifying bindings or environment variables.
@@ -79,19 +80,6 @@ The `data-ops` package manages the database schema and auth configuration.
 - Prefer Base UI composition patterns (e.g., `render` props) over `asChild`-style APIs.
 - Keep UI exports stable and consistent with the `exports` map in `packages/ui/package.json`.
 
-## Task Management (Mandatory)
-
-This project uses **bd (beads)** for issue tracking.
-Run `bd prime` for workflow context, or install hooks (`bd hooks install`) for auto-injection.
-
-**Quick reference:**
-- `bd ready` - Find unblocked work
-- `bd create "Title" --type task --priority 2` - Create issue
-- `bd close <id>` - Complete work
-- `bd sync` - Sync with git (run at session end)
-
-For full workflow details: `bd prime`
-
 ### 🚨 SESSION CLOSE PROTOCOL 🚨
 
 **CRITICAL**: Before saying "done" or "complete", you MUST run this checklist:
@@ -99,10 +87,8 @@ For full workflow details: `bd prime`
 ```bash
 [ ] 1. git status              # check what changed
 [ ] 2. git add <files>         # stage code changes
-[ ] 3. bd sync                 # commit beads changes
-[ ] 4. git commit -m "..."     # commit code
-[ ] 5. bd sync                 # commit any new beads changes
-[ ] 6. git push                # push to remote
+[ ] 3. git commit -m "..."     # commit code
+[ ] 4. git push                # push to remote
 ```
 
 **NEVER skip this.** Work is not done until pushed.

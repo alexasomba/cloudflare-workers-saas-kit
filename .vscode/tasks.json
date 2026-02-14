@@ -1,88 +1,131 @@
 {
   "version": "2.0.0",
-  "inputs": [
-    {
-      "id": "bdIssueId",
-      "type": "promptString",
-      "description": "Beads issue id (e.g., bd-a1b2 or api-a1b2)",
-      "default": ""
-    },
-    {
-      "id": "bdNotes",
-      "type": "promptString",
-      "description": "Notes to append",
-      "default": ""
-    },
-    {
-      "id": "bdCloseReason",
-      "type": "promptString",
-      "description": "Close reason (short summary of what changed + how verified)",
-      "default": "Completed"
-    }
-  ],
   "tasks": [
     {
-      "label": "Beads: Ready",
+      "label": "Project: Setup",
       "type": "shell",
-      "command": "${env:HOME}/.local/bin/bd ready",
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": []
+      "command": "pnpm run setup",
+      "group": "build",
+      "detail": "Install dependencies and build core packages (@repo/data-ops)",
+      "problemMatcher": [],
+      "icon": { "id": "edit-code" }
     },
     {
-      "label": "Beads: Status",
+      "label": "Dev: Start User Application",
       "type": "shell",
-      "command": "${env:HOME}/.local/bin/bd status",
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": []
+      "command": "pnpm run dev:user-application",
+      "isBackground": true,
+      "group": "none",
+      "detail": "Start the TanStack Start frontend (Port 3000)",
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "VITE",
+            "endsPattern": "ready in"
+          }
+        }
+      ],
+      "icon": { "id": "browser" }
     },
     {
-      "label": "Beads: Show (JSON)",
+      "label": "Dev: Start Data Service",
       "type": "shell",
-      "command": "${env:HOME}/.local/bin/bd show ${input:bdIssueId} --json",
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": []
+      "command": "pnpm run dev:data-service",
+      "isBackground": true,
+      "group": "none",
+      "detail": "Start the Hono Backend Worker (Port 8787)",
+      "problemMatcher": [],
+      "icon": { "id": "server" }
     },
     {
-      "label": "Beads: Start (set in_progress)",
+      "label": "Types: Generate Worker Bindings",
       "type": "shell",
-      "command": "${env:HOME}/.local/bin/bd update ${input:bdIssueId} --status in_progress --json",
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": []
+      "command": "pnpm run --filter user-application cf-typegen && pnpm run --filter data-service cf-typegen",
+      "group": "none",
+      "detail": "Update worker-configuration.d.ts from wrangler.jsonc",
+      "problemMatcher": [],
+      "icon": { "id": "vm-connect" }
     },
     {
-      "label": "Beads: Block (set blocked + notes)",
+      "label": "DB: Build Data Ops (Required after Schema change)",
       "type": "shell",
-      "command": "${env:HOME}/.local/bin/bd update ${input:bdIssueId} --status blocked --notes \"${input:bdNotes}\" --json",
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": []
+      "command": "pnpm run build:data-ops",
+      "group": "build",
+      "detail": "Rebuild @repo/data-ops package to propagate schema changes",
+      "problemMatcher": ["$tsc"],
+      "icon": { "id": "package" }
     },
     {
-      "label": "Beads: Note (append notes)",
+      "label": "DB: Generate Migration",
       "type": "shell",
-      "command": "${env:HOME}/.local/bin/bd update ${input:bdIssueId} --notes \"${input:bdNotes}\" --json",
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": []
+      "command": "pnpm run --filter @repo/data-ops drizzle:generate",
+      "group": "none",
+      "detail": "Generate a new SQL migration file after schema changes",
+      "problemMatcher": [],
+      "icon": { "id": "database" }
     },
     {
-      "label": "Beads: Close (with reason)",
+      "label": "DB: Apply Migration (Local D1)",
       "type": "shell",
-      "command": "${env:HOME}/.local/bin/bd close ${input:bdIssueId} --reason \"${input:bdCloseReason}\" --json",
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": []
+      "command": "cd apps/user-application && npx wrangler d1 execute DB --local --file=$(ls -t ../../packages/data-ops/src/drizzle/*.sql | head -n 1)",
+      "group": "none",
+      "detail": "Apply the latest migration to the local D1 database using wrangler",
+      "problemMatcher": [],
+      "icon": { "id": "database" }
     },
     {
-      "label": "Beads: Sync",
+      "label": "DB: Apply Migration (Production D1)",
       "type": "shell",
-      "command": "${env:HOME}/.local/bin/bd sync",
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": []
+      "command": "cd apps/user-application && npx wrangler d1 migrations apply DB --remote",
+      "group": "none",
+      "detail": "Apply pending migrations to the production Cloudflare D1 database",
+      "problemMatcher": [],
+      "icon": { "id": "cloud-upload" }
     },
     {
-      "label": "Beads: Sync Status (JSON)",
+      "label": "Check: Quality Gate (Lint, Typecheck, Test)",
       "type": "shell",
-      "command": "${env:HOME}/.local/bin/bd sync --status --json",
-      "options": { "cwd": "${workspaceFolder}" },
-      "problemMatcher": []
+      "command": "npx nx run-many -t lint typecheck test",
+      "group": "test",
+      "detail": "Run all verification checks across the workspace",
+      "problemMatcher": ["$tsc"],
+      "icon": { "id": "check-all" }
+    },
+    {
+      "label": "Check: Run All Tests",
+      "type": "shell",
+      "command": "npx nx run-many -t test",
+      "group": "test",
+      "detail": "Run all Vitest tests across the workspace",
+      "problemMatcher": [],
+      "icon": { "id": "beaker" }
+    },
+    {
+      "label": "Check: Lint All",
+      "type": "shell",
+      "command": "nx run-many -t lint",
+      "group": "test",
+      "detail": "Run linter across all workspace packages",
+      "problemMatcher": [],
+      "icon": { "id": "edit-sparkle" }
+    },
+    {
+      "label": "Check: Typecheck All",
+      "type": "shell",
+      "command": "nx run-many -t typecheck",
+      "group": "test",
+      "detail": "Run TypeScript compiler check across all workspace packages",
+      "problemMatcher": ["$tsc"],
+      "icon": { "id": "edit-sparkle" }
     }
   ]
 }

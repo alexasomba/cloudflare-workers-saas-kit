@@ -1,0 +1,16 @@
+{
+  "name": "@workspace/prettier-config",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "main": "index.js",
+  "peerDependencies": {
+    "prettier": "^3.8.1"
+  },
+  "dependencies": {
+    "prettier-plugin-tailwindcss": "^0.7.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260213.0"
+  }
+}

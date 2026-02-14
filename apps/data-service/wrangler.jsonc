@@ -12,4 +12,25 @@
   "observability": {
     "enabled": true,
   },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "EXAMPLE_DO",
+        "class_name": "ExampleDurableObject",
+      },
+    ],
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["ExampleDurableObject"],
+    },
+  ],
+  "workflows": [
+    {
+      "name": "example-workflow",
+      "binding": "EXAMPLE_WORKFLOW",
+      "class_name": "ExampleWorkflow",
+    },
+  ],
 }

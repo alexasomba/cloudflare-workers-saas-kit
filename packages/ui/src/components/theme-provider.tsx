@@ -1,6 +1,6 @@
-import * as React from "react";
+import * as React from 'react';
 
-type Theme = "dark" | "light" | "system";
+type Theme = 'dark' | 'light' | 'system';
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -14,12 +14,12 @@ type ThemeProviderProps = {
 type ThemeProviderState = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
-  resolvedTheme?: "light" | "dark";
-  systemTheme?: "light" | "dark";
+  resolvedTheme?: 'light' | 'dark';
+  systemTheme?: 'light' | 'dark';
 };
 
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: 'system',
   setTheme: () => null,
   resolvedTheme: undefined,
   systemTheme: undefined,
@@ -29,16 +29,16 @@ const ThemeProviderContext = React.createContext<ThemeProviderState>(initialStat
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
-  storageKey = "ui-theme",
-  attribute = "class",
+  defaultTheme = 'system',
+  storageKey = 'ui-theme',
+  attribute = 'class',
   enableSystem = true,
   disableTransitionOnChange = false,
   ...props
 }: ThemeProviderProps) {
   const [theme, setThemeState] = React.useState<Theme>(() => {
     // During SSR, always return the default theme to avoid hydration mismatch
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return defaultTheme;
     }
 
@@ -51,19 +51,19 @@ export function ThemeProvider({
     }
   });
 
-  const [systemTheme, setSystemTheme] = React.useState<"light" | "dark" | undefined>(() => {
+  const [systemTheme, setSystemTheme] = React.useState<'light' | 'dark' | undefined>(() => {
     // During SSR, return undefined
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
       return undefined;
     }
 
     // Client-side: detect system theme
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
   const [isMounted, setIsMounted] = React.useState(false);
 
-  const resolvedTheme = theme === "system" ? systemTheme : theme;
+  const resolvedTheme = theme === 'system' ? systemTheme : theme;
 
   const setTheme = React.useCallback(
     (newTheme: Theme) => {
@@ -78,13 +78,13 @@ export function ThemeProvider({
   );
 
   const applyTheme = React.useCallback(
-    (targetTheme: "light" | "dark" | undefined) => {
-      if (!targetTheme || typeof document === "undefined") return;
+    (targetTheme: 'light' | 'dark' | undefined) => {
+      if (!targetTheme || typeof document === 'undefined') return;
 
       const root = document.documentElement;
 
       if (disableTransitionOnChange) {
-        const css = document.createElement("style");
+        const css = document.createElement('style');
         css.appendChild(
           document.createTextNode(
             `*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}`
@@ -100,17 +100,25 @@ export function ThemeProvider({
         }, 1);
       }
 
-      if (attribute === "class") {
-        root.classList.remove("light", "dark");
+      if (attribute === 'class') {
+        root.classList.remove('light', 'dark');
         root.classList.add(targetTheme);
       } else {
         root.setAttribute(attribute, targetTheme);
       }
+
+      // Update color-scheme
+      root.style.colorScheme = targetTheme;
     },
     [attribute, disableTransitionOnChange]
   );
 
-  // Apply theme on mount and when resolvedTheme changes
+  // Mount effect
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Apply theme when it changes (after mount)
   React.useEffect(() => {
     if (isMounted) {
       applyTheme(resolvedTheme);
@@ -119,58 +127,20 @@ export function ThemeProvider({
 
   // Handle system theme changes
   React.useEffect(() => {
-    if (!enableSystem || typeof window === "undefined") return;
+    if (!enableSystem || typeof window === 'undefined') return;
 
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
     const handleSystemThemeChange = (e: MediaQueryListEvent) => {
-      setSystemTheme(e.matches ? "dark" : "light");
+      setSystemTheme(e.matches ? 'dark' : 'light');
     };
 
-    mediaQuery.addEventListener("change", handleSystemThemeChange);
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
 
     return () => {
-      mediaQuery.removeEventListener("change", handleSystemThemeChange);
+      mediaQuery.removeEventListener('change', handleSystemThemeChange);
     };
   }, [enableSystem]);
-
-  // Hydration effect - apply theme immediately on client
-  React.useEffect(() => {
-    setIsMounted(true);
-    
-    // Immediately apply the correct theme on hydration
-    const currentTheme = theme === "system" ? systemTheme : theme;
-    applyTheme(currentTheme);
-  }, [theme, systemTheme, applyTheme]);
-
-  // Prevent flash during SSR by applying theme via script
-  React.useEffect(() => {
-    if (typeof document === "undefined") return;
-
-    // Create a script that runs before React hydration to prevent FOIT
-    const script = document.createElement("script");
-    script.innerHTML = `
-      try {
-        var theme = localStorage.getItem('${storageKey}') || '${defaultTheme}';
-        var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        var resolvedTheme = theme === 'system' ? systemTheme : theme;
-        
-        if (resolvedTheme === 'dark') {
-          document.documentElement.classList.add('dark');
-          document.documentElement.classList.remove('light');
-        } else {
-          document.documentElement.classList.add('light');
-          document.documentElement.classList.remove('dark');
-        }
-      } catch (e) {}
-    `;
-
-    // Only add if not already present
-    if (!document.querySelector(`script[data-theme-script]`)) {
-      script.setAttribute('data-theme-script', 'true');
-      document.head.appendChild(script);
-    }
-  }, [storageKey, defaultTheme]);
 
   const value = React.useMemo(
     () => ({
@@ -193,7 +163,7 @@ export const useTheme = () => {
   const context = React.useContext(ThemeProviderContext);
 
   if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    throw new Error('useTheme must be used within a ThemeProvider');
   }
 
   return context;

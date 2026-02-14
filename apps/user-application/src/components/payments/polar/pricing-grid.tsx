@@ -1,5 +1,6 @@
-import { PricingCard } from "./pricing-card";
-import { Products, Subscription } from "./types";
+import { PricingCard } from './pricing-card';
+
+import type { Products, Subscription } from './types';
 
 interface PricingGridProps {
   products: Products;
@@ -15,10 +16,8 @@ export function PricingGrid({
   isCheckoutPending,
 }: PricingGridProps) {
   const sortedProducts = products.sort((a, b) => {
-    const aAmount =
-      a.prices[0]?.amountType === "fixed" ? a.prices[0].priceAmount : 0;
-    const bAmount =
-      b.prices[0]?.amountType === "fixed" ? b.prices[0].priceAmount : 0;
+    const aAmount = a.prices[0]?.amountType === 'fixed' ? a.prices[0].priceAmount : 0;
+    const bAmount = b.prices[0]?.amountType === 'fixed' ? b.prices[0].priceAmount : 0;
     return aAmount - bAmount;
   });
 
