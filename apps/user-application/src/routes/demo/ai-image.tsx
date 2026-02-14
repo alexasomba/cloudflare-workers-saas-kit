@@ -27,7 +27,7 @@ function ImagePage() {
     setImages([]);
 
     try {
-      const response = await fetch('/demo/api/ai/image', {
+      const response = await fetch('/api/ai/image', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt, size, numberOfImages }),

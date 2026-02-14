@@ -3,7 +3,7 @@ import { openaiImage } from '@tanstack/ai-openai';
 import { createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
 
-export const Route = createFileRoute('/demo/api/ai/image')({
+export const Route = createFileRoute('/api/ai/image')({
   server: {
     handlers: {
       POST: async ({ request }) => {

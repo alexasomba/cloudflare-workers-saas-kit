@@ -156,7 +156,7 @@ function StructuredPage() {
     setResult(null);
 
     try {
-      const response = await fetch('/demo/api/ai/structured', {
+      const response = await fetch('/api/ai/structured', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ recipeName, mode }),

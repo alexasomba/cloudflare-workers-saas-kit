@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import { Check, Copy } from '@phosphor-icons/react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import 'highlight.js/styles/github-dark.css';

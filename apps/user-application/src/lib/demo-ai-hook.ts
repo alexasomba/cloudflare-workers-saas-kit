@@ -10,7 +10,7 @@ const recommendGuitarToolClient = recommendGuitarToolDef.client(({ id }) => ({
 }));
 
 const chatOptions = createChatClientOptions({
-  connection: fetchServerSentEvents('/demo/api/ai/chat'),
+  connection: fetchServerSentEvents('/api/ai/chat'),
   tools: clientTools(recommendGuitarToolClient),
 });
 

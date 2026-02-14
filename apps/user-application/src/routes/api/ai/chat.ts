@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createWorkersAiChat } from '@cloudflare/tanstack-ai';
 import { chat, maxIterations, toServerSentEventsResponse } from '@tanstack/ai';
 import { anthropicText } from '@tanstack/ai-anthropic';
@@ -30,7 +29,7 @@ IMPORTANT:
 - Do NOT describe the guitar yourself - let the recommendGuitar tool do it
 `;
 
-export const Route = createFileRoute('/demo/api/ai/chat')({
+export const Route = createFileRoute('/api/ai/chat')({
   server: {
     handlers: {
       POST: async ({ request }) => {

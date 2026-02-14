@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { chat } from '@tanstack/ai';
 import { openaiText } from '@tanstack/ai-openai';
 import { createFileRoute } from '@tanstack/react-router';
@@ -36,7 +35,7 @@ const RecipeSchema = z.object({
 
 export type Recipe = z.infer<typeof RecipeSchema>;
 
-export const Route = createFileRoute('/demo/api/ai/structured')({
+export const Route = createFileRoute('/api/ai/structured')({
   server: {
     handlers: {
       POST: async ({ request, context }) => {
