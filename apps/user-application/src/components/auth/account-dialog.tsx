@@ -1,26 +1,22 @@
-import { IconLogout, IconPalette } from "@tabler/icons-react";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@workspace/ui/components/avatar";
-import { Button } from "@workspace/ui/components/button";
+import { Palette, SignOut } from '@phosphor-icons/react';
+import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
+import { Button } from '@workspace/ui/components/button';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@workspace/ui/components/dialog";
+} from '@workspace/ui/components/dialog';
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "@workspace/ui/components/input-otp";
-import { ThemeToggle } from "@workspace/ui/components/theme-toggle";
-import { useState } from "react";
-import { authClient } from "@/lib/auth-client";
+} from '@workspace/ui/components/input-otp';
+import { ThemeToggle } from '@workspace/ui/components/theme-toggle';
+import { useState } from 'react';
+import { authClient } from '@/lib/auth-client';
 
 interface AccountDialogProps {
   children: React.ReactNode;
@@ -28,14 +24,11 @@ interface AccountDialogProps {
 
 export function AccountDialog({ children }: AccountDialogProps) {
   const { data: session } = authClient.useSession();
-  const [verificationOtp, setVerificationOtp] = useState("");
+  const [verificationOtp, setVerificationOtp] = useState('');
   const [verificationOtpSent, setVerificationOtpSent] = useState(false);
-  const [isSendingVerificationOtp, setIsSendingVerificationOtp] =
-    useState(false);
+  const [isSendingVerificationOtp, setIsSendingVerificationOtp] = useState(false);
   const [isVerifyingEmail, setIsVerifyingEmail] = useState(false);
-  const [verificationError, setVerificationError] = useState<string | null>(
-    null,
-  );
+  const [verificationError, setVerificationError] = useState<string | null>(null);
 
   const signOut = async () => {
     await authClient.signOut();
@@ -47,13 +40,11 @@ export function AccountDialog({ children }: AccountDialogProps) {
     try {
       await authClient.emailOtp.sendVerificationOtp({
         email,
-        type: "email-verification",
+        type: 'email-verification',
       });
       setVerificationOtpSent(true);
     } catch (e) {
-      setVerificationError(
-        e instanceof Error ? e.message : "Failed to send verification code",
-      );
+      setVerificationError(e instanceof Error ? e.message : 'Failed to send verification code');
     } finally {
       setIsSendingVerificationOtp(false);
     }
@@ -67,12 +58,10 @@ export function AccountDialog({ children }: AccountDialogProps) {
         email,
         otp: verificationOtp,
       });
-      setVerificationOtp("");
+      setVerificationOtp('');
       setVerificationOtpSent(false);
     } catch (e) {
-      setVerificationError(
-        e instanceof Error ? e.message : "Failed to verify email",
-      );
+      setVerificationError(e instanceof Error ? e.message : 'Failed to verify email');
     } finally {
       setIsVerifyingEmail(false);
     }
@@ -85,7 +74,7 @@ export function AccountDialog({ children }: AccountDialogProps) {
   const user = session.user;
   const fallbackText = user.name
     ? user.name.charAt(0).toUpperCase()
-    : user.email.charAt(0).toUpperCase() || "U";
+    : user.email.charAt(0).toUpperCase() || 'U';
 
   return (
     <Dialog>
@@ -96,21 +85,12 @@ export function AccountDialog({ children }: AccountDialogProps) {
         </DialogHeader>
         <div className="flex flex-col items-center space-y-6 py-6">
           <Avatar className="h-20 w-20">
-            <AvatarImage
-              src={user.image || undefined}
-              alt={user.name || "User"}
-            />
-            <AvatarFallback className="text-2xl font-semibold">
-              {fallbackText}
-            </AvatarFallback>
+            <AvatarImage src={user.image || undefined} alt={user.name || 'User'} />
+            <AvatarFallback className="text-2xl font-semibold">{fallbackText}</AvatarFallback>
           </Avatar>
           <div className="text-center space-y-1">
-            {user.name && (
-              <div className="text-lg font-semibold">{user.name}</div>
-            )}
-            {user.email && (
-              <div className="text-sm text-muted-foreground">{user.email}</div>
-            )}
+            {user.name && <div className="text-lg font-semibold">{user.name}</div>}
+            {user.email && <div className="text-sm text-muted-foreground">{user.email}</div>}
           </div>
           <div className="flex flex-col gap-4 w-full mt-6">
             {user.email && !user.emailVerified ? (
@@ -124,9 +104,7 @@ export function AccountDialog({ children }: AccountDialogProps) {
                     className="w-full"
                     disabled={isSendingVerificationOtp}
                   >
-                    {isSendingVerificationOtp
-                      ? "Sending code…"
-                      : "Send verification code"}
+                    {isSendingVerificationOtp ? 'Sending code…' : 'Send verification code'}
                   </Button>
                 ) : (
                   <>
@@ -160,16 +138,14 @@ export function AccountDialog({ children }: AccountDialogProps) {
                       onClick={() => verifyEmail(user.email)}
                       size="sm"
                       className="w-full"
-                      disabled={
-                        verificationOtp.length !== 6 || isVerifyingEmail
-                      }
+                      disabled={verificationOtp.length !== 6 || isVerifyingEmail}
                     >
-                      {isVerifyingEmail ? "Verifying…" : "Verify email"}
+                      {isVerifyingEmail ? 'Verifying…' : 'Verify email'}
                     </Button>
                     <Button
                       onClick={() => {
                         setVerificationOtpSent(false);
-                        setVerificationOtp("");
+                        setVerificationOtp('');
                         setVerificationError(null);
                       }}
                       variant="outline"
@@ -182,26 +158,19 @@ export function AccountDialog({ children }: AccountDialogProps) {
                   </>
                 )}
                 {verificationError ? (
-                  <div className="text-sm text-destructive">
-                    {verificationError}
-                  </div>
+                  <div className="text-sm text-destructive">{verificationError}</div>
                 ) : null}
               </div>
             ) : null}
             <div className="flex items-center justify-between w-full py-3 px-4 rounded-lg border bg-card">
               <span className="text-sm font-medium flex items-center gap-2">
-                <IconPalette className="h-4 w-4" />
+                <Palette className="h-4 w-4" />
                 Theme
               </span>
               <ThemeToggle />
             </div>
-            <Button
-              onClick={signOut}
-              variant="outline"
-              size="lg"
-              className="w-full gap-2"
-            >
-              <IconLogout className="h-5 w-5" />
+            <Button onClick={signOut} variant="outline" size="lg" className="w-full gap-2">
+              <SignOut className="h-5 w-5" />
               Sign Out
             </Button>
           </div>

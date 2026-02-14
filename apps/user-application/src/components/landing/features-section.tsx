@@ -1,112 +1,112 @@
 import {
+  Code,
+  Database,
+  HardDrives,
+  Lightning,
+  Palette,
+  Path,
+  ShieldCheck,
+  Stack,
+} from '@phosphor-icons/react';
+import { Badge } from '@workspace/ui/components/badge';
+import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import { Badge } from "@workspace/ui/components/badge";
-import {
-  IconBolt,
-  IconCode,
-  IconDatabase,
-  IconPalette,
-  IconRoute,
-  IconServer,
-  IconShield,
-  IconStack,
-} from "@tabler/icons-react";
+} from '@workspace/ui/components/card';
 
 const features = [
   {
-    icon: IconRoute,
-    title: "TanStack Router",
+    icon: Path,
+    title: 'TanStack Router',
     description:
-      "Type-safe, file-based routing with powerful features like nested layouts, loaders, and search params validation.",
-    badge: "Type-Safe",
+      'Type-safe, file-based routing with powerful features like nested layouts, loaders, and search params validation.',
+    badge: 'Type-Safe',
   },
   {
-    icon: IconDatabase,
-    title: "TanStack Query",
+    icon: Database,
+    title: 'TanStack Query',
     description:
-      "Powerful data synchronization with server state management, caching, and background updates built-in.",
-    badge: "Server State",
+      'Powerful data synchronization with server state management, caching, and background updates built-in.',
+    badge: 'Server State',
   },
   {
-    icon: IconCode,
-    title: "React 19",
+    icon: Code,
+    title: 'React 19',
     description:
-      "Latest React with concurrent features, improved performance, and modern development patterns.",
-    badge: "Latest",
+      'Latest React with concurrent features, improved performance, and modern development patterns.',
+    badge: 'Latest',
   },
   {
-    icon: IconBolt,
-    title: "Vite",
+    icon: Lightning,
+    title: 'Vite',
     description:
-      "Lightning-fast build tool with hot module replacement and optimized production builds.",
-    badge: "Fast",
+      'Lightning-fast build tool with hot module replacement and optimized production builds.',
+    badge: 'Fast',
   },
   {
-    icon: IconShield,
-    title: "TypeScript",
+    icon: ShieldCheck,
+    title: 'TypeScript',
     description:
-      "Full TypeScript support with strict typing, IntelliSense, and compile-time error checking.",
-    badge: "Type-Safe",
+      'Full TypeScript support with strict typing, IntelliSense, and compile-time error checking.',
+    badge: 'Type-Safe',
   },
   {
-    icon: IconPalette,
-    title: "Tailwind CSS v4",
+    icon: Palette,
+    title: 'Tailwind CSS v4',
     description:
-      "Modern utility-first CSS framework with CSS variables and a comprehensive design system.",
-    badge: "Styling",
+      'Modern utility-first CSS framework with CSS variables and a comprehensive design system.',
+    badge: 'Styling',
   },
   {
-    icon: IconServer,
-    title: "SSR Ready",
+    icon: HardDrives,
+    title: 'SSR Ready',
     description:
-      "Server-side rendering support with seamless hydration and SEO optimization out of the box.",
-    badge: "Performance",
+      'Server-side rendering support with seamless hydration and SEO optimization out of the box.',
+    badge: 'Performance',
   },
   {
-    icon: IconStack,
-    title: "Shadcn/UI",
+    icon: Stack,
+    title: 'Shadcn/UI',
     description:
-      "Beautiful, accessible component library with customizable themes and modern design patterns.",
-    badge: "Components",
+      'Beautiful, accessible component library with customizable themes and modern design patterns.',
+    badge: 'Components',
   },
 ];
 
 const templateFeatures = [
   {
-    image: "/cloudflare.png",
-    title: "Edge Database",
+    image: '/cloudflare.png',
+    title: 'Edge Database',
     description:
-      "Serverless PostgreSQL with Cloudflare D1 or Hyperdrive. Edge-optimized with connection pooling and HTTP proxy to prevent connection overwhelm.",
-    badge: "Database",
+      'Serverless PostgreSQL with Cloudflare D1 or Hyperdrive. Edge-optimized with connection pooling and HTTP proxy to prevent connection overwhelm.',
+    badge: 'Database',
     highlight: true,
   },
   {
-    image: "/better-auth.png",
-    title: "Better Auth",
+    image: '/better-auth.png',
+    title: 'Better Auth',
     description:
-      "Complete authentication solution with social providers, email/password, and session management. Database-agnostic and edge-compatible.",
-    badge: "Authentication",
+      'Complete authentication solution with social providers, email/password, and session management. Database-agnostic and edge-compatible.',
+    badge: 'Authentication',
     highlight: true,
   },
   {
-    image: "/polar.png",
-    title: "Polar Payments",
+    image: '/polar.png',
+    title: 'Polar Payments',
     description:
-      "Modern subscription management and payment processing. No webhooks needed, developer-focused API with built-in product metadata.",
-    badge: "Payments",
+      'Modern subscription management and payment processing. No webhooks needed, developer-focused API with built-in product metadata.',
+    badge: 'Payments',
     highlight: true,
   },
   {
-    image: "/monorepo.svg",
-    title: "Monorepo Architecture",
+    image: '/monorepo.svg',
+    title: 'Monorepo Architecture',
     description:
-      "Organized workspace structure with Bun workspaces. Shared components, utilities, and configurations across multiple applications.",
-    badge: "Architecture",
+      'Organized workspace structure with Bun workspaces. Shared components, utilities, and configurations across multiple applications.',
+    badge: 'Architecture',
     highlight: true,
   },
 ];
@@ -121,8 +121,7 @@ export function FeaturesSection() {
             Production-Ready SaaS Template
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Pre-configured with authentication, database, and payments - ready
-            to deploy
+            Pre-configured with authentication, database, and payments - ready to deploy
           </p>
         </div>
 
@@ -164,8 +163,7 @@ export function FeaturesSection() {
             Built with Modern Technologies
           </h3>
           <p className="mt-4 text-lg text-muted-foreground">
-            A carefully curated stack of the best tools and libraries for React
-            development
+            A carefully curated stack of the best tools and libraries for React development
           </p>
         </div>
 

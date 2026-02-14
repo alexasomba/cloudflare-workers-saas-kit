@@ -81,7 +81,7 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
         <ol className="space-y-3">
           {recipe.instructions.map((step, idx) => (
             <li key={idx} className="flex gap-3 text-gray-300">
-              <span className="flex-shrink-0 w-6 h-6 bg-orange-500/20 text-orange-400 rounded-full flex items-center justify-center text-sm font-medium">
+              <span className="shrink-0 w-6 h-6 bg-orange-500/20 text-orange-400 rounded-full flex items-center justify-center text-sm font-medium">
                 {idx + 1}
               </span>
               <span>{step}</span>

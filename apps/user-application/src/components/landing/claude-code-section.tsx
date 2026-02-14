@@ -1,16 +1,13 @@
-import { Badge } from "@workspace/ui/components/badge";
-import { IconSparkles } from "@tabler/icons-react";
+import { Sparkle } from '@phosphor-icons/react';
+import { Badge } from '@workspace/ui/components/badge';
 
 export function ClaudeCodeSection() {
   return (
-    <section
-      id="claude-code"
-      className="sm:py-6 bg-gradient-to-b from-background to-muted/20"
-    >
+    <section id="claude-code" className="sm:py-6 bg-linear-to-b from-background to-muted/20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <Badge variant="outline" className="mb-4">
-            <IconSparkles className="h-3 w-3 mr-1" />
+            <Sparkle className="h-3 w-3 mr-1" />
             AI-Powered Setup
           </Badge>
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
@@ -31,9 +28,7 @@ export function ClaudeCodeSection() {
           </div>
 
           <div className="bg-muted/30 rounded-lg p-6 border max-w-2xl mx-auto">
-            <p className="text-muted-foreground mb-4">
-              Just say this to Claude Code:
-            </p>
+            <p className="text-muted-foreground mb-4">Just say this to Claude Code:</p>
             <div className="bg-background rounded-lg p-4 font-mono text-sm border">
               <span className="text-primary">Help me setup this project</span>
             </div>

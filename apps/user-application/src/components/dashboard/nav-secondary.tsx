@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { IconSettings } from "@tabler/icons-react";
-import { useNavigate } from "@tanstack/react-router";
+import { Gear } from '@phosphor-icons/react';
+import { useNavigate } from '@tanstack/react-router';
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@workspace/ui/components/sidebar";
-import type { Icon } from "@tabler/icons-react";
+} from '@workspace/ui/components/sidebar';
+import type { Icon } from '@phosphor-icons/react';
 
 export function NavSecondary({
   items,
@@ -30,7 +30,7 @@ export function NavSecondary({
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton onClick={() => navigate({ to: item.url })}>
-                {item.icon ? <item.icon /> : <IconSettings />}
+                {item.icon ? <item.icon /> : <Gear />}
                 <span>{item.title}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>

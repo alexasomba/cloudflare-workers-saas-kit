@@ -1,4 +1,4 @@
-import { IconBrandGithub, IconBrandX, IconExternalLink } from '@tabler/icons-react';
+import { ArrowSquareOut, GithubLogo, XLogo } from '@phosphor-icons/react';
 
 const navigation = {
   main: [
@@ -17,12 +17,12 @@ const navigation = {
     {
       name: 'GitHub',
       href: 'https://github.com/backpine/saas-kit',
-      icon: IconBrandGithub,
+      icon: GithubLogo,
     },
     {
       name: 'X',
       href: 'https://x.com/backpinelabs',
-      icon: IconBrandX,
+      icon: XLogo,
     },
   ],
 };
@@ -44,7 +44,7 @@ export function Footer() {
                     className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center group"
                   >
                     {item.name}
-                    <IconExternalLink className="ml-1 h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ArrowSquareOut className="ml-1 h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
                 </li>
               ))}
@@ -63,7 +63,7 @@ export function Footer() {
                     className="text-sm text-muted-foreground hover:text-foreground inline-flex items-center group"
                   >
                     {item.name}
-                    <IconExternalLink className="ml-1 h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <ArrowSquareOut className="ml-1 h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </a>
                 </li>
               ))}

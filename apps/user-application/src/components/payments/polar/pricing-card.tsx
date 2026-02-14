@@ -1,14 +1,14 @@
-import { IconCheck } from "@tabler/icons-react";
-import { Badge } from "@workspace/ui/components/badge";
-import { Button } from "@workspace/ui/components/button";
+import { Check } from '@phosphor-icons/react';
+import { Badge } from '@workspace/ui/components/badge';
+import { Button } from '@workspace/ui/components/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import type { Price, Product, Subscription } from "./types";
+} from '@workspace/ui/components/card';
+import type { Price, Product, Subscription } from './types';
 
 interface PricingCardProps {
   product: Product;
@@ -26,23 +26,23 @@ export function PricingCard({
   const price = product.prices[0];
 
   const formatPrice = (p: Price | undefined) => {
-    if (!p) return "Price unavailable";
-    if (p.type !== "recurring") {
-      return "Currency not specified";
+    if (!p) return 'Price unavailable';
+    if (p.type !== 'recurring') {
+      return 'Currency not specified';
     }
 
-    if (p.amountType === "fixed" && p.priceAmount) {
-      return new Intl.NumberFormat("en-US", {
-        style: "currency",
+    if (p.amountType === 'fixed' && p.priceAmount) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
         currency: p.priceCurrency.toUpperCase(),
       }).format(p.priceAmount / 100);
     }
 
-    if (p.amountType === "custom") {
+    if (p.amountType === 'custom') {
       const min = p.minimumAmount ? p.minimumAmount / 100 : 0;
       const max = p.maximumAmount ? p.maximumAmount / 100 : null;
-      const formatter = new Intl.NumberFormat("en-US", {
-        style: "currency",
+      const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
         currency: p.priceCurrency.toUpperCase(),
       });
 
@@ -52,13 +52,13 @@ export function PricingCard({
       return `From ${formatter.format(min)}`;
     }
 
-    return "Custom pricing";
+    return 'Custom pricing';
   };
 
-  const getFeatures = (metadata: Record<string, any>) => {
+  const getFeatures = (metadata: Record<string, unknown>) => {
     return Object.entries(metadata)
-      .filter(([key]) => key.includes("feature"))
-      .map(([_, value]) => value);
+      .filter(([key]) => key.includes('feature'))
+      .map(([, value]) => String(value));
   };
 
   const features = getFeatures(product.metadata);
@@ -72,9 +72,7 @@ export function PricingCard({
               <Badge variant="default" className="mb-2">
                 Current Plan
               </Badge>
-              <p className="text-sm text-muted-foreground">
-                Status: {subscription.status}
-              </p>
+              <p className="text-sm text-muted-foreground">Status: {subscription.status}</p>
             </div>
             <Button
               className="w-full"
@@ -121,22 +119,16 @@ export function PricingCard({
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle className="text-xl">{product.name}</CardTitle>
-          {product.isRecurring && (
-            <Badge variant="secondary">{product.recurringInterval}</Badge>
-          )}
+          {product.isRecurring && <Badge variant="secondary">{product.recurringInterval}</Badge>}
         </div>
-        {product.description && (
-          <CardDescription>{product.description}</CardDescription>
-        )}
+        {product.description && <CardDescription>{product.description}</CardDescription>}
       </CardHeader>
 
       <CardContent>
         <div className="mb-6">
           <div className="text-3xl font-bold">{formatPrice(price)}</div>
-          {price?.type === "recurring" && (
-            <div className="text-sm text-muted-foreground">
-              per {price.recurringInterval}
-            </div>
+          {price?.type === 'recurring' && (
+            <div className="text-sm text-muted-foreground">per {price.recurringInterval}</div>
           )}
         </div>
 
@@ -144,7 +136,7 @@ export function PricingCard({
           <div className="space-y-3 mb-6">
             {features.map((feature, index) => (
               <div key={index} className="flex items-start gap-2">
-                <IconCheck className="w-4 h-4 text-green-600 mt-0.5 shrink-0" />
+                <Check className="w-4 h-4 text-green-600 mt-0.5 shrink-0" />
                 <span className="text-sm">{feature}</span>
               </div>
             ))}

@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { IconCirclePlusFilled, IconMail } from "@tabler/icons-react";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { Button } from "@workspace/ui/components/button";
+import { Envelope, PlusCircle } from '@phosphor-icons/react';
+import { useNavigate, useRouterState } from '@tanstack/react-router';
+import { Button } from '@workspace/ui/components/button';
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@workspace/ui/components/sidebar";
-import { cn } from "@workspace/ui/lib/utils";
-import type { Icon } from "@tabler/icons-react";
+} from '@workspace/ui/components/sidebar';
+import { cn } from '@workspace/ui/lib/utils';
+import type { Icon } from '@phosphor-icons/react';
 
 export function NavMain({
   items,
@@ -35,7 +35,7 @@ export function NavMain({
               tooltip="Quick Create"
               className="bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear"
             >
-              <IconCirclePlusFilled />
+              <PlusCircle weight="fill" />
               <span>Quick Create</span>
             </SidebarMenuButton>
             <Button
@@ -43,7 +43,7 @@ export function NavMain({
               className="size-8 group-data-[collapsible=icon]:opacity-0"
               variant="outline"
             >
-              <IconMail />
+              <Envelope />
               <span className="sr-only">Inbox</span>
             </Button>
           </SidebarMenuItem>
@@ -51,8 +51,7 @@ export function NavMain({
         <SidebarMenu>
           {items.map((item) => {
             const isActive =
-              currentPath === item.url ||
-              (item.url !== "/app" && currentPath.startsWith(item.url));
+              currentPath === item.url || (item.url !== '/app' && currentPath.startsWith(item.url));
 
             return (
               <SidebarMenuItem key={item.title}>
@@ -60,8 +59,7 @@ export function NavMain({
                   tooltip={item.title}
                   onClick={() => navigate({ to: item.url })}
                   className={cn(
-                    isActive &&
-                      "bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary",
+                    isActive && 'bg-primary/10 text-primary hover:bg-primary/20 hover:text-primary'
                   )}
                 >
                   {item.icon && <item.icon />}

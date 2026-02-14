@@ -1,9 +1,9 @@
-import { cn } from "@workspace/ui/lib/utils";
-import { Button } from "@workspace/ui/components/button";
-import { ScrollArea } from "@workspace/ui/components/scroll-area";
-import { IconCreditCard, IconHome, IconMenu2 } from "@tabler/icons-react";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { useState } from "react";
+import { CreditCard, House, List } from '@phosphor-icons/react';
+import { useNavigate, useRouterState } from '@tanstack/react-router';
+import { Button } from '@workspace/ui/components/button';
+import { ScrollArea } from '@workspace/ui/components/scroll-area';
+import { cn } from '@workspace/ui/lib/utils';
+import { useState } from 'react';
 
 interface NavigationItem {
   name: string;
@@ -14,14 +14,14 @@ interface NavigationItem {
 
 const navigationItems: Array<NavigationItem> = [
   {
-    name: "Dashboard",
-    icon: IconHome,
-    href: "/app",
+    name: 'Dashboard',
+    icon: House,
+    href: '/app',
   },
   {
-    name: "Subscriptions",
-    icon: IconCreditCard,
-    href: "/app/polar/subscriptions",
+    name: 'Subscriptions',
+    icon: CreditCard,
+    href: '/app/polar/subscriptions',
   },
 ];
 
@@ -40,17 +40,15 @@ export function Sidebar({ className }: SidebarProps) {
       {/* Desktop Sidebar */}
       <div
         className={cn(
-          "hidden lg:flex lg:flex-col lg:border-r lg:border-border lg:bg-background",
-          isCollapsed ? "lg:w-16" : "lg:w-64",
-          "transition-all duration-300 ease-in-out",
-          className,
+          'hidden lg:flex lg:flex-col lg:border-r lg:border-border lg:bg-background',
+          isCollapsed ? 'lg:w-16' : 'lg:w-64',
+          'transition-all duration-300 ease-in-out',
+          className
         )}
       >
         <div className="flex h-16 items-center justify-between px-6 border-b border-border">
           {!isCollapsed && (
-            <h1 className="text-xl font-semibold tracking-tight text-foreground">
-              Dashboard
-            </h1>
+            <h1 className="text-xl font-semibold tracking-tight text-foreground">Dashboard</h1>
           )}
           <Button
             variant="ghost"
@@ -58,7 +56,7 @@ export function Sidebar({ className }: SidebarProps) {
             onClick={() => setIsCollapsed(!isCollapsed)}
             className="h-8 w-8"
           >
-            <IconMenu2 className="h-4 w-4" />
+            <List className="h-4 w-4" />
           </Button>
         </div>
 
@@ -67,22 +65,21 @@ export function Sidebar({ className }: SidebarProps) {
             {navigationItems.map((item) => {
               const isActive =
                 currentPath === item.href ||
-                (item.href !== "/app" && currentPath.startsWith(item.href));
+                (item.href !== '/app' && currentPath.startsWith(item.href));
 
               return (
                 <Button
                   key={item.name}
-                  variant={isActive ? "default" : "ghost"}
+                  variant={isActive ? 'default' : 'ghost'}
                   className={cn(
-                    "w-full justify-start gap-3 h-10",
-                    isCollapsed && "px-2 justify-center",
-                    isActive && "bg-primary text-primary-foreground shadow-sm",
-                    !isActive &&
-                      "text-muted-foreground hover:text-foreground hover:bg-accent",
+                    'w-full justify-start gap-3 h-10',
+                    isCollapsed && 'px-2 justify-center',
+                    isActive && 'bg-primary text-primary-foreground shadow-sm',
+                    !isActive && 'text-muted-foreground hover:text-foreground hover:bg-accent'
                   )}
                   onClick={() => navigate({ to: item.href })}
                 >
-                  <item.icon className="h-4 w-4 flex-shrink-0" />
+                  <item.icon className="h-4 w-4 shrink-0" />
                   {!isCollapsed && (
                     <>
                       <span className="truncate">{item.name}</span>
@@ -102,8 +99,8 @@ export function Sidebar({ className }: SidebarProps) {
         <div className="border-t border-border p-4">
           <div
             className={cn(
-              "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted/50",
-              isCollapsed && "justify-center",
+              'flex items-center gap-3 rounded-lg px-3 py-2 bg-muted/50',
+              isCollapsed && 'justify-center'
             )}
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground text-sm font-medium">
@@ -111,12 +108,8 @@ export function Sidebar({ className }: SidebarProps) {
             </div>
             {!isCollapsed && (
               <div className="flex flex-col truncate">
-                <span className="text-sm font-medium text-foreground">
-                  User
-                </span>
-                <span className="text-xs text-muted-foreground truncate">
-                  user@example.com
-                </span>
+                <span className="text-sm font-medium text-foreground">User</span>
+                <span className="text-xs text-muted-foreground truncate">user@example.com</span>
               </div>
             )}
           </div>

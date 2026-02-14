@@ -1,14 +1,9 @@
-import {
-  IconArrowLeft,
-  IconFileUnknown,
-  IconHome,
-  IconSearch,
-} from "@tabler/icons-react";
-import { Link } from "@tanstack/react-router";
-import { Button } from "@workspace/ui/components/button";
-import { Card, CardContent } from "@workspace/ui/components/card";
+import { ArrowLeft, File as FileIcon, House, MagnifyingGlass } from '@phosphor-icons/react';
+import { Link } from '@tanstack/react-router';
+import { Button } from '@workspace/ui/components/button';
+import { Card, CardContent } from '@workspace/ui/components/card';
 
-export function NotFound({ children }: { children?: any }) {
+export function NotFound({ children }: { children?: React.ReactNode }) {
   return (
     <div className="min-h-[60vh] flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
@@ -16,20 +11,15 @@ export function NotFound({ children }: { children?: any }) {
           <div className="flex flex-col items-center text-center space-y-6">
             {/* Icon */}
             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-muted">
-              <IconFileUnknown className="h-10 w-10 text-muted-foreground" />
+              <FileIcon className="h-10 w-10 text-muted-foreground" />
             </div>
 
             {/* Heading */}
             <div className="space-y-2">
-              <h1 className="text-2xl font-semibold tracking-tight">
-                Page Not Found
-              </h1>
+              <h1 className="text-2xl font-semibold tracking-tight">Page Not Found</h1>
               <div className="text-muted-foreground">
                 {children || (
-                  <p>
-                    The page you&apos;re looking for doesn&apos;t exist or has
-                    been moved.
-                  </p>
+                  <p>The page you&apos;re looking for doesn&apos;t exist or has been moved.</p>
                 )}
               </div>
             </div>
@@ -41,14 +31,14 @@ export function NotFound({ children }: { children?: any }) {
                 onClick={() => window.history.back()}
                 className="flex items-center gap-2"
               >
-                <IconArrowLeft className="h-4 w-4" />
+                <ArrowLeft className="h-4 w-4" />
                 Go Back
               </Button>
               <Button
                 variant="outline"
                 render={
                   <Link to="/" className="flex items-center gap-2">
-                    <IconHome className="h-4 w-4" />
+                    <House className="h-4 w-4" />
                     Home
                   </Link>
                 }
@@ -58,10 +48,8 @@ export function NotFound({ children }: { children?: any }) {
             {/* Help text */}
             <div className="pt-4 border-t w-full">
               <div className="flex items-center gap-2 text-sm text-muted-foreground justify-center">
-                <IconSearch className="h-4 w-4" />
-                <span>
-                  Try checking the URL or use the search functionality
-                </span>
+                <MagnifyingGlass className="h-4 w-4" />
+                <span>Try checking the URL or use the search functionality</span>
               </div>
             </div>
           </div>

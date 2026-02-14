@@ -1,6 +1,6 @@
-import { IconCircleCheck } from "@tabler/icons-react";
-import { Badge } from "@workspace/ui/components/badge";
-import { Button } from "@workspace/ui/components/button";
+import { CheckCircle } from '@phosphor-icons/react';
+import { Badge } from '@workspace/ui/components/badge';
+import { Button } from '@workspace/ui/components/button';
 
 export function CoursePromoSection() {
   return (
@@ -30,65 +30,50 @@ export function CoursePromoSection() {
           </h2>
 
           <p className="text-lg text-muted-foreground mb-8">
-            Build blazing-fast, globally distributed applications with sub-50ms
-            response times. Master the Cloudflare ecosystem through
-            project-based learning.
+            Build blazing-fast, globally distributed applications with sub-50ms response times.
+            Master the Cloudflare ecosystem through project-based learning.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8 text-left">
             <div className="space-y-3">
-              <h3 className="font-semibold text-lg mb-2">
-                What You&apos;ll Build
-              </h3>
+              <h3 className="font-semibold text-lg mb-2">What You&apos;ll Build</h3>
               <div className="space-y-2">
                 <div className="flex items-start gap-2">
-                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
-                  <span className="text-sm">
-                    SmartLinks - Complete short link service
-                  </span>
+                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <span className="text-sm">SmartLinks - Complete short link service</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
-                  <span className="text-sm">
-                    Location-based intelligent redirects
-                  </span>
+                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <span className="text-sm">Location-based intelligent redirects</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">AI-powered link analysis</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">Real-time analytics dashboard</span>
                 </div>
               </div>
             </div>
 
             <div className="space-y-3">
-              <h3 className="font-semibold text-lg mb-2">
-                Technologies Covered
-              </h3>
+              <h3 className="font-semibold text-lg mb-2">Technologies Covered</h3>
               <div className="space-y-2">
                 <div className="flex items-start gap-2">
-                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
-                  <span className="text-sm">
-                    Cloudflare D1, KV, R2, Workers AI
-                  </span>
+                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <span className="text-sm">Cloudflare D1, KV, R2, Workers AI</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
-                  <span className="text-sm">
-                    Durable Objects for state management
-                  </span>
+                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <span className="text-sm">Durable Objects for state management</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
-                  <span className="text-sm">
-                    Better Auth & Stripe integration
-                  </span>
+                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
+                  <span className="text-sm">Better Auth & Stripe integration</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <IconCircleCheck className="w-5 h-5 text-primary mt-0.5" />
+                  <CheckCircle className="w-5 h-5 text-primary mt-0.5" />
                   <span className="text-sm">TypeScript, Drizzle ORM, Bun</span>
                 </div>
               </div>
@@ -99,11 +84,7 @@ export function CoursePromoSection() {
             <Button
               size="lg"
               render={
-                <a
-                  href="https://learn.backpine.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="https://learn.backpine.com/" target="_blank" rel="noopener noreferrer">
                   Start Learning Now
                 </a>
               }

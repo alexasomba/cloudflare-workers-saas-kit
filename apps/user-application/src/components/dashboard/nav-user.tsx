@@ -1,18 +1,8 @@
-"use client";
+'use client';
 
-import {
-  IconCreditCard,
-  IconDotsVertical,
-  IconLogout,
-  IconNotification,
-  IconUserCircle,
-} from "@tabler/icons-react";
-import { useNavigate } from "@tanstack/react-router";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@workspace/ui/components/avatar";
+import { Bell, CreditCard, DotsThreeVertical, SignOut, UserCircle } from '@phosphor-icons/react';
+import { useNavigate } from '@tanstack/react-router';
+import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,13 +11,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@workspace/ui/components/dropdown-menu";
-import {
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@workspace/ui/components/sidebar";
-import { authClient } from "@/lib/auth-client";
+} from '@workspace/ui/components/dropdown-menu';
+import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@workspace/ui/components/sidebar';
+import { authClient } from '@/lib/auth-client';
 
 export function NavUser() {
   const navigate = useNavigate();
@@ -40,19 +26,19 @@ export function NavUser() {
   const user = {
     name: session.user.name,
     email: session.user.email,
-    avatar: session.user.image ?? "",
+    avatar: session.user.image ?? '',
   };
 
   const initials = user.name
-    .split(" ")
+    .split(' ')
     .map((n) => n[0])
-    .join("")
+    .join('')
     .toUpperCase()
     .slice(0, 2);
 
   const handleSignOut = async () => {
     await authClient.signOut();
-    navigate({ to: "/" });
+    navigate({ to: '/' });
   };
 
   return (
@@ -68,17 +54,13 @@ export function NavUser() {
               >
                 <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">
-                    {initials}
-                  </AvatarFallback>
+                  <AvatarFallback className="rounded-lg">{initials}</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
-                  <span className="text-muted-foreground truncate text-xs">
-                    {user.email}
-                  </span>
+                  <span className="text-muted-foreground truncate text-xs">{user.email}</span>
                 </div>
-                <IconDotsVertical className="ml-auto size-4" />
+                <DotsThreeVertical className="ml-auto size-4" />
               </SidebarMenuButton>
             )}
           />
@@ -93,39 +75,33 @@ export function NavUser() {
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <Avatar className="h-8 w-8 rounded-lg">
                     <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback className="rounded-lg">
-                      {initials}
-                    </AvatarFallback>
+                    <AvatarFallback className="rounded-lg">{initials}</AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{user.name}</span>
-                    <span className="text-muted-foreground truncate text-xs">
-                      {user.email}
-                    </span>
+                    <span className="text-muted-foreground truncate text-xs">{user.email}</span>
                   </div>
                 </div>
               </DropdownMenuLabel>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => navigate({ to: "/app" })}>
-                <IconUserCircle />
+              <DropdownMenuItem onClick={() => navigate({ to: '/app' })}>
+                <UserCircle />
                 Account
               </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => navigate({ to: "/app/polar/subscriptions" })}
-              >
-                <IconCreditCard />
+              <DropdownMenuItem onClick={() => navigate({ to: '/app/polar/subscriptions' })}>
+                <CreditCard />
                 Billing
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <IconNotification />
+                <Bell />
                 Notifications
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleSignOut}>
-              <IconLogout />
+              <SignOut />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

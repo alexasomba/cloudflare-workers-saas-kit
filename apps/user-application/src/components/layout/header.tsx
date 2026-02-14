@@ -1,15 +1,11 @@
-import { IconBell, IconMenu2, IconSearch } from "@tabler/icons-react";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@workspace/ui/components/avatar";
-import { Button } from "@workspace/ui/components/button";
-import { Input } from "@workspace/ui/components/input";
-import { cn } from "@workspace/ui/lib/utils";
-import { useState } from "react";
-import { authClient } from "@/lib/auth-client";
-import { AccountDialog } from "@/components/auth/account-dialog";
+import { Bell, List, MagnifyingGlass } from '@phosphor-icons/react';
+import { Avatar, AvatarFallback, AvatarImage } from '@workspace/ui/components/avatar';
+import { Button } from '@workspace/ui/components/button';
+import { Input } from '@workspace/ui/components/input';
+import { cn } from '@workspace/ui/lib/utils';
+import { useState } from 'react';
+import { authClient } from '@/lib/auth-client';
+import { AccountDialog } from '@/components/auth/account-dialog';
 
 interface HeaderProps {
   className?: string;
@@ -17,34 +13,29 @@ interface HeaderProps {
 }
 
 export function Header({ className, onMobileMenuToggle }: HeaderProps) {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const { data: session } = authClient.useSession();
 
   const user = session?.user;
   const fallbackText = user?.name
     ? user.name.charAt(0).toUpperCase()
-    : user?.email.charAt(0).toUpperCase() || "U";
+    : user?.email.charAt(0).toUpperCase() || 'U';
 
   return (
     <header
       className={cn(
-        "flex h-16 items-center justify-between border-b border-border bg-background px-6",
-        className,
+        'flex h-16 items-center justify-between border-b border-border bg-background px-6',
+        className
       )}
     >
       {/* Left side - Mobile menu button and search */}
       <div className="flex items-center gap-4">
-        <Button
-          variant="ghost"
-          size="icon"
-          className="lg:hidden"
-          onClick={onMobileMenuToggle}
-        >
-          <IconMenu2 className="h-5 w-5" />
+        <Button variant="ghost" size="icon" className="lg:hidden" onClick={onMobileMenuToggle}>
+          <List className="h-5 w-5" />
         </Button>
 
         <div className="relative">
-          <IconSearch className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <MagnifyingGlass className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search..."
             value={searchQuery}
@@ -57,25 +48,20 @@ export function Header({ className, onMobileMenuToggle }: HeaderProps) {
       {/* Right side - Notifications and user menu */}
       <div className="flex items-center gap-2">
         <Button variant="ghost" size="icon" className="relative">
-          <IconBell className="h-5 w-5" />
+          <Bell className="h-5 w-5" />
           <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-destructive"></span>
         </Button>
 
         <AccountDialog>
           <Button variant="ghost" className="flex items-center gap-2 px-3">
             <Avatar className="h-8 w-8">
-              <AvatarImage
-                src={user?.image || undefined}
-                alt={user?.name || "User"}
-              />
+              <AvatarImage src={user?.image || undefined} alt={user?.name || 'User'} />
               <AvatarFallback className="bg-primary text-primary-foreground text-sm">
                 {fallbackText}
               </AvatarFallback>
             </Avatar>
             <div className="hidden sm:flex flex-col items-start">
-              <span className="text-sm font-medium">
-                {user?.name || "User"}
-              </span>
+              <span className="text-sm font-medium">{user?.name || 'User'}</span>
               <span className="text-xs text-muted-foreground">Online</span>
             </div>
           </Button>

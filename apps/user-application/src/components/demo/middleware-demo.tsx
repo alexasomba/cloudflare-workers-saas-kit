@@ -1,43 +1,43 @@
 import {
-  IconAlertCircle,
-  IconBolt,
-  IconCircleCheck,
-  IconCode,
-  IconLoader2,
-  IconPlayerPlay,
-  IconServer,
-} from "@tabler/icons-react";
-import { useMutation } from "@tanstack/react-query";
-import { Alert, AlertDescription } from "@workspace/ui/components/alert";
-import { Badge } from "@workspace/ui/components/badge";
-import { Button } from "@workspace/ui/components/button";
+  CheckCircle,
+  Code,
+  HardDrives,
+  Lightning,
+  Play,
+  Spinner,
+  WarningCircle,
+} from '@phosphor-icons/react';
+import { useMutation } from '@tanstack/react-query';
+import { Alert, AlertDescription } from '@workspace/ui/components/alert';
+import { Badge } from '@workspace/ui/components/badge';
+import { Button } from '@workspace/ui/components/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import * as React from "react";
-import { examplefunction } from "@/core/functions/example-functions";
+} from '@workspace/ui/components/card';
+import * as React from 'react';
+import { examplefunction } from '@/core/functions/example-functions';
 
 export function MiddlewareDemo() {
-  const [inputValue, setInputValue] = React.useState("Hello TanStack Start!");
+  const [inputValue, setInputValue] = React.useState('Hello TanStack Start!');
 
   const mutation = useMutation({
     mutationFn: examplefunction,
     onSuccess: (data) => {
-      console.log("Client: Server function executed successfully:", data);
+      console.log('Client: Server function executed successfully:', data);
     },
     onError: (error) => {
-      console.error("Client: Server function failed:", error);
+      console.error('Client: Server function failed:', error);
     },
   });
 
   const handleExecute = () => {
     mutation.mutate({
       data: {
-        exampleKey: "exampleValue",
+        exampleKey: 'exampleValue',
       },
     });
   };
@@ -47,16 +47,15 @@ export function MiddlewareDemo() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <Badge variant="outline" className="mb-4">
-            <IconServer className="w-4 h-4 mr-2" />
+            <HardDrives className="w-4 h-4 mr-2" />
             Server Functions & Middleware
           </Badge>
           <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
             Server-Side Data Flow
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            See TanStack Start&apos;s middleware and server functions in action
-            with TanStack Query. Check your server logs to see the execution
-            flow!
+            See TanStack Start&apos;s middleware and server functions in action with TanStack Query.
+            Check your server logs to see the execution flow!
           </p>
         </div>
 
@@ -66,20 +65,16 @@ export function MiddlewareDemo() {
             <Card className="lg:col-span-1">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <IconPlayerPlay className="w-5 h-5 mr-2 text-primary" />
+                  <Play className="w-5 h-5 mr-2 text-primary" />
                   Interactive Demo
                 </CardTitle>
                 <CardDescription>
-                  Execute a server function with middleware through TanStack
-                  Query
+                  Execute a server function with middleware through TanStack Query
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label
-                    htmlFor="input-value"
-                    className="block text-sm font-medium mb-2"
-                  >
+                  <label htmlFor="input-value" className="block text-sm font-medium mb-2">
                     Message to Send
                   </label>
                   <input
@@ -98,9 +93,9 @@ export function MiddlewareDemo() {
                   className="w-full"
                 >
                   {mutation.isPending ? (
-                    <IconLoader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Spinner className="w-4 h-4 mr-2 animate-spin" />
                   ) : (
-                    <IconBolt className="w-4 h-4 mr-2" />
+                    <Lightning className="w-4 h-4 mr-2" />
                   )}
                   Execute Server Function
                 </Button>
@@ -109,7 +104,7 @@ export function MiddlewareDemo() {
                 <div className="space-y-2">
                   {mutation.isPending && (
                     <Alert>
-                      <IconLoader2 className="w-4 h-4 animate-spin" />
+                      <Spinner className="w-4 h-4 animate-spin" />
                       <AlertDescription>
                         Executing server function with middleware...
                       </AlertDescription>
@@ -118,7 +113,7 @@ export function MiddlewareDemo() {
 
                   {mutation.isSuccess && (
                     <Alert className="border-green-500 bg-green-200/10">
-                      <IconCircleCheck className="w-4 h-4 text-green-800 dark:text-green-400" />
+                      <CheckCircle className="w-4 h-4 text-green-800 dark:text-green-400" />
                       <AlertDescription className="text-green-700 dark:text-green-300">
                         <strong>Success!</strong> Response: &quot;
                         {mutation.data}&quot;
@@ -128,7 +123,7 @@ export function MiddlewareDemo() {
 
                   {mutation.isError && (
                     <Alert className="border-red-200 bg-red-50 dark:bg-red-950/20">
-                      <IconAlertCircle className="w-4 h-4 text-red-600" />
+                      <WarningCircle className="w-4 h-4 text-red-600" />
                       <AlertDescription className="text-red-800 dark:text-red-200">
                         <strong>Error:</strong> {mutation.error.message}
                       </AlertDescription>
@@ -142,12 +137,10 @@ export function MiddlewareDemo() {
             <Card className="lg:col-span-1">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <IconCode className="w-5 h-5 mr-2 text-primary" />
+                  <Code className="w-5 h-5 mr-2 text-primary" />
                   What&apos;s Happening
                 </CardTitle>
-                <CardDescription>
-                  The execution flow and server-side processing
-                </CardDescription>
+                <CardDescription>The execution flow and server-side processing</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
@@ -160,17 +153,13 @@ export function MiddlewareDemo() {
                         <span className="shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-0.5">
                           1
                         </span>
-                        <span>
-                          Client sends request via TanStack Query mutation
-                        </span>
+                        <span>Client sends request via TanStack Query mutation</span>
                       </li>
                       <li className="flex items-start">
                         <span className="shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-0.5">
                           2
                         </span>
-                        <span>
-                          Middleware executes first (adds context data)
-                        </span>
+                        <span>Middleware executes first (adds context data)</span>
                       </li>
                       <li className="flex items-start">
                         <span className="shrink-0 w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-xs font-medium mr-3 mt-0.5">
@@ -195,11 +184,10 @@ export function MiddlewareDemo() {
 
                   <div className="pt-4 border-t border-border">
                     <Alert>
-                      <IconServer className="w-4 h-4" />
+                      <HardDrives className="w-4 h-4" />
                       <AlertDescription>
-                        <strong>Check your server logs!</strong> You&apos;ll see
-                        console output from both the middleware and server
-                        function execution.
+                        <strong>Check your server logs!</strong> You&apos;ll see console output from
+                        both the middleware and server function execution.
                       </AlertDescription>
                     </Alert>
                   </div>
@@ -225,21 +213,17 @@ export function MiddlewareDemo() {
           {/* Additional Info */}
           <div className="mt-8 p-6 bg-muted/50 rounded-xl">
             <h3 className="text-lg font-semibold mb-3 flex items-center">
-              <IconBolt className="w-5 h-5 mr-2 text-primary" />
+              <Lightning className="w-5 h-5 mr-2 text-primary" />
               Key Benefits
             </h3>
             <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div>
                 <strong className="text-foreground">Type-Safe</strong>
-                <p className="text-muted-foreground">
-                  Full TypeScript support with Zod validation
-                </p>
+                <p className="text-muted-foreground">Full TypeScript support with Zod validation</p>
               </div>
               <div>
                 <strong className="text-foreground">Server-First</strong>
-                <p className="text-muted-foreground">
-                  Execute secure server-side logic seamlessly
-                </p>
+                <p className="text-muted-foreground">Execute secure server-side logic seamlessly</p>
               </div>
               <div>
                 <strong className="text-foreground">Middleware Ready</strong>

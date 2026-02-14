@@ -46,9 +46,11 @@ export function Feedback({
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    const item = localStorage.getItem(`docs-feedback-${url}`);
+    const key = `docs-feedback-${url}`;
+    const item = localStorage.getItem(key);
 
     if (item === null) return;
+
     setPrevious(JSON.parse(item) as Result);
   }, [url]);
 
