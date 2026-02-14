@@ -1,4 +1,13 @@
 import { useCallback, useRef, useState } from 'react';
+import { z } from 'zod';
+
+const TranscriptionResponseSchema = z.object({
+  text: z.string().optional(),
+});
+
+const ErrorSchema = z.object({
+  error: z.string().optional(),
+});
 
 /**
  * Hook for recording audio and transcribing it via the transcription API.
@@ -47,7 +56,7 @@ export function useAudioRecorder() {
         const audioBlob = new Blob(chunksRef.current, { type: 'audio/webm' });
 
         // Stop all tracks
-        mediaRecorder.stream.getTracks().forEach((track) => track.stop());
+        mediaRecorder.stream.getTracks().forEach((track: MediaStreamTrack) => track.stop());
 
         try {
           const formData = new FormData();
@@ -60,11 +69,11 @@ export function useAudioRecorder() {
           });
 
           if (!response.ok) {
-            const errorData = (await response.json()) as { error?: string };
+            const errorData = ErrorSchema.parse(await response.json());
             throw new Error(errorData.error || 'Transcription failed');
           }
 
-          const result = (await response.json()) as { text?: string };
+          const result = TranscriptionResponseSchema.parse(await response.json());
           setIsTranscribing(false);
           resolve(result.text || null);
         } catch (error) {

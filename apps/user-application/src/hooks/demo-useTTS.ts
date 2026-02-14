@@ -1,4 +1,14 @@
 import { useCallback, useRef, useState } from 'react';
+import { z } from 'zod';
+
+const TTSResponseSchema = z.object({
+  audio: z.string(),
+  contentType: z.string(),
+});
+
+const ErrorSchema = z.object({
+  error: z.string().optional(),
+});
 
 /**
  * Hook for text-to-speech playback via the TTS API.
@@ -29,11 +39,11 @@ export function useTTS() {
       });
 
       if (!response.ok) {
-        const errorData = (await response.json()) as { error?: string };
+        const errorData = ErrorSchema.parse(await response.json());
         throw new Error(errorData.error || 'TTS failed');
       }
 
-      const result = (await response.json()) as { audio: string; contentType: string };
+      const result = TTSResponseSchema.parse(await response.json());
 
       // Convert base64 to audio and play
       const audioData = atob(result.audio);

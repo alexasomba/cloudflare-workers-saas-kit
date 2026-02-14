@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { generateSpeech } from '@tanstack/ai';
 import { openaiSpeech } from '@tanstack/ai-openai';
 import { createFileRoute } from '@tanstack/react-router';
@@ -50,6 +49,8 @@ export const Route = createFileRoute('/demo/api/ai/tts')({
           const adapter = openaiSpeech({
             model: model,
             apiKey,
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } as any);
 
           const result = await generateSpeech({
@@ -58,9 +59,13 @@ export const Route = createFileRoute('/demo/api/ai/tts')({
             voice,
             responseFormat: format,
             speed,
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
           } as any);
 
           // result.audio is expected to be a buffer or compatible type
+
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const audioBuffer = (result as any).audio as Buffer;
           const audioBase64 = Buffer.isBuffer(audioBuffer)
             ? audioBuffer.toString('base64')

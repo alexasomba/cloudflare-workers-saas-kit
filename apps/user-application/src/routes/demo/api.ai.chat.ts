@@ -65,10 +65,13 @@ export const Route = createFileRoute('/demo/api/ai/chat')({
           const adapterConfig = {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             anthropic: () => anthropicText((model || 'claude-haiku-4-5') as any),
+
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             openai: () => openaiText((model || 'gpt-4o') as any),
+
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             gemini: () => geminiText((model || 'gemini-2.0-flash-exp') as any),
+
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ollama: () => ollamaText((model || 'mistral:7b') as any),
           };

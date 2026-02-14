@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { chat } from '@tanstack/ai';
 import { openaiText } from '@tanstack/ai-openai';
 import { createFileRoute } from '@tanstack/react-router';
@@ -83,6 +82,8 @@ export const Route = createFileRoute('/demo/api/ai/structured')({
               adapter: openaiText({
                 model: 'gpt-4o',
                 apiKey,
+
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
               } as any),
               messages: [
                 {
@@ -111,6 +112,8 @@ export const Route = createFileRoute('/demo/api/ai/structured')({
               adapter: openaiText({
                 model: 'gpt-4o',
                 apiKey,
+
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
               } as any),
               stream: false,
               messages: [

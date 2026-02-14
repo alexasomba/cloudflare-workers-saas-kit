@@ -375,7 +375,7 @@ export function DataTable({ data: initialData }: { data: Array<DataItem> }) {
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
 
-    if (active && over && active.id !== over.id) {
+    if (over && active.id !== over.id) {
       setData((prevData) => {
         const oldIndex = dataIds.indexOf(active.id);
         const newIndex = dataIds.indexOf(over.id);

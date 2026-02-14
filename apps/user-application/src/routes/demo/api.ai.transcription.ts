@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { generateTranscription } from '@tanstack/ai';
 import { openaiTranscription } from '@tanstack/ai-openai';
 import { createFileRoute } from '@tanstack/react-router';
@@ -42,6 +41,7 @@ export const Route = createFileRoute('/demo/api/ai/transcription')({
         }
 
         try {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const adapter = openaiTranscription({ model: modelValue, apiKey } as any);
 
           // Prepare audio data
@@ -58,6 +58,8 @@ export const Route = createFileRoute('/demo/api/ai/transcription')({
             adapter,
             audio: audioData,
             language: languageValue || undefined,
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             responseFormat: (responseFormatValue as any) || 'verbose_json',
           });
 

@@ -194,7 +194,7 @@ function ImagePage() {
             ) : (
               <div className="flex flex-col items-center justify-center h-64 text-gray-500">
                 <ImageIcon className="w-16 h-16 mb-4 opacity-50" />
-                <p>Enter a prompt and click "Generate Image" to create an image.</p>
+                <p>Enter a prompt and click &quot;Generate Image&quot; to create an image.</p>
               </div>
             )}
           </div>

@@ -285,7 +285,7 @@ function StructuredPage() {
           ) : !error && !isLoading ? (
             <div className="flex flex-col items-center justify-center h-64 text-gray-500">
               <ChefHat className="w-16 h-16 mb-4 opacity-50" />
-              <p>Enter a recipe name and click "Generate Recipe" to get started.</p>
+              <p>Enter a recipe name and click &quot;Generate Recipe&quot; to get started.</p>
             </div>
           ) : null}
         </div>
