@@ -17,11 +17,13 @@ import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-qu
 import { Route as DemoTableRouteImport } from './routes/demo/table'
 import { Route as DemoStoreRouteImport } from './routes/demo/store'
 import { Route as DemoMcpTodosRouteImport } from './routes/demo/mcp-todos'
-import { Route as DemoDbChatApiRouteImport } from './routes/demo/db-chat-api'
 import { Route as DemoDbChatRouteImport } from './routes/demo/db-chat'
 import { Route as DemoAiStructuredRouteImport } from './routes/demo/ai-structured'
 import { Route as DemoAiImageRouteImport } from './routes/demo/ai-image'
+import { Route as DemoAiEmbeddingsRouteImport } from './routes/demo/ai-embeddings'
 import { Route as DemoAiChatRouteImport } from './routes/demo/ai-chat'
+import { Route as ApiMcpTodosRouteImport } from './routes/api/mcp-todos'
+import { Route as ApiDbChatRouteImport } from './routes/api/db-chat'
 import { Route as DemoGuitarsIndexRouteImport } from './routes/demo/guitars/index'
 import { Route as StaticDocsIndexRouteImport } from './routes/_static/docs/index'
 import { Route as AuthAppIndexRouteImport } from './routes/_auth/app/index'
@@ -29,12 +31,12 @@ import { Route as DemoSentryTestingRouteImport } from './routes/demo/sentry.test
 import { Route as DemoGuitarsGuitarIdRouteImport } from './routes/demo/guitars/$guitarId'
 import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
 import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
-import { Route as DemoApiMcpTodosRouteImport } from './routes/demo/api.mcp-todos'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
 import { Route as ApiAiTtsRouteImport } from './routes/api/ai/tts'
 import { Route as ApiAiTranscriptionRouteImport } from './routes/api/ai/transcription'
 import { Route as ApiAiStructuredRouteImport } from './routes/api/ai/structured'
 import { Route as ApiAiImageRouteImport } from './routes/api/ai/image'
+import { Route as ApiAiEmbeddingsRouteImport } from './routes/api/ai/embeddings'
 import { Route as ApiAiChatRouteImport } from './routes/api/ai/chat'
 import { Route as StaticDocsNameRouteImport } from './routes/_static/docs/$name'
 import { Route as AuthAppPolarSubscriptionsRouteImport } from './routes/_auth/app/polar/subscriptions'
@@ -79,11 +81,6 @@ const DemoMcpTodosRoute = DemoMcpTodosRouteImport.update({
   path: '/demo/mcp-todos',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoDbChatApiRoute = DemoDbChatApiRouteImport.update({
-  id: '/demo/db-chat-api',
-  path: '/demo/db-chat-api',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DemoDbChatRoute = DemoDbChatRouteImport.update({
   id: '/demo/db-chat',
   path: '/demo/db-chat',
@@ -99,9 +96,24 @@ const DemoAiImageRoute = DemoAiImageRouteImport.update({
   path: '/demo/ai-image',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoAiEmbeddingsRoute = DemoAiEmbeddingsRouteImport.update({
+  id: '/demo/ai-embeddings',
+  path: '/demo/ai-embeddings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DemoAiChatRoute = DemoAiChatRouteImport.update({
   id: '/demo/ai-chat',
   path: '/demo/ai-chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiMcpTodosRoute = ApiMcpTodosRouteImport.update({
+  id: '/api/mcp-todos',
+  path: '/api/mcp-todos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDbChatRoute = ApiDbChatRouteImport.update({
+  id: '/api/db-chat',
+  path: '/api/db-chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoGuitarsIndexRoute = DemoGuitarsIndexRouteImport.update({
@@ -139,11 +151,6 @@ const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
   path: '/demo/form/address',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoApiMcpTodosRoute = DemoApiMcpTodosRouteImport.update({
-  id: '/demo/api/mcp-todos',
-  path: '/demo/api/mcp-todos',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
@@ -167,6 +174,11 @@ const ApiAiStructuredRoute = ApiAiStructuredRouteImport.update({
 const ApiAiImageRoute = ApiAiImageRouteImport.update({
   id: '/api/ai/image',
   path: '/api/ai/image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAiEmbeddingsRoute = ApiAiEmbeddingsRouteImport.update({
+  id: '/api/ai/embeddings',
+  path: '/api/ai/embeddings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAiChatRoute = ApiAiChatRouteImport.update({
@@ -200,23 +212,25 @@ const AuthAppPolarCheckoutSuccessRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/mcp': typeof McpRoute
+  '/api/db-chat': typeof ApiDbChatRoute
+  '/api/mcp-todos': typeof ApiMcpTodosRoute
   '/demo/ai-chat': typeof DemoAiChatRoute
+  '/demo/ai-embeddings': typeof DemoAiEmbeddingsRoute
   '/demo/ai-image': typeof DemoAiImageRoute
   '/demo/ai-structured': typeof DemoAiStructuredRoute
   '/demo/db-chat': typeof DemoDbChatRoute
-  '/demo/db-chat-api': typeof DemoDbChatApiRoute
   '/demo/mcp-todos': typeof DemoMcpTodosRoute
   '/demo/store': typeof DemoStoreRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/docs/$name': typeof StaticDocsNameRoute
   '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/embeddings': typeof ApiAiEmbeddingsRoute
   '/api/ai/image': typeof ApiAiImageRoute
   '/api/ai/structured': typeof ApiAiStructuredRoute
   '/api/ai/transcription': typeof ApiAiTranscriptionRoute
   '/api/ai/tts': typeof ApiAiTtsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/demo/api/mcp-todos': typeof DemoApiMcpTodosRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
   '/demo/guitars/$guitarId': typeof DemoGuitarsGuitarIdRoute
@@ -231,23 +245,25 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/mcp': typeof McpRoute
+  '/api/db-chat': typeof ApiDbChatRoute
+  '/api/mcp-todos': typeof ApiMcpTodosRoute
   '/demo/ai-chat': typeof DemoAiChatRoute
+  '/demo/ai-embeddings': typeof DemoAiEmbeddingsRoute
   '/demo/ai-image': typeof DemoAiImageRoute
   '/demo/ai-structured': typeof DemoAiStructuredRoute
   '/demo/db-chat': typeof DemoDbChatRoute
-  '/demo/db-chat-api': typeof DemoDbChatApiRoute
   '/demo/mcp-todos': typeof DemoMcpTodosRoute
   '/demo/store': typeof DemoStoreRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/docs/$name': typeof StaticDocsNameRoute
   '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/embeddings': typeof ApiAiEmbeddingsRoute
   '/api/ai/image': typeof ApiAiImageRoute
   '/api/ai/structured': typeof ApiAiStructuredRoute
   '/api/ai/transcription': typeof ApiAiTranscriptionRoute
   '/api/ai/tts': typeof ApiAiTtsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/demo/api/mcp-todos': typeof DemoApiMcpTodosRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
   '/demo/guitars/$guitarId': typeof DemoGuitarsGuitarIdRoute
@@ -265,23 +281,25 @@ export interface FileRoutesById {
   '/_auth': typeof AuthRouteRouteWithChildren
   '/_static': typeof StaticRouteRouteWithChildren
   '/mcp': typeof McpRoute
+  '/api/db-chat': typeof ApiDbChatRoute
+  '/api/mcp-todos': typeof ApiMcpTodosRoute
   '/demo/ai-chat': typeof DemoAiChatRoute
+  '/demo/ai-embeddings': typeof DemoAiEmbeddingsRoute
   '/demo/ai-image': typeof DemoAiImageRoute
   '/demo/ai-structured': typeof DemoAiStructuredRoute
   '/demo/db-chat': typeof DemoDbChatRoute
-  '/demo/db-chat-api': typeof DemoDbChatApiRoute
   '/demo/mcp-todos': typeof DemoMcpTodosRoute
   '/demo/store': typeof DemoStoreRoute
   '/demo/table': typeof DemoTableRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/_static/docs/$name': typeof StaticDocsNameRoute
   '/api/ai/chat': typeof ApiAiChatRoute
+  '/api/ai/embeddings': typeof ApiAiEmbeddingsRoute
   '/api/ai/image': typeof ApiAiImageRoute
   '/api/ai/structured': typeof ApiAiStructuredRoute
   '/api/ai/transcription': typeof ApiAiTranscriptionRoute
   '/api/ai/tts': typeof ApiAiTtsRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
-  '/demo/api/mcp-todos': typeof DemoApiMcpTodosRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
   '/demo/guitars/$guitarId': typeof DemoGuitarsGuitarIdRoute
@@ -298,23 +316,25 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/mcp'
+    | '/api/db-chat'
+    | '/api/mcp-todos'
     | '/demo/ai-chat'
+    | '/demo/ai-embeddings'
     | '/demo/ai-image'
     | '/demo/ai-structured'
     | '/demo/db-chat'
-    | '/demo/db-chat-api'
     | '/demo/mcp-todos'
     | '/demo/store'
     | '/demo/table'
     | '/demo/tanstack-query'
     | '/docs/$name'
     | '/api/ai/chat'
+    | '/api/ai/embeddings'
     | '/api/ai/image'
     | '/api/ai/structured'
     | '/api/ai/transcription'
     | '/api/ai/tts'
     | '/api/auth/$'
-    | '/demo/api/mcp-todos'
     | '/demo/form/address'
     | '/demo/form/simple'
     | '/demo/guitars/$guitarId'
@@ -329,23 +349,25 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/mcp'
+    | '/api/db-chat'
+    | '/api/mcp-todos'
     | '/demo/ai-chat'
+    | '/demo/ai-embeddings'
     | '/demo/ai-image'
     | '/demo/ai-structured'
     | '/demo/db-chat'
-    | '/demo/db-chat-api'
     | '/demo/mcp-todos'
     | '/demo/store'
     | '/demo/table'
     | '/demo/tanstack-query'
     | '/docs/$name'
     | '/api/ai/chat'
+    | '/api/ai/embeddings'
     | '/api/ai/image'
     | '/api/ai/structured'
     | '/api/ai/transcription'
     | '/api/ai/tts'
     | '/api/auth/$'
-    | '/demo/api/mcp-todos'
     | '/demo/form/address'
     | '/demo/form/simple'
     | '/demo/guitars/$guitarId'
@@ -362,23 +384,25 @@ export interface FileRouteTypes {
     | '/_auth'
     | '/_static'
     | '/mcp'
+    | '/api/db-chat'
+    | '/api/mcp-todos'
     | '/demo/ai-chat'
+    | '/demo/ai-embeddings'
     | '/demo/ai-image'
     | '/demo/ai-structured'
     | '/demo/db-chat'
-    | '/demo/db-chat-api'
     | '/demo/mcp-todos'
     | '/demo/store'
     | '/demo/table'
     | '/demo/tanstack-query'
     | '/_static/docs/$name'
     | '/api/ai/chat'
+    | '/api/ai/embeddings'
     | '/api/ai/image'
     | '/api/ai/structured'
     | '/api/ai/transcription'
     | '/api/ai/tts'
     | '/api/auth/$'
-    | '/demo/api/mcp-todos'
     | '/demo/form/address'
     | '/demo/form/simple'
     | '/demo/guitars/$guitarId'
@@ -396,22 +420,24 @@ export interface RootRouteChildren {
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   StaticRouteRoute: typeof StaticRouteRouteWithChildren
   McpRoute: typeof McpRoute
+  ApiDbChatRoute: typeof ApiDbChatRoute
+  ApiMcpTodosRoute: typeof ApiMcpTodosRoute
   DemoAiChatRoute: typeof DemoAiChatRoute
+  DemoAiEmbeddingsRoute: typeof DemoAiEmbeddingsRoute
   DemoAiImageRoute: typeof DemoAiImageRoute
   DemoAiStructuredRoute: typeof DemoAiStructuredRoute
   DemoDbChatRoute: typeof DemoDbChatRoute
-  DemoDbChatApiRoute: typeof DemoDbChatApiRoute
   DemoMcpTodosRoute: typeof DemoMcpTodosRoute
   DemoStoreRoute: typeof DemoStoreRoute
   DemoTableRoute: typeof DemoTableRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
   ApiAiChatRoute: typeof ApiAiChatRoute
+  ApiAiEmbeddingsRoute: typeof ApiAiEmbeddingsRoute
   ApiAiImageRoute: typeof ApiAiImageRoute
   ApiAiStructuredRoute: typeof ApiAiStructuredRoute
   ApiAiTranscriptionRoute: typeof ApiAiTranscriptionRoute
   ApiAiTtsRoute: typeof ApiAiTtsRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
-  DemoApiMcpTodosRoute: typeof DemoApiMcpTodosRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
   DemoGuitarsGuitarIdRoute: typeof DemoGuitarsGuitarIdRoute
@@ -477,13 +503,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoMcpTodosRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/db-chat-api': {
-      id: '/demo/db-chat-api'
-      path: '/demo/db-chat-api'
-      fullPath: '/demo/db-chat-api'
-      preLoaderRoute: typeof DemoDbChatApiRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/demo/db-chat': {
       id: '/demo/db-chat'
       path: '/demo/db-chat'
@@ -505,11 +524,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoAiImageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo/ai-embeddings': {
+      id: '/demo/ai-embeddings'
+      path: '/demo/ai-embeddings'
+      fullPath: '/demo/ai-embeddings'
+      preLoaderRoute: typeof DemoAiEmbeddingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/demo/ai-chat': {
       id: '/demo/ai-chat'
       path: '/demo/ai-chat'
       fullPath: '/demo/ai-chat'
       preLoaderRoute: typeof DemoAiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/mcp-todos': {
+      id: '/api/mcp-todos'
+      path: '/api/mcp-todos'
+      fullPath: '/api/mcp-todos'
+      preLoaderRoute: typeof ApiMcpTodosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/db-chat': {
+      id: '/api/db-chat'
+      path: '/api/db-chat'
+      fullPath: '/api/db-chat'
+      preLoaderRoute: typeof ApiDbChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo/guitars/': {
@@ -561,13 +601,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoFormAddressRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/api/mcp-todos': {
-      id: '/demo/api/mcp-todos'
-      path: '/demo/api/mcp-todos'
-      fullPath: '/demo/api/mcp-todos'
-      preLoaderRoute: typeof DemoApiMcpTodosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
@@ -601,6 +634,13 @@ declare module '@tanstack/react-router' {
       path: '/api/ai/image'
       fullPath: '/api/ai/image'
       preLoaderRoute: typeof ApiAiImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/ai/embeddings': {
+      id: '/api/ai/embeddings'
+      path: '/api/ai/embeddings'
+      fullPath: '/api/ai/embeddings'
+      preLoaderRoute: typeof ApiAiEmbeddingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/ai/chat': {
@@ -678,22 +718,24 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRouteRoute: AuthRouteRouteWithChildren,
   StaticRouteRoute: StaticRouteRouteWithChildren,
   McpRoute: McpRoute,
+  ApiDbChatRoute: ApiDbChatRoute,
+  ApiMcpTodosRoute: ApiMcpTodosRoute,
   DemoAiChatRoute: DemoAiChatRoute,
+  DemoAiEmbeddingsRoute: DemoAiEmbeddingsRoute,
   DemoAiImageRoute: DemoAiImageRoute,
   DemoAiStructuredRoute: DemoAiStructuredRoute,
   DemoDbChatRoute: DemoDbChatRoute,
-  DemoDbChatApiRoute: DemoDbChatApiRoute,
   DemoMcpTodosRoute: DemoMcpTodosRoute,
   DemoStoreRoute: DemoStoreRoute,
   DemoTableRoute: DemoTableRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
   ApiAiChatRoute: ApiAiChatRoute,
+  ApiAiEmbeddingsRoute: ApiAiEmbeddingsRoute,
   ApiAiImageRoute: ApiAiImageRoute,
   ApiAiStructuredRoute: ApiAiStructuredRoute,
   ApiAiTranscriptionRoute: ApiAiTranscriptionRoute,
   ApiAiTtsRoute: ApiAiTtsRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
-  DemoApiMcpTodosRoute: DemoApiMcpTodosRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
   DemoGuitarsGuitarIdRoute: DemoGuitarsGuitarIdRoute,
@@ -703,3 +745,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.tsx'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

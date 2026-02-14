@@ -1,4 +1,3 @@
- 
 import { Check, Copy } from '@phosphor-icons/react';
 import { createFileRoute, notFound } from '@tanstack/react-router';
 import 'highlight.js/styles/github-dark.css';
@@ -40,6 +39,7 @@ function CodeBlock({ children, ...props }: React.HTMLAttributes<HTMLPreElement>)
   const codeClassName = codeChild?.props?.className || '';
   const language = (codeClassName.match(/language-([a-z0-9+#-]+)/i)?.[1] || 'text').toUpperCase();
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const extractText = (node: any): string => {
     if (typeof node === 'string') return node;
     if (node?.props?.children) return extractText(node.props.children);

@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { z } from 'zod';
 
-import { addTodo, getTodos, subscribeToTodos } from '../../mcp-todos';
+import { addTodo, getTodos, subscribeToTodos } from '../../features/demo/lib/mcp-todos';
 
 export const Route = createFileRoute('/api/mcp-todos')({
   server: {

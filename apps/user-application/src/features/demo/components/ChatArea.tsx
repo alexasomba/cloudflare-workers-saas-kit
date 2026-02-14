@@ -1,8 +1,9 @@
 import { useState } from 'react';
 
-import Messages from './demo.messages';
+import { useChat, useMessages } from '../hooks/useChat';
 
-import { useChat, useMessages } from '@/hooks/demo.useChat';
+import Messages from './Messages';
+
 
 export default function ChatArea() {
   const { sendMessage } = useChat();

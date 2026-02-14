@@ -343,7 +343,7 @@ export function DataTable({ data: initialData }: { data: Array<DataItem> }) {
 
   const dataIds = React.useMemo<Array<UniqueIdentifier>>(() => data.map(({ id }) => id), [data]);
 
-  // eslint-disable-next-line react-hooks/incompatible-library
+  // eslint-disable-next-line
   const table = useReactTable({
     data,
     columns,

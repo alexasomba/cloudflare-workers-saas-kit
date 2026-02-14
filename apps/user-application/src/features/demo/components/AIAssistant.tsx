@@ -4,11 +4,12 @@ import { Store } from '@tanstack/store';
 import { useEffect, useRef, useState } from 'react';
 import { Streamdown } from 'streamdown';
 
-import GuitarRecommendation from './demo-GuitarRecommendation';
+import { useGuitarRecommendationChat } from '../hooks/useAI';
 
-import type { ChatMessages } from '@/lib/demo-ai-hook';
+import GuitarRecommendation from './GuitarRecommendation';
 
-import { useGuitarRecommendationChat } from '@/lib/demo-ai-hook';
+import type { ChatMessages } from '../hooks/useAI';
+
 
 export const showAIAssistant = new Store(false);
 

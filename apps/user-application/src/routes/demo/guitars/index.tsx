@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from '@tanstack/react-router';
 
-import guitars from '@/data/demo-guitars';
+import guitars from '@/features/demo/data/guitars';
 
 export const Route = createFileRoute('/demo/guitars/')({
   component: GuitarsIndex,

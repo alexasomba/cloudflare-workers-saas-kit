@@ -11,12 +11,12 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useRef, useState } from 'react';
 import { Streamdown } from 'streamdown';
 
-import type { ChatMessages } from '@/lib/demo-ai-hook';
+import type { ChatMessages } from '@/features/demo/hooks/useAI';
 
-import GuitarRecommendation from '@/components/demo-GuitarRecommendation';
-import { useAudioRecorder } from '@/hooks/demo-useAudioRecorder';
-import { useTTS } from '@/hooks/demo-useTTS';
-import { useGuitarRecommendationChat } from '@/lib/demo-ai-hook';
+import GuitarRecommendation from '@/features/demo/components/GuitarRecommendation';
+import { useGuitarRecommendationChat } from '@/features/demo/hooks/useAI';
+import { useAudioRecorder } from '@/features/demo/hooks/useAudioRecorder';
+import { useTTS } from '@/features/demo/hooks/useTTS';
 
 import './ai-chat.css';
 

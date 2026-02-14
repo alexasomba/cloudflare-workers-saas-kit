@@ -11,6 +11,42 @@
       "icon": { "id": "edit-code" }
     },
     {
+      "label": "Dev: Start User Application",
+      "type": "shell",
+      "command": "pnpm run dev:user-application",
+      "isBackground": true,
+      "group": "none",
+      "detail": "Start the TanStack Start frontend (Port 3000)",
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "VITE",
+            "endsPattern": "ready in"
+          }
+        }
+      ],
+      "icon": { "id": "browser" }
+    },
+    {
+      "label": "Dev: Start Data Service",
+      "type": "shell",
+      "command": "pnpm run dev:data-service",
+      "isBackground": true,
+      "group": "none",
+      "detail": "Start the Hono Backend Worker (Port 8787)",
+      "problemMatcher": [],
+      "icon": { "id": "server" }
+    },
+    {
       "label": "Types: Generate Worker Bindings",
       "type": "shell",
       "command": "pnpm run --filter user-application cf-typegen && pnpm run --filter data-service cf-typegen",
@@ -18,6 +54,15 @@
       "detail": "Update worker-configuration.d.ts from wrangler.jsonc",
       "problemMatcher": [],
       "icon": { "id": "vm-connect" }
+    },
+    {
+      "label": "DB: Build Data Ops (Required after Schema change)",
+      "type": "shell",
+      "command": "pnpm run build:data-ops",
+      "group": "build",
+      "detail": "Rebuild @repo/data-ops package to propagate schema changes",
+      "problemMatcher": ["$tsc"],
+      "icon": { "id": "package" }
     },
     {
       "label": "DB: Generate Migration",
@@ -29,22 +74,40 @@
       "icon": { "id": "database" }
     },
     {
-      "label": "DB: Apply Migration (Production)",
+      "label": "DB: Apply Migration (Local D1)",
       "type": "shell",
-      "command": "pnpm run --filter @repo/data-ops drizzle:migrate",
+      "command": "cd apps/user-application && npx wrangler d1 execute DB --local --file=$(ls -t ../../packages/data-ops/src/drizzle/*.sql | head -n 1)",
       "group": "none",
-      "detail": "Push pending migrations to the production Cloudflare D1 database",
+      "detail": "Apply the latest migration to the local D1 database using wrangler",
       "problemMatcher": [],
       "icon": { "id": "database" }
     },
     {
-      "label": "Auth: Generate Schema",
+      "label": "DB: Apply Migration (Production D1)",
       "type": "shell",
-      "command": "pnpm run --filter @repo/data-ops better-auth:generate",
+      "command": "cd apps/user-application && npx wrangler d1 migrations apply DB --remote",
       "group": "none",
-      "detail": "Update the Drizzle auth schema based on Better Auth config",
+      "detail": "Apply pending migrations to the production Cloudflare D1 database",
       "problemMatcher": [],
-      "icon": { "id": "database" }
+      "icon": { "id": "cloud-upload" }
+    },
+    {
+      "label": "Check: Quality Gate (Lint, Typecheck, Test)",
+      "type": "shell",
+      "command": "npx nx run-many -t lint typecheck test",
+      "group": "test",
+      "detail": "Run all verification checks across the workspace",
+      "problemMatcher": ["$tsc"],
+      "icon": { "id": "check-all" }
+    },
+    {
+      "label": "Check: Run All Tests",
+      "type": "shell",
+      "command": "npx nx run-many -t test",
+      "group": "test",
+      "detail": "Run all Vitest tests across the workspace",
+      "problemMatcher": [],
+      "icon": { "id": "beaker" }
     },
     {
       "label": "Check: Lint All",

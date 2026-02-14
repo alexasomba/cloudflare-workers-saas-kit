@@ -16,7 +16,7 @@ import {
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 
-import TanChatAIAssistant from './demo-AIAssistant.tsx';
+import TanChatAIAssistant from '@/features/demo/components/AIAssistant';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);

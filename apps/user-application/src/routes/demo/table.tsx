@@ -11,7 +11,7 @@ import {
 } from '@tanstack/react-table';
 import React from 'react';
 
-import type { Person } from '@/data/demo-table-data';
+import type { Person } from '@/features/demo/data/table-data';
 import type { RankingInfo } from '@tanstack/match-sorter-utils';
 import type {
   Column,
@@ -21,7 +21,7 @@ import type {
   SortingFn,
 } from '@tanstack/react-table';
 
-import { makeData } from '@/data/demo-table-data';
+import { makeData } from '@/features/demo/data/table-data';
 
 export const Route = createFileRoute('/demo/table')({
   component: TableDemo,
@@ -106,7 +106,7 @@ function TableDemo() {
   const [data, setData] = React.useState<Array<Person>>(() => makeData(5_000));
   const refreshData = () => setData(() => makeData(50_000)); // stress test
 
-  // eslint-disable-next-line react-hooks/incompatible-library
+  // eslint-disable-next-line
   const table = useReactTable({
     data,
     columns,
