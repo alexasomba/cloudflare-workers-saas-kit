@@ -14,7 +14,7 @@ function ORPCTodos() {
   const [todos, setTodos] = useState<Array<Todo>>([]);
 
   useEffect(() => {
-    const eventSource = new EventSource('/demo/api/mcp-todos');
+    const eventSource = new EventSource('/api/mcp-todos');
     eventSource.onmessage = (event) => {
       setTodos(JSON.parse(event.data));
     };
@@ -24,7 +24,7 @@ function ORPCTodos() {
   const [todo, setTodo] = useState('');
 
   const submitTodo = useCallback(async () => {
-    await fetch('/demo/api/mcp-todos', {
+    await fetch('/api/mcp-todos', {
       method: 'POST',
       body: JSON.stringify({ title: todo }),
     });
