@@ -9,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@workspace/ui/components/sidebar';
+
 import type { Icon } from '@phosphor-icons/react';
 
 export function NavSecondary({

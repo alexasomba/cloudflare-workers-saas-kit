@@ -40,10 +40,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import * as React from 'react';
-import { useState } from 'react';
-import { z } from 'zod';
-
 import { Badge } from '@workspace/ui/components/badge';
 import { Button } from '@workspace/ui/components/button';
 import { Checkbox } from '@workspace/ui/components/checkbox';
@@ -73,6 +69,12 @@ import {
   TableRow,
 } from '@workspace/ui/components/table';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@workspace/ui/components/tabs';
+import * as React from 'react';
+import { useState } from 'react';
+import { z } from 'zod';
+
+import type { DragEndEvent, UniqueIdentifier } from '@dnd-kit/core';
+import type { RankingInfo } from '@tanstack/match-sorter-utils';
 import type {
   ColumnDef,
   ColumnFiltersState,
@@ -81,8 +83,6 @@ import type {
   SortingState,
   VisibilityState,
 } from '@tanstack/react-table';
-import type { RankingInfo } from '@tanstack/match-sorter-utils';
-import type { DragEndEvent, UniqueIdentifier } from '@dnd-kit/core';
 
 declare module '@tanstack/react-table' {
   interface FilterFns {

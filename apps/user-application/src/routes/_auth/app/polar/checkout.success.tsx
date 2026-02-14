@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import { Button } from '@workspace/ui/components/button';
 import { z } from 'zod';
+
 import { collectSubscription, validPayment } from '@/core/functions/payments';
 
 const searchSchema = z.object({

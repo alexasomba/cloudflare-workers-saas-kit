@@ -12,11 +12,11 @@ import { useEffect, useRef, useState } from 'react';
 import { Streamdown } from 'streamdown';
 
 import type { ChatMessages } from '@/lib/demo-ai-hook';
+
+import GuitarRecommendation from '@/components/demo-GuitarRecommendation';
 import { useAudioRecorder } from '@/hooks/demo-useAudioRecorder';
 import { useTTS } from '@/hooks/demo-useTTS';
 import { useGuitarRecommendationChat } from '@/lib/demo-ai-hook';
-
-import GuitarRecommendation from '@/components/demo-GuitarRecommendation';
 
 import './ai-chat.css';
 

@@ -13,8 +13,9 @@ import {
 import { ThemeToggle } from '@workspace/ui/components/theme-toggle';
 import { cn } from '@workspace/ui/lib/utils';
 import * as React from 'react';
-import { authClient } from '@/lib/auth-client';
+
 import { AccountDialog } from '@/components/auth/account-dialog';
+import { authClient } from '@/lib/auth-client';
 
 interface NavigationItem {
   label: string;

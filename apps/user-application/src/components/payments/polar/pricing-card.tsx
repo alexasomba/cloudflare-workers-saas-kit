@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@workspace/ui/components/card';
+
 import type { Price, Product, Subscription } from './types';
 
 interface PricingCardProps {

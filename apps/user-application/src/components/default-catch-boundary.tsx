@@ -17,6 +17,7 @@ import {
   CollapsibleTrigger,
 } from '@workspace/ui/components/collapsible';
 import { useState } from 'react';
+
 import type { ErrorComponentProps } from '@tanstack/react-router';
 
 export function DefaultCatchBoundary({ error }: ErrorComponentProps) {

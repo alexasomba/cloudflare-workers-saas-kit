@@ -34,7 +34,6 @@ import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
 import { Route as DemoApiMcpTodosRouteImport } from './routes/demo/api.mcp-todos'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
 import { Route as StaticDocsNameRouteImport } from './routes/_static/docs/$name'
-import { Route as DemoApiAiTtscopyRouteImport } from './routes/demo/api.ai.tts copy'
 import { Route as DemoApiAiTtsRouteImport } from './routes/demo/api.ai.tts'
 import { Route as DemoApiAiTranscriptionRouteImport } from './routes/demo/api.ai.transcription'
 import { Route as DemoApiAiStructuredRouteImport } from './routes/demo/api.ai.structured'
@@ -167,11 +166,6 @@ const StaticDocsNameRoute = StaticDocsNameRouteImport.update({
   path: '/docs/$name',
   getParentRoute: () => StaticRouteRoute,
 } as any)
-const DemoApiAiTtscopyRoute = DemoApiAiTtscopyRouteImport.update({
-  id: '/demo/api/ai/tts copy',
-  path: '/demo/api/ai/tts copy',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const DemoApiAiTtsRoute = DemoApiAiTtsRouteImport.update({
   id: '/demo/api/ai/tts',
   path: '/demo/api/ai/tts',
@@ -246,7 +240,6 @@ export interface FileRoutesByFullPath {
   '/demo/api/ai/structured': typeof DemoApiAiStructuredRoute
   '/demo/api/ai/transcription': typeof DemoApiAiTranscriptionRoute
   '/demo/api/ai/tts': typeof DemoApiAiTtsRoute
-  '/demo/api/ai/tts copy': typeof DemoApiAiTtscopyRoute
   '/app/polar/checkout/success': typeof AuthAppPolarCheckoutSuccessRoute
 }
 export interface FileRoutesByTo {
@@ -280,7 +273,6 @@ export interface FileRoutesByTo {
   '/demo/api/ai/structured': typeof DemoApiAiStructuredRoute
   '/demo/api/ai/transcription': typeof DemoApiAiTranscriptionRoute
   '/demo/api/ai/tts': typeof DemoApiAiTtsRoute
-  '/demo/api/ai/tts copy': typeof DemoApiAiTtscopyRoute
   '/app/polar/checkout/success': typeof AuthAppPolarCheckoutSuccessRoute
 }
 export interface FileRoutesById {
@@ -317,7 +309,6 @@ export interface FileRoutesById {
   '/demo/api/ai/structured': typeof DemoApiAiStructuredRoute
   '/demo/api/ai/transcription': typeof DemoApiAiTranscriptionRoute
   '/demo/api/ai/tts': typeof DemoApiAiTtsRoute
-  '/demo/api/ai/tts copy': typeof DemoApiAiTtscopyRoute
   '/_auth/app/polar/checkout/success': typeof AuthAppPolarCheckoutSuccessRoute
 }
 export interface FileRouteTypes {
@@ -353,7 +344,6 @@ export interface FileRouteTypes {
     | '/demo/api/ai/structured'
     | '/demo/api/ai/transcription'
     | '/demo/api/ai/tts'
-    | '/demo/api/ai/tts copy'
     | '/app/polar/checkout/success'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -387,7 +377,6 @@ export interface FileRouteTypes {
     | '/demo/api/ai/structured'
     | '/demo/api/ai/transcription'
     | '/demo/api/ai/tts'
-    | '/demo/api/ai/tts copy'
     | '/app/polar/checkout/success'
   id:
     | '__root__'
@@ -423,7 +412,6 @@ export interface FileRouteTypes {
     | '/demo/api/ai/structured'
     | '/demo/api/ai/transcription'
     | '/demo/api/ai/tts'
-    | '/demo/api/ai/tts copy'
     | '/_auth/app/polar/checkout/success'
   fileRoutesById: FileRoutesById
 }
@@ -455,7 +443,6 @@ export interface RootRouteChildren {
   DemoApiAiStructuredRoute: typeof DemoApiAiStructuredRoute
   DemoApiAiTranscriptionRoute: typeof DemoApiAiTranscriptionRoute
   DemoApiAiTtsRoute: typeof DemoApiAiTtsRoute
-  DemoApiAiTtscopyRoute: typeof DemoApiAiTtscopyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -635,13 +622,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StaticDocsNameRouteImport
       parentRoute: typeof StaticRouteRoute
     }
-    '/demo/api/ai/tts copy': {
-      id: '/demo/api/ai/tts copy'
-      path: '/demo/api/ai/tts copy'
-      fullPath: '/demo/api/ai/tts copy'
-      preLoaderRoute: typeof DemoApiAiTtscopyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/demo/api/ai/tts': {
       id: '/demo/api/ai/tts'
       path: '/demo/api/ai/tts'
@@ -761,8 +741,17 @@ const rootRouteChildren: RootRouteChildren = {
   DemoApiAiStructuredRoute: DemoApiAiStructuredRoute,
   DemoApiAiTranscriptionRoute: DemoApiAiTranscriptionRoute,
   DemoApiAiTtsRoute: DemoApiAiTtsRoute,
-  DemoApiAiTtscopyRoute: DemoApiAiTtscopyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.tsx'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

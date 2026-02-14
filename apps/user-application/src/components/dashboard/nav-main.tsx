@@ -11,6 +11,7 @@ import {
   SidebarMenuItem,
 } from '@workspace/ui/components/sidebar';
 import { cn } from '@workspace/ui/lib/utils';
+
 import type { Icon } from '@phosphor-icons/react';
 
 export function NavMain({

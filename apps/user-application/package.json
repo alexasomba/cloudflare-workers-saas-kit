@@ -15,6 +15,7 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@cloudflare/tanstack-ai": "^0.1.1",
     "@cloudflare/vite-plugin": "^1.25.0",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/modifiers": "^9.0.0",
@@ -43,6 +44,7 @@
     "@tanstack/react-db": "^0.1.70",
     "@tanstack/react-devtools": "^0.7.11",
     "@tanstack/react-form": "^1.28.0",
+    "@tanstack/react-hotkeys": "^0.1.0",
     "@tanstack/react-query": "^5.90.21",
     "@tanstack/react-query-devtools": "^5.91.3",
     "@tanstack/react-router": "^1.159.5",
@@ -80,6 +82,8 @@
     "@tanstack/devtools-event-client": "^0.4.0",
     "@tanstack/devtools-vite": "^0.3.12",
     "@tanstack/eslint-config": "^0.3.4",
+    "@tanstack/react-form-devtools": "^0.2.15",
+    "@tanstack/react-hotkeys-devtools": "^0.1.0",
     "@tanstack/router-cli": "^1.159.9",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/react": "^16.3.2",

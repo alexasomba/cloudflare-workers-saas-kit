@@ -1,5 +1,6 @@
 import { toolDefinition } from '@tanstack/ai';
 import { z } from 'zod';
+
 import guitars from '@/data/demo-guitars';
 
 // Tool definition for getting guitars

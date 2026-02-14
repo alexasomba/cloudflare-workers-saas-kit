@@ -4,8 +4,9 @@ import { Button } from '@workspace/ui/components/button';
 import { Input } from '@workspace/ui/components/input';
 import { cn } from '@workspace/ui/lib/utils';
 import { useState } from 'react';
-import { authClient } from '@/lib/auth-client';
+
 import { AccountDialog } from '@/components/auth/account-dialog';
+import { authClient } from '@/lib/auth-client';
 
 interface HeaderProps {
   className?: string;

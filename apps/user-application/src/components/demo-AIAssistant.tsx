@@ -1,12 +1,13 @@
+import { CaretRight, PaperPlaneRight, Robot, X } from '@phosphor-icons/react';
 import { useStore } from '@tanstack/react-store';
 import { Store } from '@tanstack/store';
 import { useEffect, useRef, useState } from 'react';
-
-import { CaretRight, PaperPlaneRight, Robot, X } from '@phosphor-icons/react';
 import { Streamdown } from 'streamdown';
 
 import GuitarRecommendation from './demo-GuitarRecommendation';
+
 import type { ChatMessages } from '@/lib/demo-ai-hook';
+
 import { useGuitarRecommendationChat } from '@/lib/demo-ai-hook';
 
 export const showAIAssistant = new Store(false);

@@ -1,5 +1,6 @@
 import { TanStackDevtools } from '@tanstack/react-devtools';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
+
 import TanStackQueryDevtools from '../integrations/tanstack-query/devtools';
 import AiDevtools from '../lib/ai-devtools';
 import StoreDevtools from '../lib/demo-store-devtools';

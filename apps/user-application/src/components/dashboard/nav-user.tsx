@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@workspace/ui/components/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@workspace/ui/components/sidebar';
+
 import { authClient } from '@/lib/auth-client';
 
 export function NavUser() {

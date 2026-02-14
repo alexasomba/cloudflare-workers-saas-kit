@@ -1,5 +1,3 @@
-import { Link } from '@tanstack/react-router';
-
 import {
   Chats,
   ChefHat,
@@ -15,7 +13,9 @@ import {
   WebhooksLogo,
   X,
 } from '@phosphor-icons/react';
+import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
+
 import TanChatAIAssistant from './demo-AIAssistant.tsx';
 
 export default function Header() {

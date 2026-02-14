@@ -1,24 +1,25 @@
-import { Button } from "@workspace/ui/components/button";
+import { Button } from '@workspace/ui/components/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@workspace/ui/components/card";
-import { Input } from "@workspace/ui/components/input";
+} from '@workspace/ui/components/card';
+import { Input } from '@workspace/ui/components/input';
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "@workspace/ui/components/input-otp";
-import { useState } from "react";
-import { authClient } from "@/lib/auth-client";
+} from '@workspace/ui/components/input-otp';
+import { useState } from 'react';
+
+import { authClient } from '@/lib/auth-client';
 
 export function GoogleLogin() {
-  const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
+  const [email, setEmail] = useState('');
+  const [otp, setOtp] = useState('');
   const [otpSent, setOtpSent] = useState(false);
   const [isSendingOtp, setIsSendingOtp] = useState(false);
   const [isSigningIn, setIsSigningIn] = useState(false);
@@ -26,8 +27,8 @@ export function GoogleLogin() {
 
   const handleGoogleSignIn = async () => {
     await authClient.signIn.social({
-      provider: "google",
-      callbackURL: "/app",
+      provider: 'google',
+      callbackURL: '/app',
     });
   };
 
@@ -37,11 +38,11 @@ export function GoogleLogin() {
     try {
       await authClient.emailOtp.sendVerificationOtp({
         email,
-        type: "sign-in",
+        type: 'sign-in',
       });
       setOtpSent(true);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Failed to send OTP");
+      setError(e instanceof Error ? e.message : 'Failed to send OTP');
     } finally {
       setIsSendingOtp(false);
     }
@@ -56,7 +57,7 @@ export function GoogleLogin() {
         otp,
       });
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Failed to sign in");
+      setError(e instanceof Error ? e.message : 'Failed to sign in');
     } finally {
       setIsSigningIn(false);
     }
@@ -70,16 +71,8 @@ export function GoogleLogin() {
           <CardDescription>Sign in to your account to continue</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button
-            onClick={handleGoogleSignIn}
-            className="w-full h-12 text-base"
-            variant="outline"
-          >
-            <svg
-              className="mr-2 h-5 w-5"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-            >
+          <Button onClick={handleGoogleSignIn} className="w-full h-12 text-base" variant="outline">
+            <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                 fill="#4285F4"
@@ -118,7 +111,7 @@ export function GoogleLogin() {
                 className="w-full h-12 text-base"
                 disabled={!email || isSendingOtp}
               >
-                {isSendingOtp ? "Sending code…" : "Send code"}
+                {isSendingOtp ? 'Sending code…' : 'Send code'}
               </Button>
             ) : (
               <>
@@ -154,12 +147,12 @@ export function GoogleLogin() {
                   className="w-full h-12 text-base"
                   disabled={otp.length !== 6 || isSigningIn}
                 >
-                  {isSigningIn ? "Signing in…" : "Sign in"}
+                  {isSigningIn ? 'Signing in…' : 'Sign in'}
                 </Button>
                 <Button
                   onClick={() => {
                     setOtpSent(false);
-                    setOtp("");
+                    setOtp('');
                     setError(null);
                   }}
                   className="w-full"
@@ -171,9 +164,7 @@ export function GoogleLogin() {
               </>
             )}
 
-            {error ? (
-              <div className="text-sm text-destructive">{error}</div>
-            ) : null}
+            {error ? <div className="text-sm text-destructive">{error}</div> : null}
           </div>
         </CardContent>
       </Card>

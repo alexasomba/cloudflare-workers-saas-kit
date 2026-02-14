@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 
 import type { Message } from '@/db-collections';
 import type { Collection, UtilsRecord } from '@tanstack/react-db';
+
 import { messagesCollection } from '@/db-collections';
 
 function useStreamConnection<

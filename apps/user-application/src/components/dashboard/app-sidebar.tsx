@@ -28,6 +28,7 @@ import {
   SidebarMenuItem,
 } from '@workspace/ui/components/sidebar';
 import * as React from 'react';
+
 import { NavDocuments } from './nav-documents';
 import { NavMain } from './nav-main';
 import { NavSecondary } from './nav-secondary';

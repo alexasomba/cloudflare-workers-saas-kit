@@ -19,6 +19,7 @@ import {
   CardTitle,
 } from '@workspace/ui/components/card';
 import * as React from 'react';
+
 import { examplefunction } from '@/core/functions/example-functions';
 
 export function MiddlewareDemo() {
