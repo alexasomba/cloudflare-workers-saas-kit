@@ -61,6 +61,7 @@ This project follows a **Test-Driven Development (TDD)** workflow. Every feature
 - **Server Functions vs. Data Service**:
   - Use **TanStack Start Server Functions** for UI-specific data fetching, mutations, and logic tightly coupled to a route.
   - Use the **Data Service (Hono)** for complex data processing, external integrations, or APIs that need to be accessible across multiple applications.
+  - **Inter-Worker RPC**: Use `env.DATA_SERVICE` to make secure, typed RPC calls from the User Application to the Data Service.
 - **State Management**:
   - **TanStack Query**: Use for all server state (fetching, caching, synchronization).
   - **TanStack Store**: Use for transient, client-side UI state that doesn't persist across sessions.

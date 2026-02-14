@@ -20,4 +20,10 @@
       "migrations_dir": "packages/data-ops/src/drizzle",
     },
   ],
+  "services": [
+    {
+      "binding": "DATA_SERVICE",
+      "service": "saas-kit-data-service",
+    },
+  ],
 }
