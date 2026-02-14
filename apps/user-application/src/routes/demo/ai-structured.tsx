@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Streamdown } from 'streamdown';
 import { z } from 'zod';
 
-import type { Recipe } from './api.ai.structured';
+import type { Recipe } from '../api/ai/structured';
 
 type Mode = 'structured' | 'oneshot';
 

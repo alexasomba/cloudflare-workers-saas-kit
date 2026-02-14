@@ -1,6 +1,5 @@
 import { createCollection, localOnlyCollectionOptions } from '@tanstack/react-db';
 import { createFileRoute } from '@tanstack/react-router';
-import { json } from '@tanstack/react-start';
 import { z } from 'zod';
 
 const IncomingMessageSchema = z.object({
@@ -67,12 +66,13 @@ export const Route = createFileRoute('/demo/db-chat-api')({
         });
       },
       POST: async ({ request }) => {
-        const message = IncomingMessageSchema.safeParse(await request.json());
-        if (!message.success) {
-          return new Response(message.error.message, { status: 400 });
+        const message = await request.json();
+        const parsedMessage = IncomingMessageSchema.safeParse(message);
+        if (!parsedMessage.success) {
+          return new Response(parsedMessage.error.message, { status: 400 });
         }
-        sendMessage(message.data);
-        return json(message.data);
+        sendMessage(parsedMessage.data);
+        return Response.json(parsedMessage.data); // Use Response.json()
       },
     },
   },

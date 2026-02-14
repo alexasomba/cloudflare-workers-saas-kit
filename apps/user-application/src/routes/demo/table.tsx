@@ -106,6 +106,7 @@ function TableDemo() {
   const [data, setData] = React.useState<Array<Person>>(() => makeData(5_000));
   const refreshData = () => setData(() => makeData(50_000)); // stress test
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,
