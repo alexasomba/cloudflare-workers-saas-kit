@@ -26,4 +26,7 @@
       "service": "saas-kit-data-service",
     },
   ],
+  "ai": {
+    "binding": "AI",
+  },
 }

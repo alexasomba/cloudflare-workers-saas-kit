@@ -56,49 +56,56 @@ This project follows a **Test-Driven Development (TDD)** workflow. Every feature
 
 ## Development Conventions
 
-### Architecture & State Strategy
+### Architecture & TanStack Ecosystem Strategy
+
+- **TanStack Start**: The primary full-stack framework. Use **Server Functions** for UI-specific data fetching and mutations.
+- **TanStack Router**: File-based, type-safe routing. Use `createFileRoute` for all routes and leverage **Loaders** for pre-fetching data.
+- **TanStack Query**: The "Server State" engine. Use for caching, synchronization with D1, and managing all async operations.
+- **TanStack DB (Local-First)**: Use for features requiring offline capabilities. D1 is the "Source of Truth."
+- **TanStack Form**: Use for all form management with Zod validation.
+- **TanStack Table**: Use for data-heavy views.
+- **TanStack AI**: Orchestrate LLM integrations. Prefer **Streaming** responses.
+- **TanStack Store**: Use for global **transient** UI state only.
+
+### Cloudflare Services Strategy
+
+Maximize the Cloudflare ecosystem by choosing the right tool for the job:
+
+- **D1 (SQL Database)**: Primary relational storage. Managed via **Drizzle ORM** in `packages/data-ops`.
+- **KV (Key-Value)**: Use for high-read, low-latency configuration, user preferences, or simple caching that doesn't require SQL relations.
+- **R2 (Object Storage)**: Use for large assets, user uploads, and file storage.
+- **Durable Objects (DO)**: Use for stateful coordination, real-time collaboration (WebSockets), or features requiring strong consistency for a specific entity (e.g., a shared document or a game room).
+- **Workflows**: Use for long-running, multi-step processes that require reliability and retries (e.g., multi-stage onboarding, complex billing cycles).
+- **Queues**: Use for asynchronous background tasks, decoupling services, and handling spikes in traffic (e.g., processing email notifications).
+- **Workers AI**: Use for built-in, low-latency AI inference (LLMs, Whisper, Image generation) directly on the edge.
+- **Analytics Engine**: Use for gathering high-cardinality telemetry and usage metrics without overloading the primary database.
+
+### Shared Services Boundary
 
 - **Server Functions vs. Data Service**:
-  - Use **TanStack Start Server Functions** for UI-specific data fetching, mutations, and logic tightly coupled to a route.
-  - Use the **Data Service (Hono)** for complex data processing, external integrations, or APIs that need to be accessible across multiple applications.
-  - **Inter-Worker RPC**: Use `env.DATA_SERVICE` to make secure, typed RPC calls from the User Application to the Data Service.
-- **State Management**:
-  - **TanStack Query**: Use for all server state (fetching, caching, synchronization).
-  - **TanStack Store**: Use for transient, client-side UI state that doesn't persist across sessions.
-
-### AI & LLM Integration
-
-- **Tooling**: Use `@tanstack/ai` for integrating LLMs.
-- **Streaming**: Prefer streaming responses for AI chat features to improve perceived performance.
-- **Patterns**: Define AI system prompts and model configurations in a centralized utility within the application to ensure consistency.
+  - Use **Server Functions** for logic tightly coupled to the UI/Route.
+  - Use the **Data Service (Hono)** for standalone APIs, shared logic, background tasks, or orchestrating **Durable Objects** and **Workflows**.
 
 ### Coding Standards
 
-- **TypeScript**: Strict mode. Use `import type` for type-only imports.
-- **Naming**: Use **kebab-case** for all filenames (e.g., `user-profile-table.tsx`).
-- **Components**: Functional components with React Hooks. Prefer Base UI composition patterns.
-- **Styling**: Use **Tailwind CSS v4**. Prefer utility-first classes directly in components. Avoid `@apply` in CSS files unless absolutely necessary for third-party overrides.
-- **Imports**: Use `@/*` for application-local source and `@workspace/ui/*` for shared components.
+- **TypeScript**: Strict mode. Use `import type`.
+- **Naming**: Use **kebab-case** for all filenames.
+- **Components**: Functional components with React Hooks. Prefer Base UI.
+- **Styling**: Use **Tailwind CSS v4**. Prefer utility-first classes. Avoid `@apply`.
+- **Imports**: Use `@/*` for app-local source and `@workspace/ui/*` for shared components.
 
 ### Data & Auth Guidelines
 
-- **Schema Location**: NEVER define Drizzle schemas in apps. Define them in `packages/data-ops/src/drizzle` and export/import them.
-- **Schema Change Loop**: When modifying database schemas:
-  1. Update schema in `packages/data-ops`.
-  2. Run `pnpm run build:data-ops`.
-  3. Update application code to reflect changes.
+- **Schema Location**: NEVER define Drizzle schemas in apps. Define them in `packages/data-ops/src/drizzle`.
+- **Schema Change Loop**: Update schema -> `pnpm run build:data-ops` -> Update app code.
 - **Bindings**: Access Cloudflare bindings globally using `import { env } from "cloudflare:workers"`.
 - **Database Init**: Use the custom server entry in `apps/user-application/src/server.ts` to initialize database and auth on every request.
 
 ### Database Migrations (Local)
 
-To apply migrations locally during development:
-
 ```bash
 npx wrangler d1 execute DB --local --file=../../packages/data-ops/src/drizzle/<migration_file>.sql
 ```
-
-_(Run from within `apps/user-application`)_
 
 ## 🚨 Session Close Protocol
 
