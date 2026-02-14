@@ -40,6 +40,19 @@ This installs dependencies and performs an initial build of the `@repo/data-ops`
 - **Type Generation**: `pnpm run --filter user-application cf-typegen`
 - **Lint All**: `pnpm run lint`
 - **Typecheck All**: `pnpm run typecheck`
+- **Test All**: `npx nx run-many -t test`
+
+## Development Workflow
+
+This project follows a **Test-Driven Development (TDD)** workflow. Every feature or fix must begin with a test case that defines the expected behavior before implementation starts.
+
+1.  **Research & Context**: Always use `codebase_investigator` to understand existing patterns and perform **Web Search** for up-to-date documentation on external libraries (Cloudflare, TanStack, etc.).
+2.  **Test First**: Write a failing test that captures the requirement.
+3.  **Implementation**: Write the minimum code necessary to pass the test.
+4.  **Verification**: After every change, execute the quality gates:
+    - `pnpm run typecheck`
+    - `pnpm run lint`
+    - `npx nx run-many -t test` (vitest)
 
 ## Development Conventions
 
