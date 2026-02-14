@@ -1,10 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { createWorkersAiChat } from '@cloudflare/tanstack-ai';
 import { chat, maxIterations, toServerSentEventsResponse } from '@tanstack/ai';
 import { anthropicText } from '@tanstack/ai-anthropic';
 import { geminiText } from '@tanstack/ai-gemini';
 import { ollamaText } from '@tanstack/ai-ollama';
 import { openaiText } from '@tanstack/ai-openai';
 import { createFileRoute } from '@tanstack/react-router';
+import { env } from 'cloudflare:workers';
 import { z } from 'zod';
+
+import type { ModelMessage } from '@tanstack/ai';
 
 import { getGuitars, recommendGuitarToolDef } from '@/lib/demo-guitar-tools';
 
@@ -47,9 +52,12 @@ export const Route = createFileRoute('/demo/api/ai/chat')({
             })
             .parse(body);
 
+          const typedMessages = messages as Array<ModelMessage>;
+
           // Determine the best available provider
-          let provider = 'ollama';
-          let model = 'mistral:7b';
+          let provider = 'workers-ai';
+          let model = '@cf/meta/llama-3.1-8b-instruct';
+
           if (process.env.ANTHROPIC_API_KEY) {
             provider = 'anthropic';
             model = 'claude-haiku-4-5';
@@ -63,17 +71,18 @@ export const Route = createFileRoute('/demo/api/ai/chat')({
 
           // Adapter factory pattern for multi-vendor support
           const adapterConfig = {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            anthropic: () => anthropicText((model || 'claude-haiku-4-5') as any),
+            'workers-ai': () =>
+              createWorkersAiChat(model as any, {
+                binding: env.AI,
+              }),
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            openai: () => openaiText((model || 'gpt-4o') as any),
+            anthropic: () => anthropicText(model as any),
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            gemini: () => geminiText((model || 'gemini-2.0-flash-exp') as any),
+            openai: () => openaiText(model as any),
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ollama: () => ollamaText((model || 'mistral:7b') as any),
+            gemini: () => geminiText(model as any),
+
+            ollama: () => ollamaText(model as any),
           };
 
           const adapter = adapterConfig[provider as keyof typeof adapterConfig]();
@@ -86,7 +95,7 @@ export const Route = createFileRoute('/demo/api/ai/chat')({
             ],
             systemPrompts: [SYSTEM_PROMPT],
             agentLoopStrategy: maxIterations(5),
-            messages,
+            messages: typedMessages,
             abortController,
           });
 
